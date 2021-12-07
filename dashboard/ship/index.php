@@ -33,7 +33,7 @@
                         if($_GET['page'] == 'pass-account') {
                             require "./resources/templates/_dashboard_pass_account.php";
                         }
-                        if($_GET['page'] == 'pass-account') {
+                        if($_GET['page'] == 'tickets') {
                             require "./resources/templates/_dashboard_ticket.php";
                         }
                     ?>

@@ -23,15 +23,26 @@
                 <span class="menu-item-label ">Dashboard</span>
             </a>
             </li>
-            <?php if($_GET['page'] == 'assign-staff') { ?>
-                <li class="active --set-active-tables-html ">
-            <?php } else { ?>
-                <li class="--set-active-tables-html ">
-            <?php } ?>
-                <a href="index.php?page=assign-staff" class="text-decoration-none">
-                    <span class="icon"><i class="mdi mdi-account-check"></i></span>
-                    <span>Staff Account</span>
-                </a>
+                <?php if($_GET['page'] == 'assign-staff') { ?>
+                    <li class="active --set-active-tables-html ">
+                <?php } else { ?>
+                    <li class="--set-active-tables-html ">
+                <?php } ?>
+                    <a href="index.php?page=assign-staff" class="text-decoration-none">
+                        <span class="icon"><i class="mdi mdi-account-check"></i></span>
+                        <span>Staff Account</span>
+                    </a>
+            </li>
+            </li>
+                <?php if($_GET['page'] == 'tickets') { ?>
+                    <li class="active --set-active-tables-html ">
+                <?php } else { ?>
+                    <li class="--set-active-tables-html ">
+                <?php } ?>
+                    <a href="index.php?page=tickets" class="text-decoration-none">
+                        <span class="icon"><i class="mdi mdi-account-check"></i></span>
+                        <span>Tickets</span>
+                    </a>
             </li>
             <?php if($_GET['page'] == 'pass-account') { ?>
                 <li class="active --set-active-tables-html ">

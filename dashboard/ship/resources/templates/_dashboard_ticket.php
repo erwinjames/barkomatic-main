@@ -31,8 +31,16 @@
                                 <div class="control">
                                     <select name="accomm_aircon" id="accomm_aircon" class="form-control">
                                         <option selected value="">--</option>
-                                        <option value="YES">YES</option>
-                                        <option value="NO">NO</option>
+                                        <option value="YES">1</option>
+                                        <option value="NO">2</option>
+                                        <option value="YES">3</option>
+                                        <option value="NO">4</option>
+                                        <option value="YES">5</option>
+                                        <option value="NO">6</option>
+                                        <option value="YES">7</option>
+                                        <option value="NO">8</option>
+                                        <option value="YES">9</option>
+                                        <option value="NO">10</option>
                                     </select>
                                 </div>
                                 <p class="help">Required. Aircon</p>

@@ -71,21 +71,26 @@
                  
                     <div class="field">
                         <label class="label">Promo</label>
+                        <input type="checkbox" id="chkbox_promo" /><p class="help">Please check box if promo is available</p>
                         <div class="field-body">
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" autocomplete="on" name="ticket_promo" id="ticket_promo" value="" class="input" required>
+                                    <input type="text" autocomplete="on" name="ticket_promo" id="ticket_promo" value="" class="input" required  disabled>
                                 </div>
                                 <p class="help">Required. Promo</p>
                             </div>
                         </div>
                     </div>
+
+        
+
                     <div class="field">
                         <label class="label">Discount</label>
+                        <input type="checkbox" id="chkbox_discount" /> <p class="help">Please check box if discount is available</p>
                         <div class="field-body">
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" autocomplete="on" name="ticket_discount" id="ticket_discount" class="input" required>
+                                    <input type="text" autocomplete="on" name="ticket_discount" id="ticket_discount" class="input" required disabled>
                                 </div>
                                 <p class="help">Required. Discount</p>
                             </div>
@@ -151,3 +156,25 @@
     </div>
   </div>
 </div>
+
+<script>
+var checkbox_promo = document.getElementById("chkbox_promo");
+function validator() {
+  if (checkbox_promo.checked == false) {
+    document.getElementById('ticket_promo').disabled = true;
+  } else {
+    document.getElementById('ticket_promo').disabled = false;
+  }
+}
+checkbox_promo.addEventListener('click', validator)
+
+var checkbox_discount = document.getElementById("chkbox_discount");
+function validator2() {
+  if (checkbox_discount.checked == false) {
+    document.getElementById('ticket_discount').disabled = true;
+  } else {
+    document.getElementById('ticket_discount').disabled = false;
+  }
+}
+checkbox_discount.addEventListener('click', validator2)
+</script>

@@ -26,22 +26,29 @@
                     </div>
                     <div class="field">
                         <label class="label">Quantity</label>
+                        <input list="ticket_quantity" name="browser" class="form-control">
                         <div class="field-body">
                             <div class="field">
                                 <div class="control">
-                                    <select name="accomm_aircon" id="accomm_aircon" class="form-control">
+                                    <datalist name="ticket_quantity" id="ticket_quantity">
                                         <option selected value="">--</option>
-                                        <option value="YES">1</option>
-                                        <option value="NO">2</option>
-                                        <option value="YES">3</option>
-                                        <option value="NO">4</option>
-                                        <option value="YES">5</option>
-                                        <option value="NO">6</option>
-                                        <option value="YES">7</option>
-                                        <option value="NO">8</option>
-                                        <option value="YES">9</option>
-                                        <option value="NO">10</option>
-                                    </select>
+                                        <!-- <option value="1"></option>
+                                        <option value="2"></option>
+                                        <option value="3"></option>
+                                        <option value="4"></option>
+                                        <option value="5"></option>
+                                        <option value="6"></option>
+                                        <option value="7"></option>
+                                        <option value="8"></option>
+                                        <option value="9"></option>
+                                        <option value="10"></option> -->
+                                        <?php
+                                            for ($x = 1; $x <= 100; $x++) { ?>
+                                            <option value="<?php echo $x; ?>"></option>
+                                    <?php }
+                                        ?>
+                                        
+                                    </datalist>
                                 </div>
                                 <p class="help">Required. Quantity</p>
                             </div>
@@ -51,8 +58,11 @@
                         <label class="label">Status</label>
                         <div class="field-body">
                             <div class="field">
-                                <div class="control">
-                                    <input type="text" autocomplete="on" name="accomm_seat_typ" id="accomm_seat_typ" class="input" required>
+                            <div class="control">
+                                    <select name="ticket_status" id="ticket_status" class="form-control">
+                                        <option value="open_fr_avail">Open For Avail</option>
+                                        <option value="open_fr_reservation">Open For Reservation</option>
+                                    </select>
                                 </div>
                                 <p class="help">Required. Status</p>
                             </div>
@@ -64,7 +74,7 @@
                         <div class="field-body">
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" autocomplete="on" name="accomm_typ_price" id="accomm_typ_price" value="" class="input" required>
+                                    <input type="text" autocomplete="on" name="ticket_promo" id="ticket_promo" value="" class="input" required>
                                 </div>
                                 <p class="help">Required. Promo</p>
                             </div>
@@ -75,7 +85,7 @@
                         <div class="field-body">
                             <div class="field">
                                 <div class="control">
-                                    <input type="text" autocomplete="on" name="accomm_seat_typ" id="accomm_seat_typ" class="input" required>
+                                    <input type="text" autocomplete="on" name="ticket_discount" id="ticket_discount" class="input" required>
                                 </div>
                                 <p class="help">Required. Discount</p>
                             </div>
@@ -84,7 +94,7 @@
                     <hr>
                     <div class="field">
                         <div class="control">
-                            <input type="submit" name="accomm_typ_btn" id="accomm_typ_btn" value="Submit" class="button green">
+                            <input type="submit" name="add_ticket_btn" id="add_ticket_btn" value="Generate" class="button green">
                         </div>
                     </div>
                 </form>

@@ -99,7 +99,7 @@
                                                 </div>
                                                 <input type="password" name="password_sh_owner" id="password_sh_owner" class="form-control" placeholder="Password *" value="" required>
                                             </div>
-                                            <input type="submit" name="login-showner-btn" id="login-showner-btn" class="btnRegister float-left mt-3 btn btn-sm text-white" value="LoginLogin">
+                                            <input type="submit" name="login-showner-btn" id="login-showner-btn" class="btnRegister float-left mt-3 btn btn-sm text-white" value="Login">
                                             <input type="button" id="forgot-pass-sh-owner" class="btnRegister float-left mt-3 btn btn-sm bg-transparent text-dark" value="Forgot password?" data-toggle="modal" data-target="#modalShpOwnr">
                                         </form>
                                     </div>

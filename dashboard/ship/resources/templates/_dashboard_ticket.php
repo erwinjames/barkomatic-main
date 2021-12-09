@@ -43,7 +43,7 @@
                                         <option value="NO">10</option>
                                     </select>
                                 </div>
-                                <p class="help">Required. Aircon</p>
+                                <p class="help">Required. Quantity</p>
                             </div>
                         </div>
                     </div>
@@ -54,7 +54,7 @@
                                 <div class="control">
                                     <input type="text" autocomplete="on" name="accomm_seat_typ" id="accomm_seat_typ" class="input" required>
                                 </div>
-                                <p class="help">Required. Seat Type</p>
+                                <p class="help">Required. Status</p>
                             </div>
                         </div>
                     </div>
@@ -66,7 +66,7 @@
                                 <div class="control">
                                     <input type="text" autocomplete="on" name="accomm_typ_price" id="accomm_typ_price" value="" class="input" required>
                                 </div>
-                                <p class="help">Required. Price</p>
+                                <p class="help">Required. Promo</p>
                             </div>
                         </div>
                     </div>
@@ -77,7 +77,7 @@
                                 <div class="control">
                                     <input type="text" autocomplete="on" name="accomm_seat_typ" id="accomm_seat_typ" class="input" required>
                                 </div>
-                                <p class="help">Required. Seat Type</p>
+                                <p class="help">Required. Discount</p>
                             </div>
                         </div>
                     </div>

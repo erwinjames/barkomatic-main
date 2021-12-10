@@ -151,7 +151,6 @@ $(document).ready(function() {
             }
         });
     });
-
     //* create account staff
     $('#rl_create_acc_form').validate();
     $('#rl_btn_sbmt').click(function(e) {
@@ -199,28 +198,29 @@ function fetch_ticket_details() {
     });
 }
 
-    // add ticket
-    $('#add_ticket_form').validate();
-    $('#add_ticket_btn').click(function(e) {
-        if (document.querySelector('#add_ticket_form').checkValidity()) {
-            e.preventDefault();
-            $(':input[type="submit"]').prop('disabled', true);
-            $.ajax({
-                url: './modules/main/process.php',
-                method: 'post',
-                data: $('#add_ticket_form').serialize() + '&action=add_ticket_form',
-                success: function(res) {
-                    alert(res);
-                    setTimeout(function() {
-                        fetch_ticket_details();
-                    }, 100);
-                    setTimeout(function() {
-                        $(':input[type="submit"]').prop('disabled', false);
-                    }, 1000);
-                }
-            });
-        }
-    });
+// add ticket
+$('#add_ticket_form').validate();
+$('#add_ticket_btn').click(function(e) {
+    console.log('here!');
+    if (document.querySelector('#add_ticket_form').checkValidity()) {
+        e.preventDefault();
+        $(':input[type="submit"]').prop('disabled', true);
+        $.ajax({
+            url: './modules/process.php',
+            method: 'post',
+            data: $('#add_ticket_form').serialize() + '&action=add_ticket_form',
+            success: function(res) {
+                alert(res);
+                setTimeout(function() {
+                    fetch_ticket_details();
+                }, 100);
+                setTimeout(function() {
+                    $(':input[type="submit"]').prop('disabled', false);
+                }, 1000);
+            }
+        });
+    }
+});
 
 
 //* fetch reservation number 

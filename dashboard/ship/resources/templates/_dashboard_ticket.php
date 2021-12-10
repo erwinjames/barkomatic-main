@@ -130,7 +130,7 @@
     </div>
 </div>
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="port_locationLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="port_locationLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -142,7 +142,7 @@
       <div class="modal-body">
         <form id="edit_accom_form">
             <div class="form-group">
-                <label for="edit_accom_name">Accomodation Name</label>
+                <label for="edit_accom_name">Quantity</label>
                 <input type="text" class="form-control form-control-sm" name="edit_accom_name" id="edit_accom_name" required>
             </div>
             <div class="form-group">
@@ -165,7 +165,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <script>
 var checkbox_promo = document.getElementById("chkbox_promo");

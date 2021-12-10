@@ -9,7 +9,6 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 if(isset($_POST['action']) && $_POST['action'] == 'add_ticket_form') {
-    session_start();
     create_ticket($con);
 }
 if(isset($_POST["action"]) && $_POST["action"] == "rl_create_acc_form") {
@@ -522,14 +521,16 @@ function create_account_assign_role($con) {
 
 function fetch_ticket_details($c) {
     $sql_slct = "SELECT 
-                tbl_stfd.id,
-                tbl_stfd.tckt_qty,
-                tbl_stfd.tckt_stats,
-                tbl_stfa.tckt_promo,
-                tbl_stfa.tckt_dscnt
-                FROM tbl_tckt tbl_stfd
-                INNER JOIN tbl_ship_detail tbl_stfa 
-                ON tbl_stfd.tckt_owner=tbl_stfa.ship_name WHERE tbl_stfd.tckt_owner=?";
+                tbl_tkt.id,
+                tbl_tkt.tckt_qty,
+                tbl_tkt.tckt_stats,
+                tbl_tkt.tckt_promo,
+                tbl_tkt.tckt_dscnt,
+                tbl_tkt.tckt_owner,
+                tbl_to.ship_name
+                FROM tbl_tckt tbl_tkt
+                INNER JOIN tbl_ship_detail tbl_to 
+                ON tbl_tkt.tckt_owner = tbl_to.ship_name WHERE tbl_tkt.tckt_owner=?";
      $stmt = $c->prepare($sql_slct);
      $stmt->bind_param('s',$_SESSION['ship_name']);
      $stmt->execute();
@@ -538,10 +539,10 @@ function fetch_ticket_details($c) {
     <table class="table table-bordered m-0">
     <thead>
         <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Username</th>
-            <th>Password</th>
+            <th>Quantity</th>
+            <th>Ticket Status</th>
+            <th>Ticket Promo</th>
+            <th>ticket Discount</th>
             <th></th>
         </tr>
     </thead>
@@ -575,11 +576,11 @@ function create_ticket($con) {
     $tckt_stats = check_input($_POST['ticket_status']);
     $tckt_promo = check_input($_POST['ticket_promo']);
     $tckt_dscnt = check_input($_POST['ticket_discount']);
-    $tckt_dscnt = check_input($_POST['ship_comp']);
+    $tckt_owner = check_input($_POST['ship_comp']);
     $timestamp = date("Y-m-d H:i:s");
      
         $stmt_insrt_sd = $con->prepare("INSERT INTO tbl_tckt (tckt_qty,tckt_stats,tckt_promo,tckt_dscnt,tckt_owner,tbl_time_created) VALUES (?,?,?,?,?,?)");
-        $stmt_insrt_sd->bind_param('ssssss', $tckt_qnty,$tckt_stats,$tckt_promo,$tckt_dscnt,$timestamp);
+        $stmt_insrt_sd->bind_param('ssssss', $tckt_qnty,$tckt_stats,$tckt_promo,$tckt_dscnt,$tckt_owner,$timestamp);
         $stmt_insrt_sd->execute();
         $stmt_insrt_sd->close();
         echo 'Successfully Generate Ticket';

@@ -11,10 +11,10 @@
                 </p>
             </header>
             <div class="card-content">
-                <form id="add_accomm_form">
-                    <div class="field">
+                <form id="add_ticket_form">
+                    <!-- <div class="field">
                         <label class="label">Add Ticket</label>
-                        <!-- <div class="field-body">
+                        <div class="field-body">
                             <div class="field">
                                 <div class="control">
                                     <input type="hidden" name="ship" value="<?php echo $_SESSION['stff_ship_reside'];?>">
@@ -22,11 +22,22 @@
                                 </div>
                                 <p class="help">Required. Accomodation name</p>
                             </div>
-                        </div> -->
+                        </div>
+                    </div> -->
+                    <div class="field">
+                        <label class="label"></label>
+                        <div class="field-body d-none">
+                            <div class="field">
+                                <div class="control">
+                                    <input type="text" name="ship_comp" value="<?php echo $_SESSION['ship_name'];?>" class="input" readonly>
+                                </div>
+                                <p class="help"></p>
+                            </div>
+                        </div>
                     </div>
                     <div class="field">
                         <label class="label">Quantity</label>
-                        <input list="ticket_quantity" name="browser" class="form-control">
+                        <input list="ticket_quantity" name="ticket_quantity" class="form-control">
                         <div class="field-body">
                             <div class="field">
                                 <div class="control">
@@ -45,8 +56,7 @@
                                         <?php
                                             for ($x = 1; $x <= 100; $x++) { ?>
                                             <option value="<?php echo $x; ?>"></option>
-                                    <?php }
-                                        ?>
+                                          <?php } ?>
                                         
                                     </datalist>
                                 </div>
@@ -113,7 +123,7 @@
                     <span class="icon"><i class="mdi mdi-account-multiple"></i></span> Details
                 </p>
             </header>
-            <div id="ship_accomm_data" class="card-content">
+            <div id="ticket_data" class="card-content">
                 <img class="text-center" src="./resources/img/loading.gif" alt="Loading" style="text-align:center;width:48px;height:48px;">
             </div>
         </div>

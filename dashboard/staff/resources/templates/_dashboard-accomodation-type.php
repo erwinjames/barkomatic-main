@@ -10,6 +10,7 @@
                     <span class="icon"><i class="mdi mdi-account-multiple"></i></span> Add
                 </p>
             </header>
+            
             <div class="card-content">
                 <form id="add_accomm_form">
                     <div class="field">

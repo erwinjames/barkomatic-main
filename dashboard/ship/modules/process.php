@@ -8,6 +8,10 @@ use PHPMailer\PHPMailer\PHPMailer;
 //use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
+if(isset($_POST['action']) && $_POST['action'] == 'add_ticket_form') {
+    session_start();
+    create_ticket($con);
+}
 if(isset($_POST["action"]) && $_POST["action"] == "rl_create_acc_form") {
     create_account_assign_role($con);
 }
@@ -53,6 +57,10 @@ if(isset($_POST['action']) && $_POST['action'] == 'assgn_edit_id_form') {
 if(isset($_POST['action']) && $_POST['action'] == 'delete_assigned_role') {
     session_start();
     delete_assigned_role($con);
+}
+if(isset($_POST["action"]) && $_POST["action"] == "fetch_ticket_detail") {
+    session_start();
+    fetch_ticket_details($con);
 }
 
 //* update reservation status
@@ -509,6 +517,73 @@ function create_account_assign_role($con) {
         $stmt_insrt_rp->close();
         echo 'Successfully created an account.';
     }
+}
+// fetch ticket
+
+function fetch_ticket_details($c) {
+    $sql_slct = "SELECT 
+                tbl_stfd.id,
+                tbl_stfd.tckt_qty,
+                tbl_stfd.tckt_stats,
+                tbl_stfa.tckt_promo,
+                tbl_stfa.tckt_dscnt
+                FROM tbl_tckt tbl_stfd
+                INNER JOIN tbl_ship_detail tbl_stfa 
+                ON tbl_stfd.tckt_owner=tbl_stfa.ship_name WHERE tbl_stfd.tckt_owner=?";
+     $stmt = $c->prepare($sql_slct);
+     $stmt->bind_param('s',$_SESSION['ship_name']);
+     $stmt->execute();
+     $result = $stmt->get_result();
+    $output = '
+    <table class="table table-bordered m-0">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="port-location-data-content">';
+    while($row = $result->fetch_assoc()) {
+        $output .= '
+        <tr>
+            <td>'.$row['tckt_qty'].'</td>
+            <td>'.$row['tckt_stats'].'</td>
+            <td>'.$row['tckt_promo'].'</td>
+            <td>'.$row['tckt_dscnt'].'</td>
+            <td class="text-center">
+                <button type="button" name="edit_role_btn" class="button small green update_role_btn" id="'.$row["id"].'" data-toggle="modal" data-target="#exampleModal">
+                    <span class="icon"><i class="mdi mdi-pencil"></i></span>
+                </button>
+                <button type="button" name="rl_btn_delete" class="button small red delete_role_btn" id="'.$row["id"].'">
+                    <span class="icon"><i class="mdi mdi-trash-can"></i></span>
+                </button>
+            </td>
+        <tr>';
+    } 
+    $output .= '</tbody>';
+    $output .= '</table';
+    echo $output;
+    $stmt->close();
+}
+
+//* create ticket 
+function create_ticket($con) {
+    $tckt_qnty = check_input($_POST['ticket_quantity']);
+    $tckt_stats = check_input($_POST['ticket_status']);
+    $tckt_promo = check_input($_POST['ticket_promo']);
+    $tckt_dscnt = check_input($_POST['ticket_discount']);
+    $tckt_dscnt = check_input($_POST['ship_comp']);
+    $timestamp = date("Y-m-d H:i:s");
+     
+        $stmt_insrt_sd = $con->prepare("INSERT INTO tbl_tckt (tckt_qty,tckt_stats,tckt_promo,tckt_dscnt,tckt_owner,tbl_time_created) VALUES (?,?,?,?,?,?)");
+        $stmt_insrt_sd->bind_param('ssssss', $tckt_qnty,$tckt_stats,$tckt_promo,$tckt_dscnt,$timestamp);
+        $stmt_insrt_sd->execute();
+        $stmt_insrt_sd->close();
+        echo 'Successfully Generate Ticket';
+    
 }
 
 //* create account - passenger account

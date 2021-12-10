@@ -181,6 +181,48 @@ $(document).ready(function() {
     });
 });
 
+// add delete ticket and fetch data
+
+setTimeout(function() {
+    fetch_ticket_details();
+}, 100);
+
+function fetch_ticket_details() {
+    var action = 'fetch_ticket_detail';
+    $.ajax({
+        url: "./modules/process.php",
+        method: "POST",
+        data: { action: action },
+        success: function(response) {
+            $("#ticket_data").html(response);
+        }
+    });
+}
+
+    // add ticket
+    $('#add_ticket_form').validate();
+    $('#add_ticket_btn').click(function(e) {
+        if (document.querySelector('#add_ticket_form').checkValidity()) {
+            e.preventDefault();
+            $(':input[type="submit"]').prop('disabled', true);
+            $.ajax({
+                url: './modules/main/process.php',
+                method: 'post',
+                data: $('#add_ticket_form').serialize() + '&action=add_ticket_form',
+                success: function(res) {
+                    alert(res);
+                    setTimeout(function() {
+                        fetch_ticket_details();
+                    }, 100);
+                    setTimeout(function() {
+                        $(':input[type="submit"]').prop('disabled', false);
+                    }, 1000);
+                }
+            });
+        }
+    });
+
+
 //* fetch reservation number 
 $(document).ready(function() {
     setTimeout(function() {

@@ -319,6 +319,7 @@ $(document).ready(function() {
             }
         });
     }
+
     $('#add_accomm_form').validate();
     $('#accomm_typ_btn').click(function(e) {
         if (document.querySelector('#add_accomm_form').checkValidity()) {

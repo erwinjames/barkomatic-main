@@ -12,18 +12,6 @@
             </header>
             <div class="card-content">
                 <form id="add_ticket_form">
-                    <!-- <div class="field">
-                        <label class="label">Add Ticket</label>
-                        <div class="field-body">
-                            <div class="field">
-                                <div class="control">
-                                    <input type="hidden" name="ship" value="<?php echo $_SESSION['stff_ship_reside'];?>">
-                                    <input type="text" autocomplete="on" name="accomodation_name" id="accomodation_name" class="input" required>
-                                </div>
-                                <p class="help">Required. Accomodation name</p>
-                            </div>
-                        </div>
-                    </div> -->
                     <div class="field">
                         <label class="label"></label>
                         <div class="field-body d-none">
@@ -70,8 +58,8 @@
                             <div class="field">
                             <div class="control">
                                     <select name="ticket_status" id="ticket_status" class="form-control">
-                                        <option value="open_fr_avail">Open For Avail</option>
-                                        <option value="open_fr_reservation">Open For Reservation</option>
+                                        <option value="Open For Avail">Open For Avail</option>
+                                        <option value="Open For Reservation">Open For Reservation</option>
                                     </select>
                                 </div>
                                 <p class="help">Required. Status</p>
@@ -109,7 +97,7 @@
                     <hr>
                     <div class="field">
                         <div class="control">
-                            <input type="submit" name="add_ticket_btn" id="add_ticket_btn" value="Generate" class="button green">
+                            <input type="submit" name="add_ticket" id="add_ticket" value="Generate" class="button green">
                         </div>
                     </div>
                 </form>

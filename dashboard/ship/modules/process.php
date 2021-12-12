@@ -8,7 +8,7 @@ use PHPMailer\PHPMailer\PHPMailer;
 //use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-if(isset($_POST["action"]) && $_POST['action'] == "add_ticket_form") {
+if(isset($_POST["action"]) && $_POST["action"] == "add_ticket_form") {
     session_start();
     create_ticket($con);
 }
@@ -530,7 +530,7 @@ function fetch_ticket_details($c) {
                 tbl_tkt.tckt_owner
                 FROM tbl_tckt tbl_tkt
                 INNER JOIN tbl_ship_detail tbl_to 
-                ON tbl_tkt.tckt_owner = tbl_to.ship_name WHERE tbl_tkt.tckt_owner=? LIMIT 3";
+                ON tbl_tkt.tckt_owner = tbl_to.ship_name WHERE tbl_tkt.tckt_owner=?";
      $stmt = $c->prepare($sql_slct);
      $stmt->bind_param('s',$_SESSION['ship_name']);
      $stmt->execute();
@@ -602,7 +602,7 @@ function create_account_passenger($con) {
     $ppass = check_input(sha1($_POST['pl_password']));
     
     $stmt_slct = $con->prepare("SELECT * FROM tbl_passenger_detail WHERE email=?");
-    $stmt_slct->bind_param('s', $email);
+    $stmt_slct->bind_param('s', $pemail);
     $stmt_slct->execute();
     $result = $stmt_slct->fetch();
     $stmt_slct->close();

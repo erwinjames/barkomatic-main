@@ -185,36 +185,32 @@ function reservation_data($c) {
 
 //* summary reservation list in dashboard landing page
 function summ_reservation_data($c) {
-    $stmt = $c->prepare("SELECT * FROM tbl_passenger_reservation WHERE ship_name=?");
-    $stmt->bind_param('s', $_SESSION['ship_name']);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $sql_stmt = "SELECT tbl_so.id,
+                tbl_so.username,
+                tbl_so.password,
+                tbl_so_d.ship_name,
+                tbl_so_d.ship_em
+                FROM tbl_ship_account tbl_so 
+                INNER JOIN tbl_ship_detail tbl_so_d 
+                ON tbl_so.id  = tbl_so_d.id";
+    $stmt = $c->prepare($sql_stmt);
+    $results = $stmt->get_result();
     $output = '
         <table class="table table-bordered table-sm mb-0">
             <thead>
                 <tr>
-                    <th>Reservation No.</th>
-                    <th>Passenger Name</th>
-                    <th>Route</th>
-                    <th>Date/Time</th>
-                    <th>Accomodation</th>
-                    <th>Reservation Date</th>
-                    <th>Expiration</th>
-                    <th>Status</th>
+                    <th>Shipping Owner Username</th>
+                    <th>Shipping line name</th>
+                    <th>Shipping email</th>
                 </tr>
             </thead>
             <tbody id="port-location-data-content">';
-    while ($row = $result->fetch_assoc()) {
+    while ($row = $results->fetch_assoc()) {
         $output .= '
             <tr>
-                <td>'.$row["reservation_number"].'</td>
-                <td>'.$row["passenger_name"].'</td>
-                <td>'.$row["location_from"].' to '.$row["location_to"].'</td>
-                <td>'.$row["depart_date"].' '.$row["depart_time"].'</td>
-                <td>'.$row["accomodation"].'</td>
-                <td>'.$row["reservation_date"].'</td>
-                <td>'.$row["expiration"].'</td>
-                <td>'.$row["status"].'</td>
+                <td>'.$row["username"].'</td>
+                <td>'.$row["ship_name"].'</td>
+                <td>'.$row["ship_em"].'</td>
             </tr>';
     }
     $output .= '</tbody>';
@@ -450,7 +446,7 @@ function total_number_of_staff($c) {
     $output = '
     <div class="flex items-center justify-between">
         <div class="widget-label ">
-            <h3>Staff</h3>
+            <h3>Total Subcriptions</h3>
             <h1>'.$counter.'</h1>
             </div>
             <span class="icon widget-icon text-red-500 "><i class="mdi mdi-account-check mdi-48px "></i></span>
@@ -460,12 +456,11 @@ function total_number_of_staff($c) {
     $stmt->close();
 }
 
-// total num of active reservation fetch
+// total num of Shipping Owner Account fetch
 function active_reservation($c) {
     $counter = 0;
-    $sql_slct = "SELECT * FROM tbl_passenger_reservation WHERE ship_name=?";
+    $sql_slct = "SELECT * FROM tbl_ship_account";
     $stmt = $c->prepare($sql_slct);
-    $stmt->bind_param('s', $_SESSION['ship_name']);
     $stmt->execute();
     $result = $stmt->get_result();
     while($row = $result->fetch_assoc()) {
@@ -474,7 +469,7 @@ function active_reservation($c) {
     $output = '
     <div class="flex items-center justify-between">
         <div class="widget-label">
-            <h3>Active Reservation</h3>
+            <h3>Shipping Owner Account</h3>
             <h1>'.$counter.'</h1>
         </div>
         <span class="icon widget-icon text-green-500"><i class="mdi mdi-account-multiple mdi-48px"></i></span>

@@ -14,7 +14,7 @@
     <div class="col-12">
         <div class="card mb-6">
             <header class="card-header">
-                <p class="card-header-title"><span class="icon"><i class="mdi mdi-account-check"></i></span> Reservation</p>
+                <p class="card-header-title"><span class="icon"><i class="mdi mdi-account-check"></i></span> Shipping Owner Acounts</p>
             </header>
             <div class="card-content p-0" id="summ_reservation_data">
                 <img class="text-center" src="./resources/img/loading.gif" alt="Loading" style="text-align:center;width:48px;height:48px;">
@@ -29,7 +29,7 @@
     <div class="col-12">
         <div class="card mb-6">
             <header class="card-header">
-                <p class="card-header-title"><span class="icon"><i class="mdi mdi-account-check"></i></span> Staff</p>
+                <p class="card-header-title"><span class="icon"><i class="mdi mdi-account-check"></i></span>Subscribed</p>
             </header>
             <div class="card-content p-0" id="summ_staff_data">
                 <img class="text-center" src="./resources/img/loading.gif" alt="Loading" style="text-align:center;width:48px;height:48px;">

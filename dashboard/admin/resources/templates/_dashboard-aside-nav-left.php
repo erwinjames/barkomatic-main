@@ -30,7 +30,7 @@
                 <?php } ?>
                     <a href="index.php?page=assign-staff" class="text-decoration-none">
                         <span class="icon"><i class="mdi mdi-account-check"></i></span>
-                        <span>Staff Account</span>
+                        <span>Shipping Owner Accounts</span>
                     </a>
             </li>
             </li>
@@ -41,28 +41,8 @@
                 <?php } ?>
                     <a href="index.php?page=tickets" class="text-decoration-none">
                         <span class="icon"><i class="mdi mdi-account-check"></i></span>
-                        <span>Tickets</span>
+                        <span>Subscriptions</span>
                     </a>
-            </li>
-            <?php if($_GET['page'] == 'pass-account') { ?>
-                <li class="active --set-active-tables-html ">
-            <?php } else { ?>
-                <li class="--set-active-tables-html ">
-            <?php } ?>
-                <a href="index.php?page=pass-account" class="text-decoration-none">
-                    <span class="icon"><i class="mdi mdi-account-check"></i></span>
-                    <span>Passenger Accounts</span>
-                </a>
-            </li>
-            <?php if($_GET['page'] == 'reservation') { ?>
-                    <li class="active --set-active-tables-html">
-            <?php } else { ?>
-                    <li class="--set-active-tables-html">
-            <?php } ?>
-                <a href="index.php?page=reservation" class="dropdown text-decoration-none">
-                    <span class="icon"><i class="mdi mdi-calendar"></i></span>
-                    <span class="menu-item-label">Reservation</span>
-                </a>
             </li>
         </ul>
         <p class="menu-label mb-0">Settings</p>

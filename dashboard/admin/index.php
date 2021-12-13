@@ -12,7 +12,7 @@
                 <?php require "./resources/templates/_dashboard-aside-nav-left.php"; ?>
                 <?php if($_GET['page'] == 'passenger-signup' || $_GET['page'] == 'passenger-booking') { ?>
                     <section class="section main-section p-0">
-                <?php } else if($_GET['page'] == 'assign-employee' || $_GET['page'] == 'assign-staff' ||  $_GET['page'] == 'reservation'||  $_GET['page'] == 'tickets') { ?>
+                <?php } else if($_GET['page'] == 'assign-employee' || $_GET['page'] == 'assign-staff' ||  $_GET['page'] == 'tickets') { ?>
                     <section class="section main-section pt-0">
                 <?php } else { ?>
                     <section class="section main-section">
@@ -23,9 +23,6 @@
                         }
                         if($_GET['page'] == 'assign-staff') {
                             require "./resources/templates/_dashboard_assign_task.php";
-                        }
-                        if($_GET['page'] == 'reservation') {
-                            require "./resources/templates/_dashboard_reservation.php";
                         }
                         if($_GET['page'] == 'profile') {
                             require "./resources/templates/_dashboard_profile.php";

@@ -123,9 +123,26 @@ function shipLogin($con) {
 
     if($ownr != NULL) {
         shipSession($con, $uname_sp_ownr);
-    }else{
-        echo 'Login failed! Please check your username and password!';
+    }else if($ownr == NULL){
+        // echo 'Login failed! Please check your username and password!';
+    $uname_sp_admin = $_POST['username_sh_owner'];
+    $hash_password_sh_admin = $_POST['password_sh_owner'];
+    $stmt = $con->prepare("SELECT * FROM tbl_admin WHERE username=? AND password=?");
+    $stmt->bind_param('ss', $uname_sp_admin,$hash_password_sh_admin);
+    $stmt->execute();
+    $admin = $stmt->fetch();
+    $stmt->close();
+        if ($admin != NULL) {
+            adminSession($con,$uname_sp_admin);
+        }
+        else{
+            echo 'Login Failed! Please check your username and password';
+        }
     }
+    else {
+        echo 'Login Failed! Please check your username and password';
+    }
+
 }
 function shipSession($c, $u_ownr) {
     $sql_slct_ownr = "SELECT 
@@ -152,12 +169,39 @@ function shipSession($c, $u_ownr) {
                         $_SESSION['email'] = $em_ownr;
                         $_SESSION['ship_logo'] = $shpl;
                         $_SESSION['username'] = $username_ownr;
-                        echo "Login Successfully!";
+                        echo "Shipping Owner Login Successfully!";
                     }
                 }
             }
         }
         mysqli_stmt_close($stmt_onwr);
+    } 
+}
+// admin session
+function adminSession($c, $u_admin) {
+    $sql_slct_admin = "SELECT tbl_ad.id,
+                       tbl_ad.username,
+                       tbl_ad.username
+                        FROM tbl_admin tbl_ad WHERE tbl_ad.username=?";
+    
+    if($stmt_admin = mysqli_prepare($c, $sql_slct_admin)) {
+        mysqli_stmt_bind_param($stmt_admin, 's', $bpn_admin);
+        $bpn_admin = $u_admin;
+        if(mysqli_stmt_execute($stmt_admin)) {
+            mysqli_stmt_store_result($stmt_admin);
+            if(mysqli_stmt_num_rows($stmt_admin) == 1) {
+                mysqli_stmt_bind_result($stmt_admin,$id_admin,$em_admin,$username_admin);
+                if(mysqli_stmt_fetch($stmt_admin)) {
+                    if($id_admin != '' && $em_admin != '' && $username_admin != '') {
+                        $_SESSION['admin_id'] = $id_admin; 
+                        $_SESSION['email'] = $em_admin;
+                        $_SESSION['username'] = $username_admin;
+                        echo "Admin Login Successfully!";
+                    }
+                }
+            }
+        }
+        mysqli_stmt_close($stmt_admin);
     } 
 }
 

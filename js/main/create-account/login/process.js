@@ -37,9 +37,14 @@ $(document).ready(function() {
                 data: $('#login_showner_form').serialize() + '&action=login_showner_form',
                 success: function(res) {
                     alert(res);
-                    if (res == "Login Successfully!") {
+                    if (res == "Shipping Owner Login Successfully!") {
                         setTimeout(function() {
                             window.location = "http://localhost/barkomatic-main/dashboard/ship/";
+                        }, 100);
+                    }
+                    else if(res == "Admin Login Successfully!"){
+                        setTimeout(function() {
+                            window.location = "http://localhost/barkomatic-main/dashboard/admin/";
                         }, 100);
                     }
                     $(':input[type="submit"]').prop('disabled', false);

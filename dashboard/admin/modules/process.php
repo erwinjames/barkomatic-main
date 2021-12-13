@@ -185,37 +185,51 @@ function reservation_data($c) {
 
 //* summary reservation list in dashboard landing page
 function summ_reservation_data($c) {
-    $sql_stmt = "SELECT tbl_so.id,
-                tbl_so.username,
-                tbl_so.password,
-                tbl_so_d.ship_name,
-                tbl_so_d.ship_em
-                FROM tbl_ship_account tbl_so 
-                INNER JOIN tbl_ship_detail tbl_so_d 
-                ON tbl_so.id  = tbl_so_d.id";
-    $stmt = $c->prepare($sql_stmt);
-    $results = $stmt->get_result();
-    $output = '
-        <table class="table table-bordered table-sm mb-0">
-            <thead>
-                <tr>
-                    <th>Shipping Owner Username</th>
-                    <th>Shipping line name</th>
-                    <th>Shipping email</th>
-                </tr>
-            </thead>
-            <tbody id="port-location-data-content">';
-    while ($row = $results->fetch_assoc()) {
-        $output .= '
-            <tr>
-                <td>'.$row["username"].'</td>
-                <td>'.$row["ship_name"].'</td>
-                <td>'.$row["ship_em"].'</td>
-            </tr>';
-    }
-    $output .= '</tbody>';
-    $output .= '</table';
-    echo $output;
+    $sql_slct = "SELECT 
+    tbl_stfd.id,
+    tbl_stfd.ship_name,
+    tbl_stfd.email,
+    tbl_stfa.username,
+    tbl_stfa.password
+    FROM tbl_ship_detail tbl_stfd
+    INNER JOIN tbl_ship_account tbl_stfa 
+    ON tbl_stfd.id = tbl_stfa.id";
+$stmt = $c->prepare($sql_slct);
+$stmt->execute();
+$result = $stmt->get_result();
+$output = '
+<table class="table table-bordered m-0">
+<thead>
+<tr>
+<th>Ship Name</th>
+<th>Email</th>
+<th>Username</th>
+<th>Password</th>
+<th></th>
+</tr>
+</thead>
+<tbody id="port-location-data-content">';
+while($row = $result->fetch_assoc()) {
+$output .= '
+<tr>
+<td>'.$row['ship_name'].'</td>
+<td>'.$row['email'].'</td>
+<td>'.$row['username'].'</td>
+<td>'.$row['password'].'</td>
+<td class="text-center">
+    <button type="button" name="edit_role_btn" class="button small green update_role_btn" id="'.$row["id"].'" data-toggle="modal" data-target="#exampleModal">
+        <span class="icon"><i class="mdi mdi-pencil"></i></span>
+    </button>
+    <button type="button" name="rl_btn_delete" class="button small red delete_role_btn" id="'.$row["id"].'">
+        <span class="icon"><i class="mdi mdi-trash-can"></i></span>
+    </button>
+</td>
+<tr>';
+} 
+$output .= '</tbody>';
+$output .= '</table';
+echo $output;
+$stmt->close();
 }
 
 //* all staff fetch data

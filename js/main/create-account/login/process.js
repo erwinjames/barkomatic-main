@@ -47,6 +47,11 @@ $(document).ready(function() {
                             window.location = "http://localhost/barkomatic-main/dashboard/admin/";
                         }, 100);
                     }
+                    else if(res =="PPlease subscribe first."){
+                        setTimeout(function() {
+                            window.location = "http://localhost/barkomatic-main/paypal";
+                        }, 100);
+                    }
                     $(':input[type="submit"]').prop('disabled', false);
                 }
             });

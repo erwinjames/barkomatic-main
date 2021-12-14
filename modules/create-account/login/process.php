@@ -122,7 +122,20 @@ function shipLogin($con) {
     $stmt->close();
 
     if($ownr != NULL) {
+        // paypal validation
+    $stmt = $con->prepare("SELECT * FROM user_subscriptions WHERE payment_status = 'purchased'");
+    $stmt->execute();
+    $subcribe = $stmt->fetch();
+    $stmt->close();
+    if ($subcribe != NULL) {
+
         shipSession($con, $uname_sp_ownr);
+    }
+    else{
+
+        paypalValid($con, $uname_sp_ownr);
+        
+    }
     }else if($ownr == NULL){
         // echo 'Login failed! Please check your username and password!';
     $uname_sp_admin = $_POST['username_sh_owner'];
@@ -170,6 +183,40 @@ function shipSession($c, $u_ownr) {
                         $_SESSION['ship_logo'] = $shpl;
                         $_SESSION['username'] = $username_ownr;
                         echo "Shipping Owner Login Successfully!";
+                    }
+                }
+            }
+        }
+        mysqli_stmt_close($stmt_onwr);
+    } 
+}
+    // paypal validation
+function paypalValid($c, $u_ownr) {
+    $sql_slct_ownr = "SELECT 
+                        tbl_sd.id,
+                        tbl_sd.ship_name,
+                        tbl_sd.email,
+                        tbl_sd.ship_logo,
+                        tbl_sa.username
+                        FROM tbl_ship_detail tbl_sd
+                        INNER JOIN tbl_ship_account tbl_sa ON tbl_sa.id = tbl_sd.id
+                        WHERE tbl_sa.username=?";
+    
+    if($stmt_onwr = mysqli_prepare($c, $sql_slct_ownr)) {
+        mysqli_stmt_bind_param($stmt_onwr, 's', $bpn_onwr);
+        $bpn_onwr = $u_ownr;
+        if(mysqli_stmt_execute($stmt_onwr)) {
+            mysqli_stmt_store_result($stmt_onwr);
+            if(mysqli_stmt_num_rows($stmt_onwr) == 1) {
+                mysqli_stmt_bind_result($stmt_onwr, $id_ownr,$sn,$em_ownr,$shpl,$username_ownr);
+                if(mysqli_stmt_fetch($stmt_onwr)) {
+                    if($id_ownr != '' && $sn != '' && $em_ownr != '' && $username_ownr != '') {
+                        $_SESSION['ship_id'] = $id_ownr;
+                        $_SESSION['ship_name'] = $sn; 
+                        $_SESSION['email'] = $em_ownr;
+                        $_SESSION['ship_logo'] = $shpl;
+                        $_SESSION['username'] = $username_ownr;
+                        echo "Please subscribe first.";
                     }
                 }
             }

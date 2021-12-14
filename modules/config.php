@@ -10,10 +10,10 @@ $itemPrice = 25.00;
 define('PAYPAL_ID', 'williamdoe@shiplines.comm'); 
 define('PAYPAL_SANDBOX', TRUE); //TRUE or FALSE 
  
-define('PAYPAL_RETURN_URL', 'localhost/paypal/success.php'); 
-define('PAYPAL_CANCEL_URL', 'localhost/paypal/cancel.php'); 
-define('PAYPAL_NOTIFY_URL', 'localhost/paypal/paypal_ipn.php'); 
-define('PAYPAL_CURRENCY', 'PHP'); 
+define('PAYPAL_RETURN_URL', 'localhost/barkomatic-main/paypal/success.php'); 
+define('PAYPAL_CANCEL_URL', 'localhost/barkomatic-main/paypal/cancel.php'); 
+define('PAYPAL_NOTIFY_URL', 'localhost/barkomatic-main/paypal/paypal_ipn.php'); 
+define('PAYPAL_CURRENCY', 'USD'); 
  
    
    define("DB_HOST", "localhost");

@@ -47,9 +47,9 @@ $(document).ready(function() {
                             window.location = "http://localhost/barkomatic-main/dashboard/admin/";
                         }, 100);
                     }
-                    else if(res =="PPlease subscribe first."){
+                    else if(res =="Please subscribe first."){
                         setTimeout(function() {
-                            window.location = "http://localhost/barkomatic-main/paypal";
+                            window.location = "http://localhost/barkomatic-main/paypal/subForm.php";
                         }, 100);
                     }
                     $(':input[type="submit"]').prop('disabled', false);

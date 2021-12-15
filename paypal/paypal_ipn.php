@@ -1,8 +1,5 @@
 <?php
-// Include configuration file
-include_once '../modules/config.php';
-
-
+require_once "../modules/config.php";
 /*
  * Read POST data
  * reading posted data directly from $_POST causes serialization
@@ -36,7 +33,7 @@ foreach ($myPost as $key => $value) {
  * Post IPN data back to PayPal to validate the IPN data is genuine
  * Without this step anyone can fake IPN data
  */
-$paypalURL = PAYPAL_URL;
+$paypalURL = "https://www.sandbox.paypal.com/cgi-bin/webscr";
 $ch = curl_init($paypalURL);
 if ($ch == FALSE) {
     return FALSE;
@@ -62,40 +59,40 @@ $res = curl_exec($ch);
 $tokens = explode("\r\n\r\n", trim($res));
 $res = trim(end($tokens));
 if (strcmp($res, "VERIFIED") == 0 || strcasecmp($res, "VERIFIED") == 0) {
-	
-	// Retrieve transaction data from PayPal
-	$paypalInfo = $_POST;
-	$subscr_id = $paypalInfo['subscr_id'];
-	$payer_email = $paypalInfo['payer_email'];
-	$item_name = $paypalInfo['item_name'];
-	$item_number = $paypalInfo['item_number'];
-	$txn_id = !empty($paypalInfo['txn_id'])?$paypalInfo['txn_id']:'';
-	$payment_gross =  !empty($paypalInfo['mc_gross'])?$paypalInfo['mc_gross']:0;
-	$currency_code = $paypalInfo['mc_currency'];
-	$subscr_period = !empty($paypalInfo['period3'])?$paypalInfo['period3']:floor($payment_gross/$itemPrice);
-	$payment_status = !empty($paypalInfo['payment_status'])?$paypalInfo['payment_status']:'';
-	$custom = $paypalInfo['custom'];
-	$subscr_date = !empty($paypalInfo['subscr_date'])?$paypalInfo['subscr_date']:date("Y-m-d H:i:s");
-	$dt = new DateTime($subscr_date);
-	$subscr_date = $dt->format("Y-m-d H:i:s");
-	$subscr_date_valid_to = date("Y-m-d H:i:s", strtotime(" + $subscr_period month", strtotime($subscr_date)));
-	
-	if(!empty($txn_id)){
-		// Check if transaction data exists with the same TXN ID
-		$prevPayment = $db->query("SELECT id FROM user_subscriptions WHERE txn_id = '".$txn_id."'");
-		
-		if($prevPayment->num_rows > 0){
-			exit();
-		}else{
-			// Insert transaction data into the database
-			$insert = $db->query("INSERT INTO user_subscriptions(user_id,validity,valid_from,valid_to,item_number,txn_id,payment_gross,currency_code,subscr_id,payment_status,payer_email) VALUES('".$custom."','".$subscr_period."','".$subscr_date."','".$subscr_date_valid_to."','".$item_number."','".$txn_id."','".$payment_gross."','".$currency_code."','".$subscr_id."','".$payment_status."','".$payer_email."')");
-			
-			// Update subscription id in the users table
-			if($insert && !empty($custom)){
-				$subscription_id = $db->insert_id;
-				$update = $db->query("UPDATE users SET subscription_id = {$subscription_id} WHERE id = {$custom}");
-			}
-		}
-	}
+    //Include DB configuration file
+   require_once "../modules/config.php";
+    
+    $unitPrice = 25;
+    
+    //Payment data
+    $subscr_id = $_POST['subscr_id'];
+    $payer_email = $_POST['payer_email'];
+    $item_number = $_POST['item_number'];
+    $txn_id = $_POST['txn_id'];
+    $payment_gross = $_POST['mc_gross'];
+    $currency_code = $_POST['mc_currency'];
+    $payment_status = $_POST['payment_status'];
+    $custom = $_SESSION['ship_id'];
+    $subscr_month = ($payment_gross/$unitPrice);
+    $subscr_days = ($subscr_month*30);
+    $subscr_date_from = date("Y-m-d H:i:s");
+    $subscr_date_to = date("Y-m-d H:i:s", strtotime($subscr_date_from. ' + '.$subscr_days.' days'));
+    
+    if(!empty($txn_id)){
+        //Check if subscription data exists with the same TXN ID.
+        $prevPayment = $con->query("SELECT id FROM user_subscriptions WHERE txn_id = '".$txn_id."'");
+        if($prevPayment->num_rows > 0){
+            exit();
+        }else{
+            //Insert tansaction data into the database
+            $insert = $con->query("INSERT INTO user_subscriptions(user_id,validity,valid_from,valid_to,item_number,txn_id,payment_gross,currency_code,subscr_id,payment_status,payer_email) VALUES('".$custom."','".$subscr_month."','".$subscr_date_from."','".$subscr_date_to."','".$item_number."','".$txn_id."','".$payment_gross."','".$currency_code."','".$subscr_id."','".$payment_status."','".$payer_email."')");
+            
+            //Update subscription id in users table
+            if($insert){
+                $subscription_id = $con->insert_id;
+                $update = $db->query("UPDATE tbl_ship_detail SET subscription_id = 1 WHERE id = 1");
+            }
+        }
+    }
 }
 die;

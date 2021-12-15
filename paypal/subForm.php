@@ -1,15 +1,16 @@
 <?php
 // Include configuration file 
-include_once '../modules/config.php'; 
- 
+include_once 'config.php'; 
+include_once '../modules/config.php';
 // Start session
 session_start();
+
 if(isset($_SESSION['ship_id']) && $_SESSION['ship_id'] != NULL){
 ?>
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-<title>PayPal Subscriptions Payment Gateway Integration by CodexWorld</title>
+<title>Please Subscribe to Activate your Account</title>
 <meta charset="utf-8">
 
 <!-- Stylesheet file -->

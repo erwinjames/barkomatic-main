@@ -1,7 +1,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dashboard - <?php echo $_SESSION['ship_name']; ?></title>
+<title>Dashboard - <?php echo $_SESSION['username']; ?></title>
 <link rel="stylesheet" href="resources/css/main.css?version=barkomatic">
 <link rel="stylesheet" href="resources/css/bootstrap.min.css">
 <link rel="icon" type="image/png" sizes="32x32" href="resources/img/favicon.png" />

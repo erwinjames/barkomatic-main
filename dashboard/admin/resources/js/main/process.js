@@ -221,9 +221,6 @@ $(document).ready(function() {
         }
     });
 });
-
-
-
 // add ticket
 
 

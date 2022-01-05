@@ -61,6 +61,7 @@ function search_available_schedule($c) {
                         </div>
                         <div class="form-group">
                             <select name="srch_sched_accomm_type" id="slct_accomm_type" class="form-control">
+                                <option value="">None Aircon</option>
                                 <option value="'.$row["accomodation_name"].'">'.$row["accomodation_name"].'</option>
                             </select>
                         </div>

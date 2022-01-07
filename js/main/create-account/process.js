@@ -7,6 +7,7 @@ $(document).ready(function() {
             }
         }
     });
+
     $('#passenger-submit').click(function(e) {
         if (document.querySelector('#passenger-form').checkValidity()) {
             e.preventDefault();

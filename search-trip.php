@@ -100,12 +100,12 @@
     <script src="js/jquery.validate.min.js"></script>
     <script src="js/main/active.js"></script>
     <script src="js/main/schedule/process.js"></script>
-    <script>
+        <script>
             function calculateAmount(val) {
-                var price =document.getElementById("cost");
+                var price = document.getElementById("cost");
                 var accomtype = document.getElementById("slct_accomm_type");
                 var totalCost = accomtype.options[accomtype.selectedIndex].value;
-                total = parseInt(totalCost);
+                var total = parseInt(totalCost);
                 var totals = parseInt(total+price); 
                 document.getElementById('cost').innerHTML = document.getElementById("cost").value=totals;
             }

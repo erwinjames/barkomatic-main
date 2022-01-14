@@ -102,12 +102,14 @@
     <script src="js/main/schedule/process.js"></script>
         <script>
             function calculateAmount(val) {
-                var price = document.getElementById("cost");
+                var cost = document.getElementById("cost");
                 var accomtype = document.getElementById("slct_accomm_type");
-                var totalCost = accomtype.options[accomtype.selectedIndex].value;
-                var total = parseInt(totalCost);
-                var totals = parseInt(total+price); 
+                var accomtypePrice = accomtype.options[accomtype.selectedIndex].value;
+                var accomprice = parseInt(accomtypePrice);
+                var costprice = parseInt(cost);
+                var totals = accomprice+cost; 
                 document.getElementById('cost').innerHTML = document.getElementById("cost").value=totals;
+                console.log(totals);
             }
         </script>
     </body>

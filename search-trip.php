@@ -107,8 +107,8 @@
                 var accomtypePrice = accomtype.options[accomtype.selectedIndex].value;
                 var accomprice = parseInt(accomtypePrice);
                 var costprice = parseInt(cost);
-                var totals = accomprice+cost; 
-                document.getElementById('cost').innerHTML = document.getElementById("cost").value=totals;
+                var totals = parseInt(accomprice+cost); 
+                document.getElementById('cost1').innerHTML = document.getElementById("cost1").value=totals;
                 console.log(totals);
             }
         </script>

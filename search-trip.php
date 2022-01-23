@@ -100,5 +100,17 @@
     <script src="js/jquery.validate.min.js"></script>
     <script src="js/main/active.js"></script>
     <script src="js/main/schedule/process.js"></script>
+        <script>
+            function calculateAmount(value) {
+                // var cost = document.getElementById("cost");
+                var accomtype=document.getElementById("slct_accomm_type");
+                var accomtypePrice = accomtype.options[accomtype.selectedIndex].value;
+                var accomprice = parseInt(accomtypePrice);
+                // var costprice = parseInt(cost);
+                // var totals = parseInt(accomprice); 
+                document.getElementById('accom_price').innerHTML = document.getElementById('accom_price').value=accomprice;
+                console.log(accomprice);
+            }
+        </script>
     </body>
 </html>

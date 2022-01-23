@@ -70,7 +70,7 @@ function search_available_schedule($c) {
                         </div>
                         <div class="form-group">
                             <select onchange="calculateAmount(this.value)" name="srch_sched_accomm_type" id="slct_accomm_type" class="form-control">
-                            <option value="'.$row["tckt_price"].'">No Aircon</option> 
+                            <option value="">No Aircon</option> 
                             <option value="'.$row["price"].'">'.$row["accomodation_name"].'</option>
                             </select>
                         </div>

@@ -69,9 +69,9 @@ function search_available_schedule($c) {
                             <input type="text" name="srch_sched_time" value="'.$row["depart_time"].'" class="form-control border-top-0 rounded-0 text-center"  readonly>
                         </div>
                         <div class="form-group">
-                            <select onchange="calculateAmount(this.value)" name="srch_sched_accomm_type" id="slct_accomm_type" class="form-control">
-                            <option value="">No Aircon</option> 
-                            <option value="'.$row["price"].'">'.$row["accomodation_name"].'</option>
+                            <select onchange="changeValue(this.value)" name="srch_sched_accomm_type" id="slct_accomm_type" class="form-control">
+                            <option data-price="0" price="0" value="">No Aircon</option> 
+                            <option name="'.$row["accomodation_name"].'" value="'.$row["price"].'">'.$row["accomodation_name"].'</option>
                             </select>
                         </div>
                     </div>
@@ -84,6 +84,10 @@ function search_available_schedule($c) {
                             <input type="text" id="cost"  name="srch_sched_price_display" value="₱ '.$row["tckt_price"].'" class="form-control border-0 p-0 bg-light text-center" readonly>
                             <input type="hidden" id="total" name="srch_sched_price" value="'.$row["tckt_price"].'" class="form-control border-0 p-0 bg-light text-center" readonly>
                             <small>Ticket Price</small>
+                                    <br>
+                                    
+                          Price<input type="text" id="productPrice">
+                            <small>Accomodation Price Price</small>
                         </div>
                     </div>
                     <div class="col-sm-4">

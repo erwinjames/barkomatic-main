@@ -83,4 +83,12 @@ $(document).ready(function() {
             }
         });
     });
+
+    // this is the fucking accomodation prices
+    $('.srch_sched_accomm_type').on('change', function() {
+        $('.price-input')
+            .val(
+                $(this).find(':selected').data('price')
+            );
+    });
 });

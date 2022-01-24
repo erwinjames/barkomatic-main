@@ -14,7 +14,9 @@
     <title>Barkomatic - Search Trip</title>
     <!-- Favicon -->
     <link rel="icon" href="./img/core-img/favicon.png">
+   
     <!-- Stylesheet -->
+
     
 </head>
 <body>

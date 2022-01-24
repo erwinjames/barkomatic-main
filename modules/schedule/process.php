@@ -45,6 +45,7 @@ function search_available_schedule($c) {
                 tbl_ship_sched.port_to,
                 tbl_ship_acctyp.accomodation_name,
                 tbl_ship_acctyp.price,
+                tbl_ship_acctyp.id,
                 tbl_tcket.tckt_promo,
                 tbl_tcket.tckt_stats,
                 tbl_tcket.tckt_dscnt,
@@ -68,12 +69,16 @@ function search_available_schedule($c) {
                         <div class="form-group text-center">
                             <input type="text" name="srch_sched_time" value="'.$row["depart_time"].'" class="form-control border-top-0 rounded-0 text-center"  readonly>
                         </div>
+
+
                         <div class="form-group">
-                            <select onchange="calculateAmount(this.value)" name="srch_sched_accomm_type" id="slct_accomm_type" class="form-control">
-                            <option value="0">No Aircon</option> 
-                            <option value="'.$row["price"].'">'.$row["accomodation_name"].'</option>
+                            <select name="srch_sched_accomm_type" id="slct_accomm_type" class="form-control">
+                            <option value="0" >No Aircon</option> 
+                            <option  value="'.$row["price"].'">'.$row["accomodation_name"].'</option>
                             </select>
                         </div>
+
+                        
                     </div>
                     <div class="col-sm-4 text-center">
                         <div class="form-group pt-2 text-center">
@@ -82,11 +87,10 @@ function search_available_schedule($c) {
                         </div>
                         <div class="form-group">
                             <input type="text" id="cost"  name="srch_sched_price_display" value="₱ '.$row["tckt_price"].'" class="form-control border-0 p-0 bg-light text-center" readonly>
-                            <input type="hidden" id="total" name="srch_sched_price" value="'.$row["tckt_price"].'" class="form-control border-0 p-0 bg-light text-center" readonly>
+                            <input type="hidden" name="srch_sched_price" value="'.$row["tckt_price"].'" class="form-control border-0 p-0 bg-light text-center" readonly>
                             <small>Ticket Price</small>
                             <br>
-                            <input type="text" id="cost1"  name="srch_sched_price_display" value="0" class="form-control border-0 p-0 bg-light text-center" readonly>
-                            <input type="hidden" id="total" name="srch_sched_price" value="'.$row["tckt_price"].'" class="form-control border-0 p-0 bg-light text-center" readonly>
+                            Price :<input type="text" name="Price" value="" id="priceInput" disabled="disabled"/></br>
                             <small>Accomodation Price</small>
                         </div>
                     </div>

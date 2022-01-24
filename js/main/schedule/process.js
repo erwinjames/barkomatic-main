@@ -85,15 +85,23 @@ $(document).ready(function() {
     });
 
     // this is the fucking accomodation price
-    $('.calculate').change(function() {
-        var total = 0;
-        $('.calculate').each(function() {
-            if($(this).val() != 0) {
-                total += parseFloat($(this).val());
-            }
-        });
-        $('#priceInput').text('P' + total.toFixed(2));
-        console.log(total);
-    });
+    // $('.calculate').change(function() {
+    //     var total = 0;
+    //     $('.calculate').each(function() {
+    //         if($(this).val() != 0) {
+    //             total += parseFloat($(this).val());
+    //         }
+    //     });
+    //     $('#priceInput').text('P' + total.toFixed(2));
+    //     console.log(total);
+    // });
+
+    var priceMaterial = document.getElementById("price_material");
+
+$("#slct_accomm_type").on('change', function() {
+  var txt = $(this).find('option:selected').data('price');
+  $priceMaterial.text(txt);
+  console.log(txt);
+});
     
 });

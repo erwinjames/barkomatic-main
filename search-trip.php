@@ -109,17 +109,5 @@
 };
     </script> -->
 <!-- for reference -->
-<script>
-
-var priceMaterial = document.getElementById("price_material");
-
-
-document.getElementById("sct_accomm_type").addEventListener('change', function() {
-  var selected = this.options[this.selectedIndex];
-  var txt = selected.dataset.price;
-  priceMaterial.innerText = txt;
-});
-
-</script>
     </body>
 </html>

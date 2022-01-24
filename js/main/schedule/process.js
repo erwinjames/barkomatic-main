@@ -96,12 +96,5 @@ $(document).ready(function() {
     //     console.log(total);
     // });
 
-    var priceMaterial = document.getElementById("price_material");
-
-$("#slct_accomm_type").on('change', function() {
-  var txt = $(this).find('option:selected').data('price');
-  $priceMaterial.text(txt);
-  console.log(txt);
-});
     
 });

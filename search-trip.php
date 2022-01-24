@@ -101,8 +101,10 @@
     <script src="js/main/active.js"></script>
     <script src="js/main/schedule/process.js"></script>
     <script>
+
         function changeddl($this){
    $("#divprice").text($this.value>0?("₱ " + $this.value):"0");
+
 };
     </script>
     </body>

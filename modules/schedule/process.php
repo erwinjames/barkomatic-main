@@ -91,17 +91,16 @@ function search_available_schedule($c) {
                             <small>Ticket Price</small>
                             <br>
                             <br>
-                            <div id="divprice"></div>
-                            <small>Total Price</small>
+                            <div id="divprice">0</div>
+                            <small>Accomodation Price</small>
+                            <br>
+                            <br>
+                            <div id="totals"></div>
+                            <small>Accomodation Price</small>
                         </div>
                     </div>
-                    <div class="col-sm-4 text-center">
-                    <div class="form-group">
-                        <input type="text" id="total"  name="srch_sched_price_display" value="₱ '.$row["tckt_price"].'" class="form-control border-0 p-0 bg-light text-center" readonly>
-                        <input type="hidden" id="total" name="srch_sched_price" value="'.$row["tckt_price"].'" class="form-control border-0 p-0 bg-light text-center" readonly>
-                        <small>Total Price</small>
-                    </div>
-                </div>
+                   
+               
                     <div class="col-sm-4">
                         <div class="form-group">
                         </div>

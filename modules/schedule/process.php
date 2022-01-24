@@ -72,7 +72,7 @@ function search_available_schedule($c) {
 
 
                         <div class="form-group">
-                            <select name="srch_sched_accomm_type" id="slct_accomm_type" class="form-control calculate">
+                            <select onchange="changeddl(this)" name="srch_sched_accomm_type" id="slct_accomm_type" class="form-control calculate">
                             <option value="0" >No Aircon</option> 
                             <option  value="'.$row["price"].'">'.$row["accomodation_name"].'</option>
                             </select>
@@ -90,7 +90,9 @@ function search_available_schedule($c) {
                             <input type="hidden" name="srch_sched_price" value="'.$row["tckt_price"].'" class="form-control border-0 p-0 bg-light text-center" readonly>
                             <small>Ticket Price</small>
                             <br>
-                            <span id="total">P0</span>
+                            <br>
+                            <div id="divprice"></div>
+                            <small>Total Price</small>
                         </div>
                     </div>
                     <div class="col-sm-4 text-center">

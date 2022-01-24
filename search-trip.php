@@ -100,12 +100,26 @@
     <script src="js/jquery.validate.min.js"></script>
     <script src="js/main/active.js"></script>
     <script src="js/main/schedule/process.js"></script>
-    <script>
+    <!-- <script>
 
         function changeddl($this){
-   $("#divprice").text($this.value>0?("₱ " + $this.value):"0");
+   $("#divprice").text($this.value>0?("₱ " + $this.value):"₱ 0");
+   console.log($this.value);
 
 };
-    </script>
+    </script> -->
+<!-- for reference -->
+<script>
+
+var priceMaterial = document.getElementById("price_material");
+
+
+document.getElementById("sct_accomm_type").addEventListener('change', function() {
+  var selected = this.options[this.selectedIndex];
+  var txt = selected.dataset.price;
+  priceMaterial.innerText = txt;
+});
+
+</script>
     </body>
 </html>

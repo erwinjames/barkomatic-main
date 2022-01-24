@@ -72,9 +72,9 @@ function search_available_schedule($c) {
 
 
                         <div class="form-group">
-                            <select onchange="changeddl(this)" name="srch_sched_accomm_type" id="slct_accomm_type" class="form-control calculate">
-                            <option value="0" >No Aircon</option> 
-                            <option  value="'.$row["price"].'">'.$row["accomodation_name"].'</option>
+                            <select name="srch_sched_accomm_type" id="slct_accomm_type" class="form-control calculate">
+                            <option value="NONE" data-price="0" >No Aircon</option> 
+                            <option  value="'.$row["accomodation_name"].'" data-price="'.$row["price"].'">'.$row["accomodation_name"].'</option>
                             </select>
                         </div>
 
@@ -91,12 +91,10 @@ function search_available_schedule($c) {
                             <small>Ticket Price</small>
                             <br>
                             <br>
-                            <div id="divprice">0</div>
+                            <span id="price_material"></span>
                             <small>Accomodation Price</small>
                             <br>
                             <br>
-                            <div id="totals"></div>
-                            <small>Accomodation Price</small>
                         </div>
                     </div>
                    

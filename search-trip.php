@@ -100,7 +100,5 @@
     <script src="js/jquery.validate.min.js"></script>
     <script src="js/main/active.js"></script>
     <script src="js/main/schedule/process.js"></script>
-    <script>
-</script>
     </body>
 </html>

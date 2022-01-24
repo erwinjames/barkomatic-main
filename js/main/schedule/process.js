@@ -85,9 +85,9 @@ $(document).ready(function() {
     });
 
     // this is the fucking accomodation price
-    $('.srch_sched_accomm_type').change(function() {
+    $('.calculate').change(function() {
         var total = 0;
-        $('.srch_sched_accomm_type').each(function() {
+        $('.calculate').each(function() {
             if($(this).val() != 0) {
                 total += parseFloat($(this).val());
             }

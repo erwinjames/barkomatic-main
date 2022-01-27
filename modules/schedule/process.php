@@ -71,10 +71,10 @@ function search_available_schedule($c) {
                         </div>
 
 
-                        <div class="form-group accomm_type">
-                            <select name="srch_sched_accomm_type" id="slct_accomm_type" class="form-control select">
-                            <option value="0" data-name="None" >No Aircon</option> 
-                            <option name="sample_list" value="'.$row["id"].'" data-price="'.$row["price"].'" data-name="'.$row["accomodation_name"].'">'.$row["accomodation_name"].'</option>
+                        <div class="form-group accomm_type" name="sample_list" >
+                            <select onchange="selectOnChange(this)" name="srch_sched_accomm_type" id="slct_accomm_type" class="form-control select">
+                            <option value="0" data-price="0" data-name="None" >No Aircon</option> 
+                            <option value="'.$row["id"].'" data-price="'.$row["price"].'" data-name="'.$row["accomodation_name"].'">'.$row["accomodation_name"].'</option>
                             </select>
                         </div>
 
@@ -86,15 +86,23 @@ function search_available_schedule($c) {
                             <input type="text" name="srch_sched_ship_nm" value="'.$row["ship_name"].'" class="bg-light border-0" readonly>
                         </div>
                         <div class="form-group">
-                            <input type="text" id="cost"  name="srch_sched_price_display" value="₱ '.$row["tckt_price"].'" class="form-control border-0 p-0 bg-light text-center" readonly>
+                            <input type="text" id="cost"  name="srch_sched_price_display" value="'.$row["tckt_price"].'" class="form-control border-0 p-0 bg-light text-center" readonly>
                             <input type="hidden" name="srch_sched_price" value="'.$row["tckt_price"].'" class="form-control border-0 p-0 bg-light text-center" readonly>
                             <small>Ticket Price</small>
                             <br>
                             <br>
-                            <input type="text" class="form-control price-input" readonly>
+                            <input type="text" id="AcommondationPrice"  name="srch_sched_Accom_price" value="" class="form-control border-0 p-0 bg-light text-center" readonly>
+                            <input type="hidden" id="AcommondationPrice" name="srch_sched_Accom_price" value="" class="form-control border-0 p-0 bg-light text-center" readonly>
                             <small>Accomodation Price</small>
                             <br>
                             <br>
+                            <br>
+                            <br>
+                            <input type="text" id="total"  name="srch_sched_price_display" value="P'.$row["tckt_price"].'" class="form-control border-0 p-0 bg-light text-center" readonly>
+                            <input type="hidden" id="total" name="srch_sched_total_price" value="'.$row["tckt_price"].'" class="form-control border-0 p-0 bg-light text-center" readonly>
+                            <small>Total Price</small>
+                           
+
                         </div>
                     </div>
                    
@@ -119,6 +127,7 @@ function go_schedule($c) {
     $srch_st = $_POST['srch_sched_time'];
     $srch_sat = $_POST['srch_sched_accomm_type'];
     $srch_ssnm = $_POST['srch_sched_ship_nm'];
+    $srch_accomprice = $_POST['srch_sched_Accom_price'];
     if ($srch_sat == 0) {
          
         $sql_srch_slct = "SELECT 
@@ -216,7 +225,7 @@ $output = '
     <div class="col-6">
         <div class="form-group">
             <p>
-                PRICE<br><span>₱ '.$row["tckt_price"].'</span>
+               TOTAL PRICE<br><span>₱ '.$row["tckt_price"].'</span>
             </p>
             <input type="hidden" name="summry_dptr_price" value="'.$row["tckt_price"].'">
         </div>
@@ -258,12 +267,15 @@ $stmt->close();
                     JOIN tbl_ship_schedule tbl_sched ON tbl_sd.id = tbl_sched.id
                     JOIN tbl_ship_has_accomodation_type tbl_acctyp ON tbl_sched.id = tbl_acctyp.id
                     JOIN tbl_tckt tbl_tcket ON tbl_sd.ship_name = tbl_tcket.tckt_owner
-                    WHERE tbl_sched.depart_time=? AND tbl_acctyp.accomodation_name=? AND tbl_sd.ship_name=?";
+                    WHERE tbl_sched.depart_time=? AND tbl_acctyp.id=? AND tbl_sd.ship_name=?";
     $stmt = $c->prepare($sql_srch_slct);
     $stmt->bind_param('sss', $srch_st,$srch_sat,$srch_ssnm);
     $stmt->execute();
     $result = $stmt->get_result();
     $row = $result->fetch_array();
+    if ($srch_sat!=0) {
+        $total =$row["tckt_price"] + $row["price"] ;
+    }
     $output = '
     <hr class="mb-0">
     <div class="section bg-light pl-5 pr-5 pb-5 pt-3">
@@ -331,9 +343,9 @@ $stmt->close();
                 <div class="col-6">
                     <div class="form-group">
                         <p>
-                            PRICE<br><span>₱ '.$row["tckt_price"].'</span>
+                            TOTAL PRICE<br><span>₱ '.$total.'</span>
                         </p>
-                        <input type="hidden" name="summry_dptr_price" value="'.$row["tckt_price"].'">
+                        <input type="hidden" name="summry_dptr_price" value="'.$total.'">
                     </div>
                 </div>
                 <div class="col-6 text-right">

@@ -93,7 +93,7 @@
             </div>
         </div>
     </div>
-    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/roberto.bundle.js"></script>
@@ -101,19 +101,20 @@
     <script src="js/main/active.js"></script>
     <script src="js/main/schedule/process.js"></script>
     <script>
-//    function changeddl($this){
-//         $("#divprice").text($this.value>0?("₱ " + $this.value):"₱ 0");
-//         console.log($this.value);   
-//      };
-$(document).ready(function() {
-$('.accomm_type').on('change', function() {
-  $('.price-input')
-  .val(
-    $(this).find(':selected').data('price')
-  );
-});
-});
+function selectOnChange(obj) {
+         var price =  $(obj).find(':selected').data('price');
+         var cost = document.getElementById("cost").value;
+         var priceInt = parseInt(price);
+         var costInt= parseInt(cost);
+         var total = parseInt(priceInt + costInt);
+         document.getElementById("AcommondationPrice").value = priceInt;
+         document.getElementById("total").value = total;
+         if (price == 0) {
+            document.getElementById("AcommondationPrice").value = "";
+         }
+    
+	  }
     </script>
-<!-- for reference -->
+
     </body>
 </html>

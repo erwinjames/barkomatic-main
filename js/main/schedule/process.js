@@ -84,6 +84,7 @@ $(document).ready(function() {
         });
     });
 
+
     // this is the fucking accomodation price
     // $('.calculate').change(function() {
     //     var total = 0;
@@ -96,5 +97,5 @@ $(document).ready(function() {
     //     console.log(total);
     // });
 
-    
+ 
 });

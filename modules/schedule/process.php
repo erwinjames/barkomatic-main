@@ -71,10 +71,10 @@ function search_available_schedule($c) {
                         </div>
 
 
-                        <div class="form-group">
-                            <select name="srch_sched_accomm_type" id="slct_accomm_type" class="form-control">
-                            <option value="NONE" data-price="0" >No Aircon</option> 
-                            <option  value="'.$row["accomodation_name"].'" data-price="'.$row["price"].'">'.$row["accomodation_name"].'</option>
+                        <div class="form-group accomm_type">
+                            <select name="srch_sched_accomm_type" id="slct_accomm_type" class="form-control select">
+                            <option value="0" data-name="None" >No Aircon</option> 
+                            <option name="sample_list" value="'.$row["id"].'" data-price="'.$row["price"].'" data-name="'.$row["accomodation_name"].'">'.$row["accomodation_name"].'</option>
                             </select>
                         </div>
 
@@ -91,7 +91,7 @@ function search_available_schedule($c) {
                             <small>Ticket Price</small>
                             <br>
                             <br>
-                            <span id="price_material"></span>
+                            <input type="text" class="form-control price-input" readonly>
                             <small>Accomodation Price</small>
                             <br>
                             <br>

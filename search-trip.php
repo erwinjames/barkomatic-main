@@ -100,14 +100,20 @@
     <script src="js/jquery.validate.min.js"></script>
     <script src="js/main/active.js"></script>
     <script src="js/main/schedule/process.js"></script>
-    <!-- <script>
-
-        function changeddl($this){
-   $("#divprice").text($this.value>0?("₱ " + $this.value):"₱ 0");
-   console.log($this.value);
-
-};
-    </script> -->
+    <script>
+//    function changeddl($this){
+//         $("#divprice").text($this.value>0?("₱ " + $this.value):"₱ 0");
+//         console.log($this.value);   
+//      };
+$(document).ready(function() {
+$('.accomm_type').on('change', function() {
+  $('.price-input')
+  .val(
+    $(this).find(':selected').data('price')
+  );
+});
+});
+    </script>
 <!-- for reference -->
     </body>
 </html>

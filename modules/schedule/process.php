@@ -360,7 +360,7 @@ $stmt->close();
     echo $output;
     $stmt->close();
 }
-}
+}  
 
 //* reservation
 function reservation($c) {
@@ -424,11 +424,12 @@ function reservation_confirmation($c,$sdsn) {
             $mail = new PHPMailer(true);
             try {
                 // $mail->SMTPDebug = SMTP::DEBUG_SERVER; 
+                // $mail->SMTPDebug  = 2;
                 $mail->isSMTP();
                 $mail->SMTPAuth = true;
                 $mail->Host = 'smtp.gmail.com';
-                $mail->Username = 'barkomatic2021@gmail.com';
-                $mail->Password = 'kimZ_123';
+                $mail->Username = 'manugasewinjames@gmail.com';
+                $mail->Password = 'HardFact@30';
                 $mail->SMTPSecure = 'TLS';
                 $mail->Port = 587;
 
@@ -465,8 +466,8 @@ function reservation_confirmation($c,$sdsn) {
                 $mail->send();
                 echo "Your reservation is submitted, In a while you will recieve an email confirmation for your reservation.";
             }catch(Exception $e){
-                //echo "Reset password link could not be sent. Mailer Error: {$mail->ErrorInfo}";
-                echo 'Could not sent the reservation confirmation.';
+                echo "Reset password link could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                // echo 'Could not sent the reservation confirmation.{$mail->ErrorInfo}';
             }
         } else {
             echo "row is empty! - 2";

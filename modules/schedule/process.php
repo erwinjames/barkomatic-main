@@ -5,7 +5,7 @@ require "../library/PHPMailer/src/PHPMailer.php";
 require "../library/PHPMailer/src/SMTP.php";
 
 use PHPMailer\PHPMailer\PHPMailer;
-//use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 if(isset($_POST['action']) && $_POST['action'] == 'search_sched_form') {
@@ -371,7 +371,6 @@ function reservation($c) {
     $sdt = $_POST['summry_dptr_time'];
     $sdan = $_POST['summry_dptr_accom_name'];
     $pssgr_name = $_SESSION['first_name']." ".$_SESSION['lastname']; 
-
     $success = 0;
     $rsrvtn_num = rand(1000000,9999999);
     $rsrvtn_date = date('Y-m-d');
@@ -420,18 +419,20 @@ function reservation_confirmation($c,$sdsn) {
             $ship_email = $row['email'];
             $exp = $row['expiration'];
             $pssngr_fname = $_SESSION['first_name'];
-
-            $mail = new PHPMailer(true);
+            $mail = new PHPMailer();
             try {
                 // $mail->SMTPDebug = SMTP::DEBUG_SERVER; 
-                // $mail->SMTPDebug  = 2;
+                // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+                // $mail->SMTPDebug = 4;
                 $mail->isSMTP();
+                $mail->Mailer = "smtp";
                 $mail->SMTPAuth = true;
                 $mail->Host = 'smtp.gmail.com';
                 $mail->Username = 'manugasewinjames@gmail.com';
                 $mail->Password = 'HardFact@30';
-                $mail->SMTPSecure = 'TLS';
+                $mail->SMTPSecure = 'tls';
                 $mail->Port = 587;
+                
 
                 $mail->setFrom($ship_email, 'Reservation');
                 $mail->addAddress($_SESSION['email']);
@@ -466,7 +467,7 @@ function reservation_confirmation($c,$sdsn) {
                 $mail->send();
                 echo "Your reservation is submitted, In a while you will recieve an email confirmation for your reservation.";
             }catch(Exception $e){
-                echo "Reset password link could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                echo "Could not sent the reservation confirmation. Mailer Error: {$mail->ErrorInfo}";
                 // echo 'Could not sent the reservation confirmation.{$mail->ErrorInfo}';
             }
         } else {

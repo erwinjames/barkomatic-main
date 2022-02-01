@@ -262,9 +262,9 @@
 <body>
 
     <!-- Preloader -->
-    <div id="preloader">
+    <!-- <div id="preloader">
         <div class="loader"></div>
-    </div>
+    </div> -->
     <!-- /Preloader -->
     <!-- Header Area Start -->
     <header class="header-area" style="position: fixed;">

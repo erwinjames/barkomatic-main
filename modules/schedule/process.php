@@ -390,7 +390,6 @@ function reservation($c) {
         reservation_confirmation($c,$sdsn);
     }
 }
-
 //* send email reservation confirmation
 function reservation_confirmation($c,$sdsn) {
     $sql_rsrvtn = "SELECT * FROM tbl_passenger_reservation";
@@ -466,6 +465,7 @@ function reservation_confirmation($c,$sdsn) {
                 </html>";
                 $mail->send();
                 echo "Your reservation is submitted, In a while you will recieve an email confirmation for your reservation.";
+                
             }catch(Exception $e){
                 echo "Could not sent the reservation confirmation. Mailer Error: {$mail->ErrorInfo}";
                 // echo 'Could not sent the reservation confirmation.{$mail->ErrorInfo}';
@@ -477,6 +477,3 @@ function reservation_confirmation($c,$sdsn) {
         echo "row is empty! - 1";
     }
 }
-
-
-

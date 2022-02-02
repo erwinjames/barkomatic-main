@@ -1,336 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Title -->
-    <title>Barkomatic - Payment</title>
-    <!-- Favicon -->
-    <link rel="icon" href="./img/core-img/favicon.png">
-    <!-- Stylesheet -->
-    <link rel="stylesheet" href="css/default-assets/main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
-    <style>
-        /* Input Fields */
-        
-        .wrapper {
-            background-color: white;
-            border-radius: 5px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .wrapper h1 {
-            background-color: blue;
-            color: white;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 12px;
-            text-transform: uppercase;
-            padding: 14px 0 10px 49px;
-            letter-spacing: 1px;
-            margin-top: 20px;
-            margin-left: -52px;
-            width: 330px;
-        }
-        
-        .wrapper form {
-            font-family: 'Work Sans', sans-serif;
-        }
-        
-        .wrapper form .group {
-            display: block;
-            width: 90%;
-            float: right;
-            position: relative;
-            margin-bottom: 25px;
-        }
-        
-        .wrapper form .group label {
-            font-size: 12px;
-            float: cen;
-            width: 100%;
-            display: block;
-            margin-bottom: 5px;
-        }
-        
-        .wrapper form .card-number input {
-            float: left;
-            width: 25%;
-            height: 28px;
-            font-size: 18px;
-            font-family: 'Work Sans', sans-serif;
-            border: 0;
-            color: black;
-            border-bottom: 1px solid grey;
-            outline: none;
-            text-align: center;
-            opacity: .5;
-        }
-        
-        .wrapper form .card-name input {
-            float: left;
-            width: 100%;
-            height: 28px;
-            font-size: 18px;
-            font-family: 'Work Sans', sans-serif;
-            border: 0;
-            color: black;
-            border-bottom: 1px solid grey;
-            opacity: .5;
-            text-align: center;
-            outline: none;
-        }
-        
-        .wrapper form .card-expiry input {
-            float: left;
-            width: 40%;
-            height: 28px;
-            font-size: 18px;
-            font-family: 'Work Sans', sans-serif;
-            border: 0;
-            color: black;
-            border-bottom: 1px solid grey;
-            outline: none;
-            margin-right: 3px;
-            opacity: .5;
-            text-align: center;
-        }
-        
-        .wrapper form .csv input {
-            float: left;
-            width: 80%;
-            height: 28px;
-            font-size: 18px;
-            font-family: 'Work Sans', sans-serif;
-            border: 0;
-            color: black;
-            border-bottom: 1px solid grey;
-            text-align: center;
-            opacity: .5;
-            outline: none;
-        }
-        
-        input::placeholder {
-            font-size: 12px;
-        }
-        
-        .wrapper .container form .group input {
-            font-size: 12px;
-            font-family: 'Work Sans', sans-serif;
-        }
-        
-        .card-inforamation {
-            display: none;
-        }
-        
-        .fa-check-circle {
-            display: none;
-            margin-top: 100px;
-            font-size: 18px;
-        }
-        /* PAYMNET */
-        
-        .images {
-            width: 100%;
-            background-color: antiquewhite;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            text-align: center;
-            margin: 10px 0px 0px 0px;
-            font-size: 50px;
-            box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06), 0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086), 0 100px 80px rgba(0, 0, 0, 0.12);
-        }
-        
-        .imgs {
-            margin-top: 20px;
-            height: 8rem;
-        }
-        
-        /* .arrow {}
-         */
-        .images p {
-            font-size: 20%;
-        }
-        
-        .arrow .fa {
-            justify-content: space-between;
-            align-items: center;
-            text-align: center;
-            margin: 10px 0px 0px 0px;
-            font-size: 40px;
-        }
-        
-        body {
-            background-image: url("./img/bg-img/1.5.png");
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-attachment: fixed;
-        }
-        
-        @media only screen and (max-width: 1199px) {
-            .be-there {
-                margin-top: 20px;
-            }
-        }
-        
-        @media only screen and (max-width:575px) {
-            .arrow {
-                right: 1%;
-            }
-            .fa-chevron-right {
-                display: none;
-            }
-            img {
-                width: auto;
-                height: auto;
-            }
-            .arrow {
-                margin-top: -10px;
-            }
-            .imagess {
-                margin-top: -10px;
-            }
-        }
-        
-        @media only screen and (min-width: 576px) {
-            .be-there {
-                margin-top: 20px;
-            }
-            .fa-chevron-down {
-                display: none;
-            }
-        }
-        
-        @media only screen and (max-width: 475px) {
-            .colasdd {
-                display: none;
-            }
-        }
-        
-        @media only screen and (min-width:475px) {
-            .colasd {
-                display: none;
-            }
-        }
-        
-        @media only screen and (max-width: 600px) {
-            .receipt-border-col {
-                display: none;
-            }
-        }
-        
-        @media only screen and (max-width: 768px) {
-            .progressbar {
-                display: none;
-            }
-            /* .receipt-border-col {} */
-        }
-        
-        @media only screen and (max-width: 600px) {
-            .receipt-border-col {
-                display: none;
-            }
-        }
-        
-        @media only screen and ( width: 1024px) {}
-        
-        .your-almost-there-col,
-        .Important,
-        .receipt-border-col,
-        .asd {
-            box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06), 0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086), 0 100px 80px rgba(0, 0, 0, 0.12);
-            border-radius: 5px;
-        }
-        
-        .pay:hover {
-            background-color: azure;
-        }
-        
-        .pay:active {
-            background-color: gray;
-        }
-    </style>
-
-</head>
-
-<body>
-
-    <!-- Preloader -->
-    <div id="preloader">
-        <div class="loader"></div>
-    </div>
-    <!-- /Preloader -->
-    <!-- Header Area Start -->
-    <header class="header-area" style="position: fixed;">
-
-        <!-- Top Header Area End -->
-        <!-- Main Header Start -->
-        <div class="main-header-area">
-            <div class="classy-nav-container breakpoint-off">
-                <div class="container">
-                    <!-- Classy Menu -->
-                    <nav class="classy-navbar" id="robertoNav">
-                        <!-- Logo -->
-                        <a class="nav-brand" href="index.php">
-                            <img src="./img/core-img/logo.png" alt="BarkoMatic">
-                        </a>
-                        <!-- Navbar Toggler -->
-                        <div class="classy-navbar-toggler">
-                            <span class="navbarToggler">
-                                    <span></span>
-                            <span></span>
-                            <span></span>
-                            </span>
-                        </div>
-                        <!-- Menu -->
-                        <div class="classy-menu">
-                            <!-- Menu Close Button -->
-                            <div class="classycloseIcon">
-                                <div class="cross-wrap">
-                                    <span class="top"></span>
-                                    <span class="bottom"></span>
-                                </div>
-                            </div>
-                            <!-- Nav Start -->
-                            <div class="classynav">
-                                <div class="classynav">
-                                    <ul id="nav">
-                                        <li class="active"><a href="./index.html">Home</a></li>
-                                        <li><a href="./contact.html">Contact Us</a></li>
-                                        <li><a href="">Privacy Policy</a></li>
-                                        <li class="border" style="border-radius: 30px;"><a href="#">PASSENGER GIUDE LINES</a>
-                                            <ul class="dropdown" style="background-color: #09527F;">
-                                                <li>
-                                                    <a href=""></a>
-                                                </li>
-                                            </ul>
-
-                                        </li>
-                                        <li class="border" style="border-radius: 30px;"><a href="#">CARGO GUIDELINES</a>
-                                            <ul class="dropdown" style="background-color: #09527F;">
-                                                <li>
-                                                    <a href=""></a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- Nav End -->
-                        </div>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </header><br><br><br>
-
-
+    <?php require "resources/templates/_payment_header.php"; ?>
     <div>
         <div class=" col-sm-12" style="background-color: white; margin-top:41px;">
             <div class="container ">
@@ -395,7 +64,6 @@
                         <p> <img src="./img/core-img/logoq.png" alt="" style="max-width: 60px;  height: auto;  ">You're Almost There</p>
                     </div>
                 </div>
-
                 <div class=" receipt-border-col  col-sm-3 border" style="margin-top: -5%; position: fixed; right: 2%; color: black; background-color: rgb(18, 68, 63); font-size: 60%;">
                     <div class="row">
                         <p class="col-sm-6" style=" margin-left: 10%; font-size: 200%;">Passenger </p>
@@ -445,11 +113,8 @@
                             <span class="card-inforamation box fa fa-check-circle "></span>
                             <img src="./img/core-img/6.png" alt="">
                             <div class="radio-input" value="credit">
-                                <label><input type="radio" name="payment" value="card-inforamation"> credit card</label>
-
-
+                                <label><input type="radio" name="payment" value="card-inforamation" disabled> credit card</label>
                             </div>
-
                         </div>
                         <div class="pay col-sm-3 text-center  border" style>
                             <span class=" paypal box  fa fa-check-circle "></span>
@@ -462,46 +127,21 @@
                             <span class="e-cash box fa fa-check-circle "></span>
                             <img src="./img/core-img/8.png" alt="">
                             <div class="radio-input">
-                                <input id="card" type="radio" name="payment" value="e-cash"> e-cash
+                                <input id="card" type="radio" name="payment" value="e-cash" disabled> e-cash
                             </div>
-
                         </div>
                         <div class=" pay col-sm-3 text-center  border">
                             <span class="counters box fa fa-check-circle "></span>
                             <img src="./img/core-img/8.png " alt="">
                             <div class="radio-input">
-                                <input id="card" type="radio" name="payment" value="counters"> over the counter
+                                <input id="card" type="radio" name="payment" value="counters" disabled> over the counter
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
     </Div>
-    <div class="">
-        <div class="payment">
-            <div class="container  text-center">
-                <div class="payment1 col-sm-9" style="background-color: white; padding:0;">
-                    <div>
-                        <div class=" row">
-                            <div class="container " style="margin:0;">
-                                <div class="pay col-sm-12 text-center  border">
-
-                                    <img src="./img/core-img/8.png " class="border" style="height:10rem;" alt="">
-                                    <div class="radio-input">
-                                        <input id="card" type="radio" name="payment"> over the counter
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-                    </div><br>
-
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="card-inforamation box container ">
         <div class="col-sm-9">
             <div class="row ">
@@ -685,6 +325,10 @@
         </div>
 
     </div>
+    <div class="container mt-3 mb-3" id="srch_sched_data">
+                <form id="srch_sched_ftr_form">
+                </form>
+    </div>
     <div class="container PASSENGER_INFO">
         <div class=" col-sm-9 border" style="background-color: white ;border-top: 50px; margin-top: -6%; margin-top: 10%;">
             <div>
@@ -694,7 +338,6 @@
                             <h5>Passenger's Information</h5>
                         </div>
                     </div>
-
                 </div>
                 <div class="row">
                     <div class="col-sm-3 text-center">
@@ -723,12 +366,9 @@
                         <p class="LName" style="font-size: 15px;"><span>Nationality</span></p>
                         <p class="" style=" font-size: 13px;">Filipino</p><br>
                     </div>
-
                 </div>
-
             </div>
         </div>
-
     </div>
     <div class="container" style="margin-top: 2%;">
         <div class="col-sm-9">
@@ -742,40 +382,20 @@
             </div>
         </div>
     </div>
-
-
-    <div class="container" style="margin-top:20px;">
-        <div class="row col-sm-9">
-
-
-        </div>
-
-    </div>
-
-
-
-
-
-
-
+  
     <!-- **** All JS Files ***** -->
-    <!-- jQuery 2.2.4 -->
-    <script src="js/jquery.min.js"></script>
-    <!-- Popper -->
+    <script src="js/jquery/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>
-    <!-- Bootstrap -->
     <script src="js/bootstrap.min.js"></script>
-    <!-- All Plugins -->
     <script src="js/roberto.bundle.js"></script>
-    <!-- Active -->
-    <script src="js/default-assets/active.js"></script>
+    <script src="js/jquery.validate.min.js"></script>
+    <script src="js/main/active.js"></script>
+    <script src="js/main/schedule/process.js"></script>
     <script>
         window.onscroll = function() {
             myFunction()
         };
-
         var header = document.get
-
         function myFunction() {
             if (window.pageYOffset > sticky) {
                 header.classList.add("sticky");
@@ -789,7 +409,7 @@
             document.getElementById("demo").innerHTML = "YOU CLICKED ME!";
         }
     </script>
-    <SCript>
+    <script>
         $(document).ready(function() {
 
             // Radio box border
@@ -816,7 +436,7 @@
             });
 
         });
-    </SCript>
+    </script>
     <!--BlueSnap Hosted Payment Fields JavaScript file-->
     <script type="text/javascript" src="https://sandbox.bluesnap.com/services/hosted-payment-fields/v1.0/bluesnap.hpf.mini.js"></script>
     <script>

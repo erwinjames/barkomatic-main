@@ -18,7 +18,15 @@ if(isset($_POST['action']) && $_POST['action'] == 'srch_sched_ftr_form') {
         go_schedule($con);
     } else {
         echo '<p class="text-center text-danger">Sorry, you need to create an account first and sign in as passenger.</p>';
-    }
+    } 
+}
+if(isset($_GET['reservetionId']) && $_GET['reservetionId'] == 'srch_sched_ftr_form') {
+    session_start();
+    if(isset($_SESSION['first_name']) && $_SESSION['first_name'] != "") {
+        go_schedule($con);
+    } else {
+        echo '<p class="text-center text-danger">Sorry, you need to create an account first and sign in as passenger.</p>';
+    } 
 }
 
 if(isset($_POST['action']) && $_POST['action'] == 'smmry_dptr_slctd_sched_form') {
@@ -387,12 +395,12 @@ function reservation($c) {
         $success = 1;
     }
     if($success == 1) {
-        reservation_confirmation($c,$sdsn);
+        reservation_confirmation($c,$sdsn,$rsrvtn_num);
     }
 }
 
 //* send email reservation confirmation
-function reservation_confirmation($c,$sdsn) {
+function reservation_confirmation($c,$sdsn,$rsrvtn_num) {
     $sql_rsrvtn = "SELECT * FROM tbl_passenger_reservation";
     $stmt = $c->prepare($sql_rsrvtn);
     $stmt->execute();
@@ -404,7 +412,8 @@ function reservation_confirmation($c,$sdsn) {
         $sql_em = "SELECT 
                     tbl_sd.email,
                     tbl_pr.ship_name,
-                    tbl_pr.expiration
+                    tbl_pr.expiration,
+                    tbl_pr.reservation_number
                     FROM tbl_ship_detail tbl_sd
                     JOIN tbl_passenger_reservation tbl_pr ON tbl_sd.id = tbl_pr.id
                     WHERE tbl_sd.ship_name=?";
@@ -432,11 +441,8 @@ function reservation_confirmation($c,$sdsn) {
                 $mail->Password = 'HardFact@30';
                 $mail->SMTPSecure = 'tls';
                 $mail->Port = 587;
-                
-
                 $mail->setFrom($ship_email, 'Reservation');
                 $mail->addAddress($_SESSION['email']);
-
                 $mail->isHTML(true);
                 $mail->Subject = 'Reservation Confirmation';
                 $mail->Body = "
@@ -453,7 +459,7 @@ function reservation_confirmation($c,$sdsn) {
                         <div class='row'>
                             <div class='col-sm-12'>
                                 <h4>$ship_name</h4><br>
-                                <p>Hello $pssngr_fname, Thank you for making your reservation in our shipping line. <br>Your <b>Payment</b> will be handled in the ticket office.</p>
+                                <p>Hello $pssngr_fname, Thank you for making your reservation in our shipping line. <br>Your <b>Payment</b> Please  <a class='link' href='http://localhost/barkomatic-main/payment.php?reservetionId=$rsrvtn_num'>click me</a></p>
                                 <p>Your ticket reservation is valid until: <b>$exp</b></p>
                                 <p>If you find it necessary to cancel or change plans, please inform us by email <span style='color:#007bff;font-weight:700;'>$ship_email<span></p>
                                 <br><br>
@@ -465,7 +471,8 @@ function reservation_confirmation($c,$sdsn) {
                 </body>
                 </html>";
                 $mail->send();
-                echo "Your reservation is submitted, In a while you will recieve an email confirmation for your reservation.";
+                echo "Emailed Successfully";
+
             }catch(Exception $e){
                 echo "Could not sent the reservation confirmation. Mailer Error: {$mail->ErrorInfo}";
                 // echo 'Could not sent the reservation confirmation.{$mail->ErrorInfo}';
@@ -476,6 +483,7 @@ function reservation_confirmation($c,$sdsn) {
     } else {
         echo "row is empty! - 1";
     }
+
 }
 
 

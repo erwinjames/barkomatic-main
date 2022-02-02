@@ -1,0 +1,242 @@
+.wrapper {
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.wrapper h1 {
+    background-color: blue;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    padding: 14px 0 10px 49px;
+    letter-spacing: 1px;
+    margin-top: 20px;
+    margin-left: -52px;
+    width: 330px;
+}
+
+.wrapper form {
+    font-family: 'Work Sans', sans-serif;
+}
+
+.wrapper form .group {
+    display: block;
+    width: 90%;
+    float: right;
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.wrapper form .group label {
+    font-size: 12px;
+    float: cen;
+    width: 100%;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.wrapper form .card-number input {
+    float: left;
+    width: 25%;
+    height: 28px;
+    font-size: 18px;
+    font-family: 'Work Sans', sans-serif;
+    border: 0;
+    color: black;
+    border-bottom: 1px solid grey;
+    outline: none;
+    text-align: center;
+    opacity: .5;
+}
+
+.wrapper form .card-name input {
+    float: left;
+    width: 100%;
+    height: 28px;
+    font-size: 18px;
+    font-family: 'Work Sans', sans-serif;
+    border: 0;
+    color: black;
+    border-bottom: 1px solid grey;
+    opacity: .5;
+    text-align: center;
+    outline: none;
+}
+
+.wrapper form .card-expiry input {
+    float: left;
+    width: 40%;
+    height: 28px;
+    font-size: 18px;
+    font-family: 'Work Sans', sans-serif;
+    border: 0;
+    color: black;
+    border-bottom: 1px solid grey;
+    outline: none;
+    margin-right: 3px;
+    opacity: .5;
+    text-align: center;
+}
+
+.wrapper form .csv input {
+    float: left;
+    width: 80%;
+    height: 28px;
+    font-size: 18px;
+    font-family: 'Work Sans', sans-serif;
+    border: 0;
+    color: black;
+    border-bottom: 1px solid grey;
+    text-align: center;
+    opacity: .5;
+    outline: none;
+}
+
+input::placeholder {
+    font-size: 12px;
+}
+
+.wrapper .container form .group input {
+    font-size: 12px;
+    font-family: 'Work Sans', sans-serif;
+}
+
+.card-inforamation {
+    display: none;
+}
+
+.fa-check-circle {
+    display: none;
+    margin-top: 100px;
+    font-size: 18px;
+}
+
+
+/* PAYMNET */
+
+.images {
+    width: 100%;
+    background-color: antiquewhite;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    margin: 10px 0px 0px 0px;
+    font-size: 50px;
+    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06), 0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086), 0 100px 80px rgba(0, 0, 0, 0.12);
+}
+
+.imgs {
+    margin-top: 20px;
+    height: 8rem;
+}
+
+
+/* .arrow {}
+         */
+
+.images p {
+    font-size: 20%;
+}
+
+.arrow .fa {
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    margin: 10px 0px 0px 0px;
+    font-size: 40px;
+}
+
+body {
+    background-image: url("./img/bg-img/1.5.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+@media only screen and (max-width: 1199px) {
+    .be-there {
+        margin-top: 20px;
+    }
+}
+
+@media only screen and (max-width:575px) {
+    .arrow {
+        right: 1%;
+    }
+    .fa-chevron-right {
+        display: none;
+    }
+    img {
+        width: auto;
+        height: auto;
+    }
+    .arrow {
+        margin-top: -10px;
+    }
+    .imagess {
+        margin-top: -10px;
+    }
+}
+
+@media only screen and (min-width: 576px) {
+    .be-there {
+        margin-top: 20px;
+    }
+    .fa-chevron-down {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 475px) {
+    .colasdd {
+        display: none;
+    }
+}
+
+@media only screen and (min-width:475px) {
+    .colasd {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .receipt-border-col {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .progressbar {
+        display: none;
+    }
+    /* .receipt-border-col {} */
+}
+
+@media only screen and (max-width: 600px) {
+    .receipt-border-col {
+        display: none;
+    }
+}
+
+@media only screen and ( width: 1024px) {}
+
+.your-almost-there-col,
+.Important,
+.receipt-border-col,
+.asd {
+    box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034), 0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06), 0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086), 0 100px 80px rgba(0, 0, 0, 0.12);
+    border-radius: 5px;
+}
+
+.pay:hover {
+    background-color: azure;
+}
+
+.pay:active {
+    background-color: gray;
+}

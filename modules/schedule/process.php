@@ -20,14 +20,6 @@ if(isset($_POST['action']) && $_POST['action'] == 'srch_sched_ftr_form') {
         echo '<p class="text-center text-danger">Sorry, you need to create an account first and sign in as passenger.</p>';
     } 
 }
-if(isset($_GET['reservetionId']) && $_GET['reservetionId'] == 'srch_sched_ftr_form') {
-    session_start();
-    if(isset($_SESSION['first_name']) && $_SESSION['first_name'] != "") {
-        go_schedule($con);
-    } else {
-        echo '<p class="text-center text-danger">Sorry, you need to create an account first and sign in as passenger.</p>';
-    } 
-}
 
 if(isset($_POST['action']) && $_POST['action'] == 'smmry_dptr_slctd_sched_form') {
     session_start();
@@ -398,7 +390,6 @@ function reservation($c) {
         reservation_confirmation($c,$sdsn,$rsrvtn_num);
     }
 }
-
 //* send email reservation confirmation
 function reservation_confirmation($c,$sdsn,$rsrvtn_num) {
     $sql_rsrvtn = "SELECT * FROM tbl_passenger_reservation";

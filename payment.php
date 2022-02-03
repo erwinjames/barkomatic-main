@@ -268,8 +268,8 @@
                     </div>
 
                 </div>
-                <div class="row">
-                    <div class="col-sm-3 text-center">
+                <div class="row" id="responsecontainer1">
+                    <!-- <div class="col-sm-3 text-center">
                         <br>
                         <p class="Name" style="font-size: 15px;"><span>Name</span></p>
                         <p class="" style=" font-size: 13px;">Joshua Desoyo</p><br>
@@ -292,7 +292,8 @@
                         <br>
                         <p class="" style="font-size: 15px;"><span>Address</span></p>
                         <p class="" style="margin: -15px 0px 0px 10px; font-size: 13px;">Manlagtang Tabogon Cebu</p>
-                    </div>
+                    </div> -->
+
                 </div>
             </div>
         </div>
@@ -309,33 +310,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-sm-3 text-center">
-                        <p class="Name" style="font-size: 15px;"><span>Name</span></p>
-                        <p class="" style=" font-size: 13px;">Joshua</p><br>
-                    </div>
-                    <div class="col-sm-3 text-center">
-                        <p class="LName" style="font-size: 15px;"><span>last Name</span></p>
-                        <p class="" style=" font-size: 13px;">Joshua</p><br>
-                    </div>
-                    <div class="col-sm-3 text-center">
-                        <p class="MName" style="font-size: 15px;"><span>Middle Name</span></p>
-                        <p class="" style=" font-size: 13px;"></p><br>
-                    </div>
-                    <div class="col-sm-3 text-center">
-                        <p class="Gender" style="font-size: 15px;"><span>Gender</span></p>
-                        <p class="" style=" font-size: 13px;">Male</p><br>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-3 text-center">
-                        <p class="Bdate" style="font-size: 15px;"><span>Birthdate</span></p>
-                        <p class="" style=" font-size: 13px;">June 23, 3000</p><br>
-                    </div>
-                    <div class="col-sm-3 text-center">
-                        <p class="LName" style="font-size: 15px;"><span>Nationality</span></p>
-                        <p class="" style=" font-size: 13px;">Filipino</p><br>
-                    </div>
+                <div class="row" id="responsecontainer">
                 </div>
             </div>
         </div>
@@ -365,24 +340,28 @@
     <script src="js/roberto.bundle.js"></script>
     <script src="js/jquery.validate.min.js"></script>
     <script src="js/main/active.js"></script>
-    <script src="js/main/schedule/process.js"></script>
     <script>
-        window.onscroll = function() {
-            myFunction()
-        };
-        var header = document.get
-        function myFunction() {
-            if (window.pageYOffset > sticky) {
-                header.classList.add("sticky");
-            } else {
-                header.classList.remove("sticky");
-            }
-        }
-    </script>
-    <script>
-        function myFunction() {
-            document.getElementById("demo").innerHTML = "YOU CLICKED ME!";
-        }
+        var getReservetionId= <?php echo $_GET['reservetionId'] ?>;
+        var passengerId= <?php echo $_GET['userId'] ?>;
+       $(document).ready(function() {
+         // fetch payment
+ajax_call = function() {
+    $.ajax({
+    type: "POST",
+    url:'modules/schedule/payment.php?reservation='+getReservetionId+'&&passengersId='+passengerId,
+    dataType: "html",
+    success: function(response){
+        setTimeout(function() {
+                     $("#responsecontainer").html(response);
+                }, 100);
+                
+             }
+         });
+    };
+    var interval = 5000;
+    setInterval(ajax_call, interval);
+});
+
     </script>
     <script>
         $(document).ready(function() {

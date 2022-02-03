@@ -42,6 +42,8 @@ $(document).ready(function() {
             });
         }
     });
+    
+
 
     //* fetch summary selected schedule
     $('#srch_sched_ftr_form').submit(function(e) {
@@ -83,18 +85,6 @@ $(document).ready(function() {
         });
     });
 
-
-    // this is the fucking accomodation price
-    // $('.calculate').change(function() {
-    //     var total = 0;
-    //     $('.calculate').each(function() {
-    //         if($(this).val() != 0) {
-    //             total += parseFloat($(this).val());
-    //         }
-    //     });
-    //     $('#priceInput').text('P' + total.toFixed(2));
-    //     console.log(total);
-    // });
 
 
 });

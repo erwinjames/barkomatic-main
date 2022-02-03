@@ -205,6 +205,7 @@
         <div class="container">
             <div class=" col-sm-9 border" style="background-color: white ;border-top: 50px; margin-top: -6%;">
                 <div class=" " style="background-color: white ; margin-top: -6%;">
+
                     <div class="container" style="margin-top: 8%;">
                         <div class="col-sm- 6">
                             <div>
@@ -222,7 +223,7 @@
                             <p class="">December 10, 2021</p>
                         </div>
                         <div class="depature_portal_accomadation col-sm-4 text-center">
-                            <h5 class=" text-center" style="margin-top: 20px">Departure Time</h5>
+                            <h5 class="text-center" style="margin-top: 20px">Departure Time</h5>
                             <p class="departure_time">1:00 pm</p>
                         </div>
                         <div class="depature_portal_accomadation col-sm-4 text-center">

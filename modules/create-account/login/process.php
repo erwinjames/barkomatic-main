@@ -181,7 +181,7 @@ function shipSession($c, $u_ownr) {
 function adminSession($c, $u_admin) {
     $sql_slct_admin = "SELECT tbl_ad.id,
                        tbl_ad.username,
-                       tbl_ad.username
+                       tbl_ad.password
                         FROM tbl_admin tbl_ad WHERE tbl_ad.username=?";
     
     if($stmt_admin = mysqli_prepare($c, $sql_slct_admin)) {

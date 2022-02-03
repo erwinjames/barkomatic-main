@@ -1,6 +1,7 @@
 <?php 
     require("resources/config.php");
     require (TEMPLATES_PATH . "/_distributable.php");
+   
 ?>
 <!DOCTYPE html>
 <html lang="en">

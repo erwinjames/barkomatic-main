@@ -28,7 +28,7 @@ function getSubsPrice(obj){
 </head>
 <body>
 <div class="container">
-	<h1>PayPal Subscriptions Payment Gateway Integration in PHP</h1>
+	<h1>Barkomatic Pay</h1>
 	
 	<div class="subs-box">
 		<div class="form-group">

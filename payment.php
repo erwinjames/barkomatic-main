@@ -1,5 +1,7 @@
 
+    <?php  include_once 'paypal/config.php'; ?>
     <?php require "resources/templates/_payment_header.php"; ?>
+
     <?php if (isset($_GET['reservetionId'])) {?>
           <?php if (isset($_SESSION['id'])== $_GET['userId'])  { ?>
     <div class="progressbar" style="font-size: 12px;margin-top: 50px; font-weight: bolder;">
@@ -29,7 +31,7 @@
             </div>
         </div>
     </div>
-    <div class="container-lg">
+    <!-- <div class="container-lg">
         <div class="container" style="margin-top: 5%;">
             <div class="row ">
                 <div class="col-sm-9 ">
@@ -60,7 +62,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <div class="container " style="margin-top: 8%;">
         <div class="row">
             <H4 style="color: black;">Payment Options *</H4>
@@ -204,128 +206,19 @@
     <div class="tripsummary" style="margin-top: 12%">
         <div class="container">
             <div class=" col-sm-9 border" style="background-color: white ;border-top: 50px; margin-top: -6%;">
-                <div class=" " style="background-color: white ; margin-top: -6%;">
-
-                    <div class="container" style="margin-top: 8%;">
-                        <div class="col-sm- 6">
-                            <div>
-                                <fieldset class="scheduler-border" style="border-style: dashed; border-color: black;border-width: 2px;">
-                                    <legend class="scheduler-border" style=" padding: 3px; font-size: 15px;">Return
-                                    </legend>
-                                    <p class="text-center" style="font-size: 150%; color: black;"> Bohol <span class="" style="margin: 10px 10px 10px -8px;"><i class="fa fa-arrow-right"></i></span> </i>Cebu</p>
-                                </fieldset>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="depature_portal_accomadation col-sm-4 text-center">
-                            <h5 class=" text-center" style="margin-top: 20px">Departure Date</h5>
-                            <p class="">December 10, 2021</p>
-                        </div>
-                        <div class="depature_portal_accomadation col-sm-4 text-center">
-                            <h5 class="text-center" style="margin-top: 20px">Departure Time</h5>
-                            <p class="departure_time">1:00 pm</p>
-                        </div>
-                        <div class="depature_portal_accomadation col-sm-4 text-center">
-                            <h5 class=" text-center" style="margin-top: 20px">shippingline</h5>
-                            <p class=""></p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="depature_portal_accomadation col-sm-4 text-center">
-                            <h5 class=" text-center" style="margin-top: 20px">Accomodation</h5>
-                            <p class="">Economy A</p>
-                        </div>
-                        <div class="depature_portal_accomadation col-sm-4 text-center">
-                            <h5 class="seat-type text-center" style="margin-top: 20px">Seat Type</h5>
-                            <p class="">Bunk</p>
-                        </div>
-                        <div class="depature_portal_accomadation col-sm-4 text-center">
-                            <h5 class="Aircon text-center" style="margin-top: 20px">Aircon </h5>
-                            <p class="">No</p>
-                        </div>
-                        <div class="depature_portal_accomadation col-sm-4 text-center">
-                            <h5 class=" text-center" style="margin-top: 20px">Port</h5>
-                            <p class="">Port of Cebu Passenger Terminal 2</p>
-                            <p><span>Pier 3</span><i class="fa fa-long-arrow-right" style="margin-left: 1px;"></i><span>Port of Bato</span></p>
-                        </div>
-                    </div>
-                    
+                <div class=" " style="background-color: white ; margin-top: -6%;" id="tripsummary">
                 </div>
             </div>
         </div>
     </div>
     <!-- **** tripsummary-text=end ***** -->
-
-    <div class="container CONTACT-INFO" style="margin-top: 12%">
-        <div class=" col-sm-9 border" style="background-color: white ;border-top: 50px;  margin-top: -10%;">
-            <div>
-                <div class="contactInfo">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h5>Contact Information</h5>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="row" id="responsecontainer1">
-                    <!-- <div class="col-sm-3 text-center">
-                        <br>
-                        <p class="Name" style="font-size: 15px;"><span>Name</span></p>
-                        <p class="" style=" font-size: 13px;">Joshua Desoyo</p><br>
-                    </div>
-                    <div class="col-sm-1"></div>
-                    <div class="col-sm-3 text-center">
-                        <br>
-                        <p class="Email" style="font-size: 15px;"><span>Email Adddress</span></p>
-                        <p class="" style="font-size: 13px;">joshuadesoyo12@gmail.com</p><br>
-                    </div>
-                    <div class="col-sm-1"></div>
-                    <div class="col-sm-3 text-center">
-                        <br>
-                        <p class="Phone#" style="font-size: 15px;"><span>Phone Number</span></p>
-                        <p class="" style=" font-size: 13px;">092113456431</p><br>
-                    </div>
-
-                    <div class="col-sm-1"></div>
-                    <div class="col-sm-3 text-center">
-                        <br>
-                        <p class="" style="font-size: 15px;"><span>Address</span></p>
-                        <p class="" style="margin: -15px 0px 0px 10px; font-size: 13px;">Manlagtang Tabogon Cebu</p>
-                    </div> -->
-
-                </div>
-            </div>
-        </div>
-
-    </div>
-  
-    <div class="container PASSENGER_INFO">
-        <div class=" col-sm-9 border" style="background-color: white ;border-top: 50px; margin-top: -6%; margin-top: 10%;">
-            <div>
-                <div class="contactInfo">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h5>Passenger's Information</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="row" id="responsecontainer">
-                </div>
-            </div>
-        </div>
-    </div>
+<div id="responsecontainer">  
+</div>
     <div class="container" style="margin-top: 2%;">
-        <div class="col-sm-9">
-            <div class="row">
-                <div class="" style=" position: absolute; left: 1px;">
-                    <button type="button" class="btn btn-light" style="padding-left: -1%;  border-radius: 0px; position: static;">BACK</button>
-                </div>
-                <div class="" style=" position: absolute; right: 1px;">
-                    <button type="button" class="btn btn-light" style="  border-radius: 0px; ">CONTINUE AND CONFIRM</button>
-                </div>
-            </div>
-        </div>
+    <form action="<?php echo PAYPAL_URL; ?>" method="post" id='paypal'>
+			<!-- Display the payment button -->
+		
+		</form>
     </div>
     <?php  }else{?>
      <H1>Please Login</H1>
@@ -345,24 +238,53 @@
         var passengerId= <?php echo $_GET['userId'] ?>;
        $(document).ready(function() {
          // fetch payment
-ajax_call = function() {
-    $.ajax({
-    type: "POST",
-    url:'modules/schedule/payment.php?reservation='+getReservetionId+'&&passengersId='+passengerId,
-    data: $('#responsecontainer').serialize() + '&action=responsecontainer',
-    success: function(response){
-        setTimeout(function() {
-                     $("#responsecontainer").html(response);
-                }, 100);
-                
-             }
-         });
-    };
-    var interval = 5000;
-    setInterval(ajax_call, interval);
+        ajax_call = function() {
+            $.ajax({
+            type: "POST",
+            url:'modules/schedule/payment.php?reservation='+getReservetionId+'&&passengersId='+passengerId,
+            data: $('#responsecontainer').serialize() + '&action=responsecontainer',
+            success: function(response){
+                            $("#responsecontainer").html(response);
+                        
+                    }
+                });
+            };
+            var interval = 100;
+            setInterval(ajax_call, interval);
 });
 
     </script>
+    <script>
+         $(document).ready(function() {
+               ajax_call = function() {
+            $.ajax({
+            type: "POST",
+            url:'modules/schedule/payment.php?reservation='+getReservetionId,
+            data: $('#tripsummary').serialize() + '&action=tripsummary',
+            success: function(response){
+           
+                            $("#tripsummary").html(response); 
+                    }
+                });
+            };
+            var intervals= 100;
+            setInterval(ajax_call, intervals);
+        });
+    </script>
+            <script>  
+        $(document).ready(function(){  
+            $('input[type="radio"]').click(function(){   
+                $.ajax({  
+                    url:'modules/schedule/payment.php?reservation='+getReservetionId+'&&passengersId='+passengerId, 
+                        method:"POST",  
+                        data: $('#paypal').serialize() + '&action=paypal', 
+                        success:function(data){  
+                            $('#paypal').html(data);  
+                        }  
+                });  
+            });  
+        });  
+ </script>
     <script>
         $(document).ready(function() {
 

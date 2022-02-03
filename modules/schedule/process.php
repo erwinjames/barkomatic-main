@@ -450,7 +450,7 @@ function reservation_confirmation($c,$sdsn,$rsrvtn_num) {
                         <div class='row'>
                             <div class='col-sm-12'>
                                 <h4>$ship_name</h4><br>
-                                <p>Hello $pssngr_fname, Thank you for making your reservation in our shipping line. Please  <a class='link' href='http://localhost/barkomatic-main/payment.php?reservetionId=$rsrvtn_num&&userId=$userid'>click me</a></p> for youre <b>Payment</b
+                                <p>Hello $pssngr_fname, Thank you for making your reservation in our shipping line. Please  <a class='link' href='http://localhost/barkomatic-main/payment.php?reservetionId=$rsrvtn_num&&userId=$pssngr_id'>click me</a></p> for youre <b>Payment</b
                                 <p>Your ticket reservation is valid until: <b>$exp</b></p>
                                 <p>If you find it necessary to cancel or change plans, please inform us by email <span style='color:#007bff;font-weight:700;'>$ship_email<span></p>
                                 <br><br>
@@ -463,7 +463,6 @@ function reservation_confirmation($c,$sdsn,$rsrvtn_num) {
                 </html>";
                 $mail->send();
                 echo "Emailed Successfully";
-
             }catch(Exception $e){
                 echo "Could not sent the reservation confirmation. Mailer Error: {$mail->ErrorInfo}";
                 // echo 'Could not sent the reservation confirmation.{$mail->ErrorInfo}';

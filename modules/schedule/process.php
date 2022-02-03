@@ -11,9 +11,6 @@ use PHPMailer\PHPMailer\Exception;
 if(isset($_POST['action']) && $_POST['action'] == 'search_sched_form') {
     search_available_schedule($con);
 }
-if(isset($_POST['action']) && $_POST['action'] == 'search_sched_form') {
-    search_available_schedule($con);
-}
 if(isset($_POST['action']) && $_POST['action'] == 'srch_sched_ftr_form') {
     session_start();
     if(isset($_SESSION['first_name']) && $_SESSION['first_name'] != "") {

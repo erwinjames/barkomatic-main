@@ -349,7 +349,7 @@ ajax_call = function() {
     $.ajax({
     type: "POST",
     url:'modules/schedule/payment.php?reservation='+getReservetionId+'&&passengersId='+passengerId,
-    dataType: "html",
+    data: $('#responsecontainer').serialize() + '&action=responsecontainer',
     success: function(response){
         setTimeout(function() {
                      $("#responsecontainer").html(response);

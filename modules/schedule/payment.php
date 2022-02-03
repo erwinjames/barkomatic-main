@@ -3,7 +3,6 @@ require "../../resources/config.php";
 
 if (isset($_GET['reservation']) && isset($_GET['passengersId'])) {
    get_PssngerInfo($con);
-   get_ContactInfo($con);
 }
 
 //fetch passenger info

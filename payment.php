@@ -1,34 +1,8 @@
 
     <?php require "resources/templates/_payment_header.php"; ?>
-    <div>
-        <div class=" col-sm-12" style="background-color: white; margin-top:41px;">
-            <div class="container ">
-                <div class=" row" style="padding: 1px; font-size: 10px;">
-                    <div class="col-sm-3 text-center  border">
-                        Cebu<i class='fa fa-exchange'></i> Talibon
-                    </div>
-                    <div class="col-sm-2 text-center  border" style>
-                        </br>
-                        </br>passenger
-                    </div>
-                    <div class="col-sm-2 text-center  border">
-                        </br>
-                        </br>departure
-                    </div>
-                    <div class="col-sm-2 text-center  border">
-                        </br>
-                        </br>return
-                    </div>
-                    <div class="col-sm-3 text-center  border">
-                        </br><i class="fa fa-edit"></i>
-                        <a href="#"> MODIFY ITINERARY</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--  -->
-    <div class="progressbar" style="font-size: 12px;margin-top: 50px; font-weight: bolder; color: aliceblue;">
+    <?php if (isset($_GET['reservetionId'])) {?>
+          <?php if (isset($_SESSION['id'])== $_GET['userId'])  { ?>
+    <div class="progressbar" style="font-size: 12px;margin-top: 50px; font-weight: bolder;">
         <div class="container">
             <div class="row">
                 <div class="col-sm-3 text-center ">
@@ -50,7 +24,6 @@
                     <div class="two " style="background-color:#007bff; border-radius: 100%; width: 20px; height: 20px; position: absolute;z-index:1;margin-top: -5px; left: 36%;"></div>
                     <div class="three " style="background-color:#007bff; border-radius: 100%; width: 20px; height: 20px; position: absolute;z-index:1;margin-top: -5px;left: 50%;"></div>
                     <div class="four " style="background-color:#007bff; border-radius: 100%; width: 20px; height: 20px; position: absolute;z-index:1;margin-top: -5px;left: 63%;"></div>
-
                     <div class="progress-bar" style="width: 70%;"></div>
                 </div>
             </div>
@@ -243,7 +216,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="  row ">
+                    <div class="row">
                         <div class="depature_portal_accomadation col-sm-4 text-center">
                             <h5 class=" text-center" style="margin-top: 20px">Departure Date</h5>
                             <p class="">December 10, 2021</p>
@@ -276,15 +249,14 @@
                             <p><span>Pier 3</span><i class="fa fa-long-arrow-right" style="margin-left: 1px;"></i><span>Port of Bato</span></p>
                         </div>
                     </div>
-                    <div class="row">
-                    </div>
+                    
                 </div>
             </div>
         </div>
     </div>
     <!-- **** tripsummary-text=end ***** -->
 
-    <div class="container CONTACT-INFO">
+    <div class="container CONTACT-INFO" style="margin-top: 12%">
         <div class=" col-sm-9 border" style="background-color: white ;border-top: 50px;  margin-top: -10%;">
             <div>
                 <div class="contactInfo">
@@ -325,10 +297,7 @@
         </div>
 
     </div>
-    <div class="container mt-3 mb-3" id="srch_sched_data">
-                <form id="srch_sched_ftr_form">
-                </form>
-    </div>
+  
     <div class="container PASSENGER_INFO">
         <div class=" col-sm-9 border" style="background-color: white ;border-top: 50px; margin-top: -6%; margin-top: 10%;">
             <div>
@@ -382,7 +351,12 @@
             </div>
         </div>
     </div>
-  
+    <?php  }else{?>
+     <H1>Please Login</H1>
+    <?php } ?>
+  <?php }else{?>
+  <h1>PLEASE CHECK YOUR EMAIL FIRST</h1>
+    <?php }?>
     <!-- **** All JS Files ***** -->
     <script src="js/jquery/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>

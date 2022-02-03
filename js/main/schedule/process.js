@@ -61,7 +61,6 @@ $(document).ready(function() {
             }
         });
     });
-
     //* submit reservation
     $('#smmry_dptr_slctd_sched_form').submit(function(e) {
         e.preventDefault();

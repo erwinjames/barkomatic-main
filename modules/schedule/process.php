@@ -419,6 +419,7 @@ function reservation_confirmation($c,$sdsn,$rsrvtn_num) {
             $ship_email = $row['email'];
             $exp = $row['expiration'];
             $pssngr_fname = $_SESSION['first_name'];
+            $pssngr_id = $_SESSION['id'];
             $mail = new PHPMailer();
             try {
                 // $mail->SMTPDebug = SMTP::DEBUG_SERVER; 
@@ -450,7 +451,7 @@ function reservation_confirmation($c,$sdsn,$rsrvtn_num) {
                         <div class='row'>
                             <div class='col-sm-12'>
                                 <h4>$ship_name</h4><br>
-                                <p>Hello $pssngr_fname, Thank you for making your reservation in our shipping line. <br>Your <b>Payment</b> Please  <a class='link' href='http://localhost/barkomatic-main/payment.php?reservetionId=$rsrvtn_num'>click me</a></p>
+                                <p>Hello $pssngr_fname, Thank you for making your reservation in our shipping line. <br>Your <b>Payment</b> Please  <a class='link' href='http://localhost/barkomatic-main/payment.php?reservetionId=$rsrvtn_num&&userId=$pssngr_id'>click me</a></p>
                                 <p>Your ticket reservation is valid until: <b>$exp</b></p>
                                 <p>If you find it necessary to cancel or change plans, please inform us by email <span style='color:#007bff;font-weight:700;'>$ship_email<span></p>
                                 <br><br>

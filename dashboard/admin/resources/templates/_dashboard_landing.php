@@ -13,6 +13,39 @@
 <div class="row">
     <div class="col-12">
         <div class="card mb-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h3 class="panel-title">Month Wise Profit Data</h3>
+                        </div>
+                        <div class="col-md-3">
+                        <select class="form-control" name="year" id="year" required>
+                                                <?php 
+                                                    $stmt2 = $con->prepare("SELECT year FROM shipping_subscribed"); 
+                                                    $stmt2->execute();
+                                                    $result2 = $stmt2->get_result();
+                                                    while ($row2 = $result2->fetch_assoc()) {
+                                                        $yeartoimplode = $row2['year']; 
+                                                        ?>
+                                                        <option value="<?php echo date("Y",strtotime($yeartoimplode)); ?>"><?php echo date("Y",strtotime($yeartoimplode));  ?></option>
+                                                <?php } ?>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div id="chart_area" style="width: 1000px; height: 620px;"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card mb-6">
             <header class="card-header">
                 <p class="card-header-title"><span class="icon"><i class="mdi mdi-account-check"></i></span> Shipping Owner Acounts</p>
             </header>

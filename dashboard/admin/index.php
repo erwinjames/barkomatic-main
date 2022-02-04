@@ -38,6 +38,74 @@
             </div>
         </body>
         </html>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+google.charts.load('current', {packages: ['corechart', 'bar']});
+google.charts.setOnLoadCallback();
+
+function load_monthwise_data(year, title)
+{
+    var temp_title = title + ' '+year+'';
+    $.ajax({
+        url:"modules/graphFetch.php",
+        method:"POST",
+        data:{year:year},
+        dataType:"JSON",
+        success:function(data)
+        {
+            drawMonthwiseChart(data, temp_title);
+        }
+    });
+}
+
+function drawMonthwiseChart(chart_data, chart_main_title)
+{
+    var jsonData = chart_data;
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Month');
+    data.addColumn('number', 'Profit');
+    $.each(jsonData, function(i, jsonData){
+        var month = jsonData.month;
+        var profit = parseFloat($.trim(jsonData.profit));
+        data.addRows([[month, profit]]);
+    });
+    var options = {
+        title:chart_main_title,
+        hAxis: {
+            title: "Months"
+        },
+        vAxis: {
+            title: 'Profit'
+        }
+    };
+
+    var chart = new google.visualization.ColumnChart(document.getElementById('chart_area'));
+    chart.draw(data, options);
+
+    console.log(chart);
+}
+
+</script>
+
+<script>
+    
+$(document).ready(function(){
+
+    $('#year').change(function(){
+        var year = $(this).val();
+        if(year != '')
+        {
+            load_monthwise_data(year, 'Month Wise Profit Data For');
+        }
+    });
+
+});
+
+</script>
+
+
+
+
 <?php } else { ?>
     <span class="text-danger display-4">BAD GATEWAY!</span>
 <?php } ?>

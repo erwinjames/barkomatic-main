@@ -20,22 +20,19 @@
                             <h3 class="panel-title">Month Wise Profit Data</h3>
                         </div>
                         <div class="col-md-3">
-                        <select class="form-control" name="year" id="year" required>
-                                                <?php 
-                                                    $stmt2 = $con->prepare("SELECT year FROM shipping_subscribed"); 
-                                                    $stmt2->execute();
-                                                    $result2 = $stmt2->get_result();
-                                                    while ($row2 = $result2->fetch_assoc()) {
-                                                        $yeartoimplode = $row2['year']; 
-                                                        ?>
-                                                        <option value="<?php echo date("Y",strtotime($yeartoimplode)); ?>"><?php echo date("Y",strtotime($yeartoimplode));  ?></option>
-                                                <?php } ?>
+                        <select name="year" class="form-control" id="operator">
+                                <option value="">Select Year</option>
+                                <option value="2021">2021</option>
+                                <option value="2022">2022</option>
+                                <option value="2023">2023</option>
+                         
+                
                             </select>
                         </div>
                     </div>
                 </div>
                 <div class="panel-body">
-                    <div id="chart_area" style="width: 1000px; height: 620px;"></div>
+                <canvas  id="chartjs_bar"></canvas> 
                 </div>
             </div>
 

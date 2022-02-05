@@ -1,21 +1,22 @@
 <?php
 require_once "../resources/config.php";
-if(isset($_POST["year"]))
-{
-    
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
-    $stmt2 = $con->prepare("SELECT * FROM shipping_subscribed WHERE year = '2022'"); 
-    $stmt2->execute();
-    $result2 = $stmt2->get_result();
-    while ($row2 = $result2->fetch_assoc()) {
- {
-  $output[] = array(
-   'month'   => date("m",strtotime($row2['year']));
-   'profit'  => floatval($row["money_sent"])
-  );
- }
- echo json_encode($output);
+  
+//query to get data from the table
+$query = "SELECT * FROM shipping_subscribed";
+//execute query
+$result = $con->query($query);
+//loop through the returned data
+$data = array();
+foreach ($result as $row) {
+ $date = date("m",strtotime($row['date']));
+  $data[] = $row;
+  $data[] =
 }
+//free memory associated with result
+$result->close();
+//close connection
+$con->close();
+//now print the data
+print json_encode($data);
 
 ?>

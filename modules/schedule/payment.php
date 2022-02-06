@@ -1,6 +1,6 @@
 <?php
 require "../../resources/config.php";
-require_once '../../paypal/config.php';
+require "../../modules/schedule/paypal_config.php";
 
 if(isset($_POST['action']) && $_POST['action'] == 'responsecontainer') {
    get_PssngerInfo($con);
@@ -60,6 +60,7 @@ function get_PssngerInfo($c){
                     <p class="Email" style="font-size: 15px;"><span>Email Adddress</span></p>
                     <p class="" style="font-size: 13px;">'.$row['email'].'</p><br>
                 </div>
+
                 <div class="col-sm-1"></div>
                 <div class="col-sm-3 text-center">
                     <br>
@@ -279,23 +280,31 @@ function fetch_data_paypal($c){
     $stmt->execute();
     $result = $stmt->get_result();
     $row = $result->fetch_array();
+    $total_price = $row['price'] + $row['tckt_price'];
     if ($row == null) {
        echo "Error";
     }
     else{
     $output = '
-    <!-- Identify your business so that you can collect the payments -->
+                 <!-- Identify your business so that you can collect the payments -->
+
     <input type="hidden" name="business" value="'.PAYPAL_ID.'">
-    <!-- Specify a subscriptions button. -->
+
+                 <!-- Specify a subscriptions button. -->
+
     <input type="hidden" name="cmd" value="_xclick-subscriptions">
-    <!-- Specify details about the subscription that buyers will purchase -->
-    <input type="hidden" name="item_name" value="sample">
-    <input type="hidden" name="item_number" value="543225">
+
+                <!-- Specify details about the subscription that buyers will purchase -->
+
+    <input type="hidden" name="item_name" value="Payment_reservation">
+    <input type="hidden" name="item_number" value="'.$row['reservation_number'].'">
     <input type="hidden" name="currency_code" value="'.PAYPAL_CURRENCY.'">
-    <input type="hidden" name="a3" id="paypalAmt" value="50000">
+    <input type="hidden" name="a3" id="paypalAmt" value="'.$total_price.'">
     <input type="hidden" name="p3" id="paypalValid" value="1">
     <input type="hidden" name="t3" value="M">
-    <!-- Custom variable user ID -->
+
+                 <!-- Custom variable user ID -->
+
     <input type="hidden" name="custom" value="'.$_SESSION['id'].'">
     <input type="hidden" name="cancel_return" value="'.PAYPAL_CANCEL_URL.'">
     <input type="hidden" name="return" value="'.PAYPAL_RETURN_URL.'">

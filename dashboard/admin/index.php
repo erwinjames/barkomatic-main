@@ -5,7 +5,7 @@
         ini_set('display_errors', 1);
       
       
-        $query = "SELECT dates,year(dates) as dateYear,SUM(Profit) as totalProfit FROM shipping_subscribed ";
+        $query = "SELECT dates,year(dates) as dateYear,SUM(Profit) as totalProfit FROM shipping_subscribed ORDER BY dateYear";
         //execute query
         $result = $con->query($query);
         //loop through the returned data
@@ -45,11 +45,11 @@
      if ($date=="11") {
             $month = "November";
         }
-      if ($date=="12") {
+    if ($date=="12") {
             $month = "December";
         } 
-         $productname[] =$month;
-         $sale[]= $row['totalProfit'];
+    $productname[] =$month;
+    $sale[]= $row['totalProfit'];
         }
     
           
@@ -94,6 +94,7 @@
         <script type="text/javascript">
       var ctx = document.getElementById("chartjs_bar").getContext('2d');
       var datesYear = <?php echo json_encode($productname);?>;
+      var sales1 =  <?php echo json_encode($sale);?>;
       $(document).ready(function() {
 
         
@@ -138,8 +139,8 @@
         var option = $("#operator").val();
         myChart.data.labels = option;
         if (option == 'All') {
-           myChart.datesYear.labels = user,
-           myChart.datesYear.datasets[0].datasets = order;
+           myChart.datesYear.labels = sales1,
+           myChart.datesYear.datasets[0].datasets = datesYear;
         } else {
           myChart.datesYear.datasets[0].datasets = datesYear;
         }

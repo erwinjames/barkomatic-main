@@ -65,7 +65,7 @@ if (strcmp($res, "VERIFIED") == 0 || strcasecmp($res, "VERIFIED") == 0) {
     $unitPrice = $_POST['a3'];
     $payerId = $_SESSION['id'];
     //Payment data
-    $subscr_id = $_POST['subscr_id'];
+    $subscr_id = $_POST['userId'];
     $payer_email = $_POST['payer_email'];
     $item_number = $_POST['item_number'];
     $txn_id = $_POST['txn_id'];

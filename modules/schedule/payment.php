@@ -279,7 +279,11 @@ function fetch_data_paypal($c){
     $stmt->execute();
     $result = $stmt->get_result();
     $row = $result->fetch_array();
+    if($row['accomodation']=="No Aircon"){
+    $total_price = $row['tckt_price'];
+    }else{
     $total_price = $row['price'] + $row['tckt_price'];
+    }
     if ($row == null) {
        echo "Error";
     }

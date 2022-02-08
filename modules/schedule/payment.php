@@ -122,9 +122,7 @@ function get_PssngerInfo($c){
    ';
     echo $output;
     $stmt->close();
-
 }
-
 //fetch reservation data
 function fetch_resrvation_data($c){
     error_reporting(E_ALL);
@@ -239,6 +237,7 @@ function fetch_data_paypal($c){
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
     $reservationNum = $_GET['reservation'];
+    $passengerId = $_SESSION['id'];
     $sql_srch_slcts = "SELECT 
                         tbl_pass_reserv.reservation_number,
                         tbl_pass_reserv.ship_name,
@@ -296,6 +295,7 @@ function fetch_data_paypal($c){
 
                 <!-- Specify details about the subscription that buyers will purchase -->
 
+    <input type="hidden" name="userId" value="'.$passengerId.'">
     <input type="hidden" name="item_name" value="Payment_reservation">
     <input type="hidden" name="item_number" value="'.$row['reservation_number'].'">
     <input type="hidden" name="currency_code" value="'.PAYPAL_CURRENCY.'">
@@ -313,7 +313,6 @@ function fetch_data_paypal($c){
    ';
     echo $output;
     $stmt->close();
-
 }
 }
 ?>

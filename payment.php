@@ -313,9 +313,6 @@
 
         });
     </script>
-    <!--BlueSnap Hosted Payment Fields JavaScript file-->
-    <script type="text/javascript" src="https://sandbox.bluesnap.com/services/hosted-payment-fields/v1.0/bluesnap.hpf.mini.js"></script>
-    <script>
     </script>
     <!-- creditcard payment -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

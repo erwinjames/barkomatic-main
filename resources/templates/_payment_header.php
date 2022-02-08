@@ -18,8 +18,6 @@
     <link rel="stylesheet" href="./css/payment.css">
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
     <!-- Stylesheet -->
-
-    
 </head>
 <body>
     <!-- Preloader -->
@@ -27,7 +25,6 @@
         <div class="loader"></div>
     </div>
     <!-- /Preloader -->
-
     <!-- Header Area Start -->
     <header class="header-area">
         <!-- Main Header Start -->

@@ -63,7 +63,7 @@ if (strcmp($res, "VERIFIED") == 0 || strcasecmp($res, "VERIFIED") == 0) {
     require_once "../config.php";
     
     $unitPrice = $_POST['a3'];
-    
+    $payerId = $_SESSION['id'];
     //Payment data
     $subscr_id = $_POST['subscr_id'];
     $payer_email = $_POST['payer_email'];
@@ -80,19 +80,17 @@ if (strcmp($res, "VERIFIED") == 0 || strcasecmp($res, "VERIFIED") == 0) {
     
     if(!empty($txn_id)){
         //Check if subscription data exists with the same TXN ID.
-        $prevPayment = $con->query("SELECT id FROM user_subscriptions WHERE txn_id = '".$txn_id."'");
+        $prevPayment = $con->query("SELECT id FROM tbl_psnger_pymnt WHERE txn_id = '".$txn_id."'");
         if($prevPayment->num_rows > 0){
             exit();
         }else{
             //Insert tansaction data into the database
-            $insert = $con->query("INSERT INTO user_subscriptions(Year,user_email,validity,valid_from,valid_to,item_number,txn_id,payment_gross,currency_code,subscr_id,payment_status,payer_email) VALUES(NOW(),'test@2go.com','".$subscr_month."','".$subscr_date_from."','".$subscr_date_to."','".$item_number."','".$txn_id."','".$payment_gross."','".$currency_code."','".$subscr_id."','".$payment_status."','".$payer_email."')");
-            
+            $insert = $con->query("INSERT INTO tbl_psnger_pymnt(reservation_number,txn_id,payer_email,currency,gross_income,payment_status) VALUES(NOW(),'".$item_number."','".$txn_id."','".$payer_email."','".$currency_code."','".$payment_gross."','".$payment_status."')");
             //Update subscription id in users table
-            if($insert){
-                $subscription_id = $con->insert_id;
-                $update = $con->query("UPDATE tbl_ship_detail SET subscription_id = 1 AND subs_stats = '$payment_status'  WHERE id = 1");
-
-            }
+            // if($insert){
+            //     $subscription_id = $con->insert_id;
+            //     $update = $con->query("UPDATE tbl_ship_detail SET subscription_id = 1 AND subs_stats = '$payment_status'  WHERE id = 1");
+            // }
         }
     }
 }

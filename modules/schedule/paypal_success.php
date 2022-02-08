@@ -1,6 +1,6 @@
 <?php
 //Include DB configuration file
-include '../modules/config.php';
+require "../../resources/config.php";
 
 if(!empty($_GET['item_number']) && !empty($_GET['tx']) && !empty($_GET['amt']) && $_GET['st'] == 'Completed'){
     //get transaction information from query string
@@ -29,19 +29,26 @@ if(!empty($_GET['item_number']) && !empty($_GET['tx']) && !empty($_GET['amt']) &
     }else{
         $phtml = '<h5 class="error">Your payment was unsuccessful, please try again.</h5>';
     }
-}elseif(!empty($_GET['item_number']) && !empty($_GET['tx']) && !empty($_GET['amt']) && $_GET['st'] != 'Completed'){
+
+
+
+
+}
+
+
+elseif(!empty($_GET['item_number']) && !empty($_GET['tx']) && !empty($_GET['amt']) && $_GET['st'] != 'Completed'){
     $phtml = '<h5 class="error">Your payment was unsuccessful, please try again.</h5>';
 }
 ?>
 <!DOCTYPE html>
 <html>
 <head>
-    <title>PayPal Subscriptions Payment Payment Status</title>
+    <title>Payment Status</title>
     <meta charset="utf-8">
 </head>
 <body>
 <div class="container">
-    <h1>PayPal Subscriptions Payment Status</h1>
+    <h1>Payment Status</h1>
     <!-- render subscription details -->
     <?php echo !empty($phtml)?$phtml:''; ?>
     

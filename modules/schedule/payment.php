@@ -239,6 +239,7 @@ function fetch_data_paypal($c){
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
     $reservationNum = $_GET['reservation'];
+    $userId = $_SESSION['id'];
     $sql_srch_slcts = "SELECT 
                         tbl_pass_reserv.reservation_number,
                         tbl_pass_reserv.ship_name,
@@ -280,7 +281,11 @@ function fetch_data_paypal($c){
     $stmt->execute();
     $result = $stmt->get_result();
     $row = $result->fetch_array();
+    if ($row['accomodation']=="No Aircon") {
+        $total_price = $row['tckt_price'];
+    }else{
     $total_price = $row['price'] + $row['tckt_price'];
+    }
     if ($row == null) {
        echo "Error";
     }
@@ -295,7 +300,7 @@ function fetch_data_paypal($c){
     <input type="hidden" name="cmd" value="_xclick-subscriptions">
 
                 <!-- Specify details about the subscription that buyers will purchase -->
-
+    <input type="hidden" name="userId" value="'.$userId.'">
     <input type="hidden" name="item_name" value="Payment_reservation">
     <input type="hidden" name="item_number" value="'.$row['reservation_number'].'">
     <input type="hidden" name="currency_code" value="'.PAYPAL_CURRENCY.'">

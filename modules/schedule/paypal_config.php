@@ -1,5 +1,4 @@
 <?php
-
    // Product information
    // Subscription price for one month
    //$itemPrice = 25.00;
@@ -8,9 +7,9 @@
    define('PAYPAL_ID', 'williamdoe@shiplines.com'); 
    define('PAYPAL_SANDBOX', TRUE); //TRUE or FALSE 
     
-   define('PAYPAL_RETURN_URL', 'http://localhost/barkomatic-main/modules/schedule/paypal_success.php'); 
-   define('PAYPAL_CANCEL_URL', 'http://localhost/barkomatic-main/modules/schedule/paypal_cancel.php'); 
-   define('PAYPAL_NOTIFY_URL', 'http://localhost/barkomatic-main/modules/schedule/paypal_ipn.php'); 
+   define('PAYPAL_RETURN_URL', 'https://b530-110-54-218-100.ngrok.io/barkomatic-main/modules/schedule/paypal_success.php'); 
+   define('PAYPAL_CANCEL_URL', 'https://b530-110-54-218-100.ngrok.io/barkomatic-main/modules/schedule/paypal_cancel.php'); 
+   define('PAYPAL_NOTIFY_URL', 'https://b530-110-54-218-100.ngrok.io/barkomatic-main/modules/schedule/paypal_ipn.php'); 
    define('PAYPAL_CURRENCY', 'PHP'); 
     
       

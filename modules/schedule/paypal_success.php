@@ -1,56 +1,56 @@
-<?php
-//Include DB configuration file
-require "../../resources/config.php";
-
-if(!empty($_GET['item_number']) && !empty($_GET['tx']) && !empty($_GET['amt']) && $_GET['st'] == 'Completed'){
-    //get transaction information from query string
-    $item_number = $_GET['item_number'];
-    $txn_id = $_GET['tx'];
-    $payment_gross = $_GET['amt'];
-    $currency_code = $_GET['cc'];
-    $payment_status = $_GET['st'];
-    $custom = $_GET['cm'];
-    
-    //Check if subscription data exists with the TXN ID
-    $prevPaymentResult = $con->query("SELECT * FROM user_subscriptions WHERE txn_id = '".$txn_id."'");
-    
-    if($prevPaymentResult->num_rows > 0){
-        //get subscription info from database
-        $paymentRow = $prevPaymentResult->fetch_assoc();
-        
-        //prepare subscription html to display
-        $phtml  = '<h5 class="success">Thanks for payment, your payment was successful. Payment details are given below.</h5>';
-        $phtml .= '<div class="paymentInfo">';
-        $phtml .= '<p>Payment Reference Number: <span>MS'.$paymentRow['id'].'</span></p>';
-        $phtml .= '<p>Transaction ID: <span>'.$paymentRow['txn_id'].'</span></p>';
-        $phtml .= '<p>Paid Amount: <span>'.$paymentRow['payment_gross'].' '.$paymentRow['currency_code'].'</span></p>';
-        $phtml .= '<p>Validity: <span>'.$paymentRow['valid_from'].' to '.$paymentRow['valid_to'].'</span></p>';
-        $phtml .= '</div>';
-    }else{
-        $phtml = '<h5 class="error">Your payment was unsuccessful, please try again.</h5>';
-    }
-
-
-
-
-}
-
-
-elseif(!empty($_GET['item_number']) && !empty($_GET['tx']) && !empty($_GET['amt']) && $_GET['st'] != 'Completed'){
-    $phtml = '<h5 class="error">Your payment was unsuccessful, please try again.</h5>';
-}
+<?php 
+// Include configuration file 
+include_once 'paypal_config.php'; 
+ 
+// Include database connection file 
+include_once '../config.php'; 
+ 
+// If transaction data is available in the URL 
+if(!empty($_GET['item_number']) && !empty($_GET['tx']) && !empty($_GET['amt']) && !empty($_GET['cc']) && !empty($_GET['st'])){ 
+    // Get transaction information from URL 
+    $item_number = $_GET['item_number'];  
+    $txn_id = $_GET['tx']; 
+    $payment_gross = $_GET['amt']; 
+    $currency_code = $_GET['cc']; 
+    $payment_status = $_GET['st']; 
+     
+    // Get product info from the database 
+    $productResult = $con->query("SELECT * FROM tbl_psnger_pymnt WHERE id = ".$item_number); 
+    $productRow = $productResult->fetch_assoc(); 
+     
+    // Check if transaction data exists with the same TXN ID. 
+    $prevPaymentResult = $con->query("SELECT * FROM tbl_psnger_pymnt WHERE txn_id = '".$txn_id."'"); 
+ 
+    if($prevPaymentResult->num_rows > 0){ 
+        $paymentRow = $prevPaymentResult->fetch_assoc(); 
+        $payment_id = $paymentRow['id']; 
+        $payment_gross = $paymentRow['gross_income']; 
+        $payment_status = $paymentRow['payment_status']; 
+    }else{ 
+        // Insert tansaction data into the database 
+        $insert = $con->query("INSERT INTO tbl_psnger_pymnt(reservation_number,txn_id,currency_code,gross_income,payment_status) VALUES('".$item_number."','".$txn_id."','test@2go','".$currency_code."','".$payment_gross."','".$payment_status."')"); 
+        $payment_id = $con->insert_id; 
+    } 
+} 
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Payment Status</title>
-    <meta charset="utf-8">
-</head>
-<body>
+
 <div class="container">
-    <h1>Payment Status</h1>
-    <!-- render subscription details -->
-    <?php echo !empty($phtml)?$phtml:''; ?>
-    
-</body>
-</html>
+    <div class="status">
+        <?php if(!empty($payment_id)){ ?>
+            <h1 class="success">Your Payment has been Successful</h1>
+			
+            <h4>Payment Information</h4>
+            <p><b>Reference Number:</b> <?php echo $payment_id; ?></p>
+            <p><b>Transaction ID:</b> <?php echo $txn_id; ?></p>
+            <p><b>Paid Amount:</b> <?php echo $payment_gross; ?></p>
+            <p><b>Payment Status:</b> <?php echo $payment_status; ?></p>
+			
+            <h4>Product Information</h4>
+            <p><b>Name:</b> <?php echo $productRow['name']; ?></p>
+            <p><b>Price:</b> <?php echo $productRow['price']; ?></p>
+        <?php }else{ ?>
+            <h1 class="error">Your Payment has Failed</h1>
+        <?php } ?>
+    </div>
+    <a href="index.php" class="btn-link">Back to Products</a>
+</div>

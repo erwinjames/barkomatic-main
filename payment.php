@@ -1,5 +1,5 @@
 
-    <?php  include_once 'paypal/config.php'; ?>
+    <?php  include_once 'modules/schedule/paypal_config.php'; ?>
     <?php require "resources/templates/_payment_header.php"; ?>
 
     <?php if (isset($_GET['reservetionId'])) {?>
@@ -215,10 +215,13 @@
 <div id="responsecontainer">  
 </div>
     <div class="container" style="margin-top: 2%;">
-    <form action="<?php echo PAYPAL_URL; ?>" method="post" id='paypal'>
+ 
 			<!-- Display the payment button -->
-		
-		</form>
+	<div id='paypal'>
+
+
+    </div>	
+	
     </div>
     <?php  }else{?>
      <H1>Please Login</H1>
@@ -313,9 +316,6 @@
 
         });
     </script>
-    <!--BlueSnap Hosted Payment Fields JavaScript file-->
-    <script type="text/javascript" src="https://sandbox.bluesnap.com/services/hosted-payment-fields/v1.0/bluesnap.hpf.mini.js"></script>
-    <script>
     </script>
     <!-- creditcard payment -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

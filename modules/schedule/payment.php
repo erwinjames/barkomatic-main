@@ -1,6 +1,7 @@
 <?php
+
 require "../../resources/config.php";
-require "../../modules/schedule/paypal_config.php";
+require_once "paypal_config.php";
 
 if(isset($_POST['action']) && $_POST['action'] == 'responsecontainer') {
    get_PssngerInfo($con);
@@ -122,9 +123,7 @@ function get_PssngerInfo($c){
    ';
     echo $output;
     $stmt->close();
-
 }
-
 //fetch reservation data
 function fetch_resrvation_data($c){
     error_reporting(E_ALL);
@@ -239,7 +238,6 @@ function fetch_data_paypal($c){
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
     $reservationNum = $_GET['reservation'];
-    $userId = $_SESSION['id'];
     $sql_srch_slcts = "SELECT 
                         tbl_pass_reserv.reservation_number,
                         tbl_pass_reserv.ship_name,
@@ -281,8 +279,8 @@ function fetch_data_paypal($c){
     $stmt->execute();
     $result = $stmt->get_result();
     $row = $result->fetch_array();
-    if ($row['accomodation']=="No Aircon") {
-        $total_price = $row['tckt_price'];
+    if($row['accomodation']=="No Aircon"){
+    $total_price = $row['tckt_price'];
     }else{
     $total_price = $row['price'] + $row['tckt_price'];
     }
@@ -291,6 +289,7 @@ function fetch_data_paypal($c){
     }
     else{
     $output = '
+    <form action="'.PAYPAL_URL.'" method="post" >
                  <!-- Identify your business so that you can collect the payments -->
 
     <input type="hidden" name="business" value="'.PAYPAL_ID.'">
@@ -300,7 +299,7 @@ function fetch_data_paypal($c){
     <input type="hidden" name="cmd" value="_xclick-subscriptions">
 
                 <!-- Specify details about the subscription that buyers will purchase -->
-    <input type="hidden" name="userId" value="'.$userId.'">
+
     <input type="hidden" name="item_name" value="Payment_reservation">
     <input type="hidden" name="item_number" value="'.$row['reservation_number'].'">
     <input type="hidden" name="currency_code" value="'.PAYPAL_CURRENCY.'">
@@ -315,10 +314,10 @@ function fetch_data_paypal($c){
     <input type="hidden" name="return" value="'.PAYPAL_RETURN_URL.'">
     <input type="hidden" name="notify_url" value="'.PAYPAL_NOTIFY_URL.'">
     <input class="buy-btn" type="submit" value="Proceed to Payment">
+    </form>
    ';
     echo $output;
     $stmt->close();
-
 }
 }
 ?>

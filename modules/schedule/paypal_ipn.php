@@ -112,7 +112,7 @@ else if($_POST['item_name']=="subscription_ship"){
             //Insert tansaction data into the database
             $insert = $con->query("INSERT INTO user_subscriptions(Year,user_email,validity,valid_from,valid_to,item_number,txn_id,payment_gross,currency_code,subscr_id,payment_status,payer_email) VALUES(NOW(),'test@2go.com','".$subscr_month."','".$subscr_date_from."','".$subscr_date_to."','".$item_number."','".$txn_id."','".$payment_gross."','".$currency_code."','".$subscr_id."','".$payment_status."','".$payer_email."')");
         }
-    }
+     }
     }
         else {
              echo "something went wrong";

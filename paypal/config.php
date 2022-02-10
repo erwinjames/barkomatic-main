@@ -12,7 +12,7 @@
     
    define('PAYPAL_RETURN_URL', 'http://localhost/barkomatic-main/paypal/success.php'); 
    define('PAYPAL_CANCEL_URL', 'http://localhost/barkomatic-main/paypal/cancel.php'); 
-   define('PAYPAL_NOTIFY_URL', 'http://localhost/barkomatic-main/paypal/paypal_ipn.php'); 
+   define('PAYPAL_NOTIFY_URL', 'http://localhost/barkomatic-main/modules/schedule/paypal_ipn.php); 
    define('PAYPAL_CURRENCY', 'USD'); 
     
       

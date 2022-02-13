@@ -162,28 +162,19 @@ function shipSession($c, $u_ownr) {
         if(mysqli_stmt_execute($stmt_onwr)) {
             mysqli_stmt_store_result($stmt_onwr);
             if(mysqli_stmt_num_rows($stmt_onwr) == 1) {
-                mysqli_stmt_bind_result($stmt_onwr, $id_ownr,$sn,$em_ownr,$shpl,$username_ownr,$subs_id);
+                mysqli_stmt_bind_result($stmt_onwr,$id_ownr,$sn,$em_ownr,$shpl,$username_ownr);
                 if(mysqli_stmt_fetch($stmt_onwr)) {
-                    if($id_ownr != '' && $sn != '' && $em_ownr != '' && $username_ownr != '' && $subs_id != 0) {
+                    if($id_ownr != '' && $sn != '' && $em_ownr != '' && $username_ownr != '') {
                     
                             $_SESSION['ship_id'] = $id_ownr;
                             $_SESSION['ship_name'] = $sn; 
                             $_SESSION['email'] = $em_ownr;
-                            $_SESSION['subs_id'] = $subs_id;
+                            $_SESSION['username'] = $$username_ownr;
                             $_SESSION['ship_logo'] = $shpl;
                            
                                 echo "Shipping Owner Login Successfully!";
                           
                                
-                    }
-                    else{
-                        $_SESSION['ship_id'] = $id_ownr;
-                        $_SESSION['ship_name'] = $sn; 
-                        $_SESSION['email'] = $em_ownr;
-                        $_SESSION['subs_id'] = $subs_id;
-                        $_SESSION['ship_logo'] = $shpl;
-                        
-                        echo "Please subscribe first.";
                     }
                 }
             }

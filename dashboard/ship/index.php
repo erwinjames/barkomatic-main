@@ -1,6 +1,6 @@
 <?php require "./resources/config.php";
     session_start(); 
-    if(isset($_SESSION['ship_id']) && $_SESSION['ship_id'] != NULL) { 
+    if(isset($_SESSION['ship_id']) && $_SESSION['ship_id'] != NULL && $_SESSION['subscription_id'] == 1) { 
         
         
       

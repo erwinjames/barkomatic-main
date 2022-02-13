@@ -1,6 +1,6 @@
 <?php
 require_once "../modules/config.php";
-require_once "paypal_config";
+require_once 
 /*
  * Read POST data
  * reading posted data directly from $_POST causes serialization

@@ -90,7 +90,6 @@ else if($_POST['item_name']=="subscription_ship"){
     $unitPrice = 25;
     
     //Payment data
-    $subscr_id = $_POST['subscr_id'];
     $payer_email = $_POST['payer_email'];
     $item_number = $_POST['item_number'];
     $txn_id = $_POST['txn_id'];
@@ -110,7 +109,7 @@ else if($_POST['item_name']=="subscription_ship"){
             exit();
         }else{
             //Insert tansaction data into the database
-            $insert = $con->query("INSERT INTO user_subscriptions(Year,user_email,validity,valid_from,valid_to,item_number,txn_id,payment_gross,currency_code,subscr_id,payment_status,payer_email) VALUES(NOW(),'test@2go.com','".$subscr_month."','".$subscr_date_from."','".$subscr_date_to."','".$item_number."','".$txn_id."','".$payment_gross."','".$currency_code."','".$subscr_id."','".$payment_status."','".$payer_email."')");
+            $insert = $con->query("INSERT INTO user_subscriptions(user_id,validity,valid_from,valid_to,item_number,txn_id,payment_gross,currency_code,subscr_id,payment_status,payer_email) VALUES('".$custom."','".$subscr_month."','".$subscr_date_from."','".$subscr_date_to."','".$item_number."','".$txn_id."','".$payment_gross."','".$currency_code."','".$subscr_id."','".$payment_status."','".$payer_email."')");
         }
      }
     }

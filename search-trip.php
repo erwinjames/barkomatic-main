@@ -1,5 +1,35 @@
 
     <?php require "resources/templates/_search-trip_header.php"; ?>
+    <div class="progressbar" style="font-size: 12px;margin-top: 50px; font-weight: bolder;">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3 text-center ">
+                    SCHEDULE
+                </div>
+                <div class="col-sm-2 text-center ">
+                    PASSENGER INFO
+                </div>
+                <div class="col-sm-2 text-center ">
+                    PAYMENT
+                </div>
+                <div class="col-sm-2 text-center ">
+                    COMPLETE
+                </div>
+            </div>
+            <div class="row " style="margin-top: 10px">
+                <div class="progress" style="width: 56%;margin-left: 11%; margin-right: 10; height:10px;">
+                    <div class="one " style="background-color:#007bff; border-radius: 100%; width: 20px; height: 20px; position: absolute;z-index:1;margin-top: -5px;"></div>
+                    <div class="two " style="background-color:gray;; border-radius: 100%; width: 20px; height: 20px; position: absolute;z-index:1;margin-top: -5px; left: 36%;"></div>
+                    <div class="three " style="background-color:gray;; border-radius: 100%; width: 20px; height: 20px; position: absolute;z-index:1;margin-top: -5px;left: 50%;"></div>
+                    <div class="four " style="background-color:gray; border-radius: 100%; width: 20px; height: 20px; position: absolute;z-index:1;margin-top: -5px;left: 63%;"></div>
+                    <div class="progress-bar" style="width: 25%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
     <div class="section pt-0 container">
         <div style="background: hsla(0,0%,100%,.94);" class="p-0 pt-0">
             <div class="row p-0">

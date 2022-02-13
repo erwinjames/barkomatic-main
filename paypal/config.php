@@ -4,22 +4,18 @@
    $itemNumber = 'MS123456';
    
    // Subscription price for one month
-   $itemPrice = 25.00;
+   $itemPrice = 1500.00;
      
    // PayPal configuration 
    define('PAYPAL_ID', 'williamdoe@shiplines.com'); 
    define('PAYPAL_SANDBOX', TRUE); //TRUE or FALSE 
     
-   define('PAYPAL_RETURN_URL', 'http://localhost/barkomatic-main/paypal/success.php'); 
-   define('PAYPAL_CANCEL_URL', 'http://localhost/barkomatic-main/paypal/cancel.php'); 
-   define('PAYPAL_NOTIFY_URL', 'http://localhost/barkomatic-main/modules/schedule/paypal_ipn.php); 
-   define('PAYPAL_CURRENCY', 'USD'); 
+   define('PAYPAL_RETURN_URL', 'https://b4d7-175-176-68-12.ngrok.io/barkomatic-main/paypal/success.php'); 
+   define('PAYPAL_CANCEL_URL', 'https://b4d7-175-176-68-12.ngrok.io/barkomatic-main/paypal/cancel.php'); 
+   define('PAYPAL_NOTIFY_URL', 'https://b4d7-175-176-68-12.ngrok.io/barkomatic-main/modules/schedule/paypal_ipn.php'); 
+   define('PAYPAL_CURRENCY', 'PHP'); 
     
-      
-    //   define("DB_HOST", "localhost");
-    //   define("DB_ROOT", "root");
-    //   define("DB_PASS", "");
-    //   define("DB_NAME", "barkomatic");
+    
    
     define('PAYPAL_URL', (PAYPAL_SANDBOX == true)?"https://www.sandbox.paypal.com/cgi-bin/webscr":"https://www.paypal.com/cgi-bin/webscr");
 

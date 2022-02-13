@@ -20,7 +20,7 @@ if(isset($_SESSION['ship_id']) && $_SESSION['ship_id'] != NULL){
 function getSubsPrice(obj){
 	var month = obj.value;
 	var price = (month * <?php echo $itemPrice; ?>);
-	document.getElementById('subPrice').innerHTML = '$'+price+' USD';
+	document.getElementById('subPrice').innerHTML = 'P '+price+' PHP';
 	document.getElementById('paypalValid').value = month;
 	document.getElementById('paypalAmt').value = price;
 }
@@ -42,7 +42,7 @@ function getSubsPrice(obj){
 			</select>
 		</div>
 		<div class="form-group">
-			<p><b>Total Price:</b> <span id="subPrice"><?php echo '$'.$itemPrice.' USD'; ?></span></p>
+			<p><b>Total Price:</b> <span id="subPrice"><?php echo 'P '.$itemPrice.' PHP'; ?></span></p>
 		</div>
 		
 		<!-- Buy button -->

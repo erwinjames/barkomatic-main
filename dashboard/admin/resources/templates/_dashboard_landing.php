@@ -17,9 +17,10 @@
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-md-9">
-                            <h3 class="panel-title">Month Wise Profit Data</h3>
+                            <br>
+                            <h3 style="margin-left:5%" class="panel-title">Month Wise Profit Data</h3>
                         </div>
-                        <div class="col-md-3">
+                        <!-- <div class="col-md-3">
                         <select name="year" class="form-control" id="operator">
                                 <option value="">Select Year</option>
                                 <option value="2021">2021</option>
@@ -28,9 +29,10 @@
                          
                 
                             </select>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
+                <br>
                 <div class="panel-body">
                 <canvas  id="chartjs_bar"></canvas> 
                 </div>

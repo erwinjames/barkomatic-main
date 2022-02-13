@@ -1,6 +1,6 @@
 <?php
    // Product information
-   $itemName = 'Membership Subscription';
+   $itemName = 'Membership_subscription';
    $itemNumber = 'MS123456';
    
    // Subscription price for one month

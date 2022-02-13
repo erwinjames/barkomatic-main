@@ -90,6 +90,7 @@ else if($_POST['item_name']=="Membership_subscription"){
     $unitPrice = 25;
     
     //Payment data
+    $subscr_id = $_POST['subscr_id'];
     $payer_email = $_POST['payer_email'];
     $item_number = $_POST['item_number'];
     $txn_id = $_POST['txn_id'];
@@ -109,7 +110,7 @@ else if($_POST['item_name']=="Membership_subscription"){
             exit();
         }else{
             //Insert tansaction data into the database
-            $insert = $con->query("INSERT INTO user_subscriptions(user_id,payment_method,validity,valid_from,valid_to,item_number,txn_id,payment_gross,currency_code,payment_status,payer_email) VALUES('".$custom."','paypal','".$subscr_month."','".$subscr_date_from."','".$subscr_date_to."','".$item_number."','".$txn_id."','".$payment_gross."','".$currency_code."','".$payment_status."','".$payer_email."')");
+            $insert = $con->query("INSERT INTO user_subscriptions(user_id,payment_method,validity,valid_from,valid_to,item_number,txn_id,payment_gross,currency_code,subscr_id,payment_status,payer_email) VALUES('".$custom."','paypal','".$subscr_month."','".$subscr_date_from."','".$subscr_date_to."','".$item_number."','".$txn_id."','".$payment_gross."','".$currency_code."','". $subscr_id."','".$payment_status."','".$payer_email."')");
         }
      }
     }

@@ -149,9 +149,9 @@ function shipSession($c, $u_ownr) {
                         tbl_sd.id,
                         tbl_sd.ship_name,
                         tbl_sd.email,
-                        tbl_sd.subscription_id,
                         tbl_sd.ship_logo,
-                        tbl_sa.username
+                        tbl_sa.username,
+                        tbl_sd.subscription_id
                         FROM tbl_ship_detail tbl_sd
                         INNER JOIN tbl_ship_account tbl_sa ON tbl_sa.id = tbl_sd.id
                         WHERE tbl_sa.username=?";
@@ -162,25 +162,35 @@ function shipSession($c, $u_ownr) {
         if(mysqli_stmt_execute($stmt_onwr)) {
             mysqli_stmt_store_result($stmt_onwr);
             if(mysqli_stmt_num_rows($stmt_onwr) == 1) {
-                mysqli_stmt_bind_result($stmt_onwr,$id_ownr,$sn,$em_ownr,$shpl,$username_ownr);
+                mysqli_stmt_bind_result($stmt_onwr, $id_ownr,$sn,$em_ownr,$shpl,$username_ownr,$sub_id);
                 if(mysqli_stmt_fetch($stmt_onwr)) {
                     if($id_ownr != '' && $sn != '' && $em_ownr != '' && $username_ownr != '') {
                     
                             $_SESSION['ship_id'] = $id_ownr;
                             $_SESSION['ship_name'] = $sn; 
+                            $_SESSION['subscription_id'] = $sub_id;
                             $_SESSION['email'] = $em_ownr;
-                            $_SESSION['username'] = $$username_ownr;
                             $_SESSION['ship_logo'] = $shpl;
-                           
+                            
+                            if ($sub_id == 1) {
                                 echo "Shipping Owner Login Successfully!";
+                            }
+                          else {
+                            echo "Please subscribe first.";
+                          }
                           
                                
                     }
+                    
                 }
+                
+             
             }
+           
         }
         mysqli_stmt_close($stmt_onwr);
     } 
+ 
 }
 // admin session
 function adminSession($c, $u_admin) {

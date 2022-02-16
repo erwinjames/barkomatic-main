@@ -21,8 +21,8 @@ if($_POST["action"] == "ship_ownr_signout") {
 
 //* ship profile fetch - data
 function fetch_ship_profile($c) {
-    $ship_line_id = $_SESSION['ship_id'];
-    $stmt = $c->prepare("SELECT ship_logo,ship_name,email FROM tbl_ship_detail WHERE id=?");
+    $ship_line_id = $_SESSION['admin_id'];
+    $stmt = $c->prepare("SELECT * FROM tbl_ship_detail WHERE id=?");
     $stmt->bind_param("i", $ship_line_id);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -49,18 +49,6 @@ function fetch_ship_profile($c) {
     $stmt->close();
 }
 
-//* ship profile upload
-function ship_profile_upload($c) {
-    $file = file_get_contents($_FILES["image"]["tmp_name"]);
-    $ship_name = $_POST['ship_name_profile'];
-    $ship_email = $_POST['ship_email_profile'];
-    $id = $_SESSION['ship_id'];
-    $stmt = $c->prepare("UPDATE tbl_ship_detail SET ship_name=?,email=?,ship_logo=? WHERE id=?");
-    $stmt->bind_param("sssi", $ship_name,$ship_email,$file,$id);
-    $stmt->execute();
-    echo "Updated Successfully Updated!";
-}   
-
 //* ship profile change password
 function ship_change_password($c) {
     $pass = sha1($_POST['ship_nw_psswd']);
@@ -68,8 +56,8 @@ function ship_change_password($c) {
     if($pass != $cpass) {
         echo "Password did not match!";
     } else {
-        $id = $_SESSION['ship_id'];
-        $stmt = $c->prepare("UPDATE tbl_ship_account SET password=? WHERE id=?");
+        $id = $_SESSION['admin_id'];
+        $stmt = $c->prepare("UPDATE tbl_admin SET password=? WHERE id=?");
         $stmt->bind_param("si", $pass,$id);
         $stmt->execute();
         echo "Password changed successfully!";

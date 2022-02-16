@@ -232,7 +232,7 @@ echo $output;
 $stmt->close();
 }
 
-//* all staff fetch data
+//* all staff fetch dataeeeeeeeeeeeeeeeeeeeeeee
 function all_staff_data($c) {
     $sql_slct = "SELECT 
                 tbl_stfd.id,

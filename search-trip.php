@@ -1,5 +1,6 @@
 
     <?php require "resources/templates/_search-trip_header.php"; ?>
+   
     <div class="progressbar" style="font-size: 12px;margin-top: 50px; font-weight: bolder;">
         <div class="container">
             <div class="row">
@@ -7,7 +8,7 @@
                     SCHEDULE
                 </div>
                 <div class="col-sm-2 text-center ">
-                    PASSENGER INFO
+                    CHECK EMAIL
                 </div>
                 <div class="col-sm-2 text-center ">
                     PAYMENT
@@ -16,8 +17,8 @@
                     COMPLETE
                 </div>
             </div>
-            <div class="row " style="margin-top: 10px">
-                <div class="progress" style="width: 56%;margin-left: 11%; margin-right: 10; height:10px;">
+            <div class="row " style="margin-top: 10px;margin-left:10%">
+                <div class="progress" style="width: 56%;margin-left: 10%; margin-right: 10; height:10px;">
                     <div class="one " style="background-color:#007bff; border-radius: 100%; width: 20px; height: 20px; position: absolute;z-index:1;margin-top: -5px;"></div>
                     <div class="two " style="background-color:gray;; border-radius: 100%; width: 20px; height: 20px; position: absolute;z-index:1;margin-top: -5px; left: 36%;"></div>
                     <div class="three " style="background-color:gray;; border-radius: 100%; width: 20px; height: 20px; position: absolute;z-index:1;margin-top: -5px;left: 50%;"></div>

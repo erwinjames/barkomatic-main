@@ -308,6 +308,7 @@ function fetch_data_paypal($c){
                  <!-- Custom variable user ID -->
 
     <input type="hidden" name="custom" value="'.$_SESSION['id'].'">
+    <input type="hidden" name="ship_name" value="'.$row['ship_name'].'">
     <input type="hidden" name="cancel_return" value="'.PAYPAL_CANCEL_URL.'">
     <input type="hidden" name="return" value="'.PAYPAL_RETURN_URL.'">
     <input type="hidden" name="notify_url" value="'.PAYPAL_NOTIFY_URL.'">

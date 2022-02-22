@@ -1,10 +1,11 @@
 <?php require "./resources/config.php";
     session_start(); 
     if(isset($_SESSION['ship_id']) && $_SESSION['ship_id'] != NULL && $_SESSION['subscription_id'] == 1) { 
-        
+       
+        $ship_name = $_SESSION['ship_name'];
         
       
-        $query = "SELECT dates,year(dates) as dateYear,SUM(gross_income) as totalProfit FROM tbl_psnger_pymnt ORDER BY dateYear";
+        $query = "SELECT dates,year(dates) as dateYear,SUM(gross_income) as totalProfit FROM tbl_psnger_pymnt WHERE ship_name = '$ship_name' ORDER BY dateYear ";
         //execute query
         $result = $con->query($query);
         //loop through the returned data

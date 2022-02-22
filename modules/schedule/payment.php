@@ -78,9 +78,7 @@ function get_PssngerInfo($c){
             </div>
         </div>
     </div>
-
 </div>
-
 <div class="container PASSENGER_INFO">
     <div class=" col-sm-9 border" style="background-color: white ;border-top: 50px; margin-top: -6%; margin-top: 10%;">
         <div>

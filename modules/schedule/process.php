@@ -51,7 +51,7 @@ function search_available_schedule($c) {
                 tbl_tcket.tckt_owner,
                 tbl_tcket.tckt_price
                 FROM tbl_ship_detail tbl_ship_sd
-                JOIN tbl_ship_schedule tbl_ship_sched ON tbl_ship_sd.id = tbl_ship_sched.id
+                JOIN tbl_ship_schedule tbl_ship_sched
                 JOIN tbl_ship_has_accomodation_type tbl_ship_acctyp ON tbl_ship_sched.id = tbl_ship_acctyp.id
                 JOIN tbl_tckt tbl_tcket ON tbl_ship_sd.ship_name = tbl_tcket.tckt_owner
                 WHERE tbl_ship_sd.ship_name=? AND tbl_ship_sched.depart_date=? AND tbl_ship_sched.location_from=? AND tbl_ship_sched.location_to=?";
@@ -148,7 +148,7 @@ function go_schedule($c) {
         tbl_tcket.tckt_owner,
         tbl_tcket.tckt_price
         FROM tbl_ship_detail tbl_sd
-        JOIN tbl_ship_schedule tbl_sched ON tbl_sd.id = tbl_sched.id
+        JOIN tbl_ship_schedule tbl_sched
         JOIN tbl_ship_has_accomodation_type tbl_acctyp ON tbl_sched.id = tbl_acctyp.id
         JOIN tbl_tckt tbl_tcket ON tbl_sd.ship_name = tbl_tcket.tckt_owner
         WHERE tbl_sched.depart_time=? AND tbl_sd.ship_name=?";
@@ -263,7 +263,7 @@ $stmt->close();
                     tbl_tcket.tckt_owner,
                     tbl_tcket.tckt_price
                     FROM tbl_ship_detail tbl_sd
-                    JOIN tbl_ship_schedule tbl_sched ON tbl_sd.id = tbl_sched.id
+                    JOIN tbl_ship_schedule tbl_sched
                     JOIN tbl_ship_has_accomodation_type tbl_acctyp ON tbl_sched.id = tbl_acctyp.id
                     JOIN tbl_tckt tbl_tcket ON tbl_sd.ship_name = tbl_tcket.tckt_owner
                     WHERE tbl_sched.depart_time=? AND tbl_acctyp.id=? AND tbl_sd.ship_name=?";

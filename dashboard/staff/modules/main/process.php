@@ -342,8 +342,8 @@ function add_schedule($c) {
     $spt = check_input($_POST['sched_port_to']);
     $ship_belong = check_input($_POST['ship']);
 
-    $stmt = $c->prepare("INSERT INTO tbl_ship_schedule (depart_date,depart_time,location_from,port_from,location_to,port_to) VALUES (?,?,?,?,?,?)");
-    $stmt->bind_param('ssssss', $d,$t,$slf,$spf,$slt,$spt);
+    $stmt = $c->prepare("INSERT INTO tbl_ship_schedule (ship_reside,depart_date,depart_time,location_from,port_from,location_to,port_to) VALUES (?,?,?,?,?,?,?)");
+    $stmt->bind_param('sssssss', $ship_belong,$d,$t,$slf,$spf,$slt,$spt);
     $stmt->execute();
     $stmt->close();
 

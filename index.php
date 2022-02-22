@@ -123,6 +123,9 @@
                     <button type="button" class="btn btn-primary btn-lg pushable mt-3">
                         <a href="search-trip.php"><span class="front">RESERVE TICKET NOW!</span></a>
                     </button>
+                    <button type="button" class="btn btn-primary btn-lg pushable mt-3">
+                        <a href="avail_search-trip.php"><span class="front">AVAIL TICKET NOW!</span></a>
+                    </button>
                 <?php } ?>
             </div>
         </div>

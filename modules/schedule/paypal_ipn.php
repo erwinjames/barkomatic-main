@@ -84,6 +84,11 @@ if (strcmp($res, "VERIFIED") == 0 || strcasecmp($res, "VERIFIED") == 0) {
     $currency_code     = $_POST['mc_currency']; 
     $payment_status = $_POST['payment_status']; 
     $payer_email = $_POST['payer_email'];
+
+    //some data
+
+    $accomodations = $_POST['item_accomodation'];
+    
      
     // Check if transaction data exists with the same TXN ID 
     $prevPayment = $con->query("SELECT id FROM tbl_psnger_pymnt WHERE txn_id = '".$txn_id."'"); 
@@ -114,8 +119,8 @@ if (strcmp($res, "VERIFIED") == 0 || strcasecmp($res, "VERIFIED") == 0) {
                 <!DOCTYPE html>
                 <head>
                 <style>
-                
                 .bodydiv {       
+
                                   display: flex;
                                   align-items: center;
                                   justify-content: center;
@@ -255,7 +260,7 @@ if (strcmp($res, "VERIFIED") == 0 || strcasecmp($res, "VERIFIED") == 0) {
                 <div class='ticket__body'>
                   <section class='ticket__section'>
                     <h3>Your Tickets</h3>
-                    <p>Level 1 VIP Club Seats and Bar</p>
+                    <p>Accomodation : <b>$accomodations</b> </p>
                     <p>Block 406   Row Q   Seats 34-35</p>
                     <p>Your seats are together</p>
                   </section>

@@ -462,7 +462,7 @@ function reservation_confirmation($c,$sdsn,$rsrvtn_num) {
                 </body>
                 </html>";
                 $mail->send();
-                echo "Emailed Successfully";
+                echo "payment.php?reservetionId=$rsrvtn_num&&userId=$pssngr_id";
             }catch(Exception $e){
                 echo "Could not sent the reservation confirmation. Mailer Error: {$mail->ErrorInfo}";
                 // echo 'Could not sent the reservation confirmation.{$mail->ErrorInfo}';

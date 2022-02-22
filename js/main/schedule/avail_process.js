@@ -28,7 +28,7 @@ $(document).ready(function() {
             e.preventDefault();
             $(':input[type="submit"]').prop('disabled', true);
             $.ajax({
-                url: './modules/schedule/process.php',
+                url: './modules/schedule/avail_process.php',
                 method: 'POST',
                 data: $('#search_sched_form').serialize() + '&action=search_sched_form',
                 success: function(response) {
@@ -47,7 +47,7 @@ $(document).ready(function() {
         e.preventDefault();
         $(':input[type="submit"]').prop('disabled', true);
         $.ajax({
-            url: './modules/schedule/process.php',
+            url: './modules/schedule/avail_process.php',
             method: 'POST',
             data: $('#srch_sched_ftr_form').serialize() + '&action=srch_sched_ftr_form',
             success: function(data) {
@@ -65,18 +65,15 @@ $(document).ready(function() {
         e.preventDefault();
         $(':input[type="submit"]').prop('disabled', true);
         $.ajax({
-            url: './modules/schedule/process.php',
+            url: './modules/schedule/avail_process.php',
             method: 'POST',
             data: $('#smmry_dptr_slctd_sched_form').serialize() + '&action=smmry_dptr_slctd_sched_form',
             success: function(response) {
                 setTimeout(function() {
-                    alert(response);
-                }, 100);
-                setTimeout(function() {
                     $(':input[type="submit"]').prop('disabled', false);
                 }, 100);
                 setTimeout(function() {
-                    window.location.reload();
+                    window.location.href = response ;
                 }, 100);
             }
         });

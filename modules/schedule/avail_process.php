@@ -349,7 +349,7 @@ $stmt->close();
                 </div>
                 <div class="col-6 text-right">
                     <div class="form-group">
-                        <input type="submit" name="summry_dptr_btn" id="summry_dptr_btn" class="btn btn-success rounded-0" value="RESERVE">
+                        <input type="submit" name="summry_dptr_btn" id="summry_dptr_btn" class="btn btn-success rounded-0" value="AVAIL">
                     </div>
                 </div>
             </div>

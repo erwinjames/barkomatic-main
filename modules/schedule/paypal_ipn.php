@@ -3,8 +3,15 @@
 include_once 'paypal_config.php'; 
  
 // Include database connection file 
-include_once '../../resources/config.php'; 
- 
+require "../../resources/config.php";
+require "../library/PHPMailer/src/Exception.php";
+require "../library/PHPMailer/src/PHPMailer.php";
+require "../library/PHPMailer/src/SMTP.php";
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 /* 
  * Read POST data 
  * reading posted data directly from $_POST causes serialization 
@@ -65,8 +72,6 @@ $tokens = explode("\r\n\r\n", trim($res));
 $res = trim(end($tokens)); 
 if (strcmp($res, "VERIFIED") == 0 || strcasecmp($res, "VERIFIED") == 0) { 
     if ($_POST['item_name']== "Payment_reservation") {
-        
-     
     // Retrieve transaction info from PayPal
     $item_name = $_POST['item_name']; 
     $item_number    = $_POST['item_number']; 
@@ -84,7 +89,56 @@ if (strcmp($res, "VERIFIED") == 0 || strcasecmp($res, "VERIFIED") == 0) {
     }else{ 
         // Insert transaction data into the database 
         $insert = $con->query("INSERT INTO tbl_psnger_pymnt(id,reservation_number,txn_id,payer_email,currency,gross_income,payment_status,dates) VALUES('".$custom."','".$item_number."','".$txn_id."','".$payer_email."','".$currency_code."','".$payment_gross."','".$payment_status."',NOW())"); 
-        
+        if ($insert) {
+            $mail = new PHPMailer();
+            try {
+                // $mail->SMTPDebug = SMTP::DEBUG_SERVER; 
+                // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+                // $mail->SMTPDebug = 4;
+                $mail->isSMTP();
+                $mail->Mailer = "smtp";
+                $mail->SMTPAuth = true;
+                $mail->Host = 'smtp.gmail.com';
+                $mail->Username = 'manugasewinjames@gmail.com';
+                $mail->Password = 'HardFact@30';
+                $mail->SMTPSecure = 'tls';
+                $mail->Port = 587;
+                $mail->setFrom($ship_email, 'Reservation');
+                $mail->addAddress($_SESSION['email']);
+                $mail->isHTML(true);
+                $mail->Subject = 'Reservation Confirmation';
+                $mail->Body = "
+                <!DOCTYPE html>
+                <head>
+                <style>
+                    body {
+                        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+                        }
+                </style>
+                </head>
+                <body>
+                    <div class='container m-auto'>
+                        <div class='row'>
+                            <div class='col-sm-12'>
+                                <h4>$ship_name</h4><br>
+                                <p>Hello $pssngr_fname, Thank you for making your reservation in our shipping line. Please  <a class='link' href='http://localhost/barkomatic-main/payment.php?reservetionId=$rsrvtn_num&&userId=$pssngr_id'>click me</a></p> for youre <b>Payment</b
+                                <p>Your ticket reservation is valid until: <b>$exp</b></p>
+                                <p>If you find it necessary to cancel or change plans, please inform us by email <span style='color:#007bff;font-weight:700;'>$ship_email<span></p>
+                                <br><br>
+                                <p>Again, thank you for choosing us. We look forward to having you as our guest.</p>
+                                <p>Best regards,<br><span>Reservation Office</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </body>
+                </html>";
+                $mail->send();
+                echo "Emailed Successfully";
+            }catch(Exception $e){
+                echo "Could not sent the reservation confirmation. Mailer Error: {$mail->ErrorInfo}";
+                // echo 'Could not sent the reservation confirmation.{$mail->ErrorInfo}';
+            }
+        }
 
     } 
 }

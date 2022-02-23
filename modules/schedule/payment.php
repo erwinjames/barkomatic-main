@@ -280,10 +280,10 @@ function fetch_data_paypal($c){
     if($row['accomodation']=="No Aircon"){
     $total_price = $row['tckt_price'];
     $No = "No Aircon";
-
     }
     else{
     $total_price = $row['price'] + $row['tckt_price'];
+    $No = $row['accomodation'];
     }
     if ($row == null) {
        echo "Error";
@@ -303,6 +303,7 @@ function fetch_data_paypal($c){
 
     <input type="hidden" name="item_name" value="Payment_reservation">
     <input type="hidden" name="item_accomodation" value="'.$No.'">
+
     <input type="hidden" name="item_number" value="'.$row['reservation_number'].'">
     <input type="hidden" name="currency_code" value="'.PAYPAL_CURRENCY.'">
     <input type="hidden" name="a3" id="paypalAmt" value="'.$total_price.'">

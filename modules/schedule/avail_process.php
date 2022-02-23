@@ -414,9 +414,7 @@ function reservation_confirmation($c,$sdsn,$rsrvtn_num) {
         $row = $result->fetch_array();
 
         if(!empty($row)) {
-            
             $pssngr_id = $_SESSION['id'];
-          
             echo "payment.php?reservetionId=$rsrvtn_num&&userId=$pssngr_id";
         } else {
             echo "row is empty! - 2";

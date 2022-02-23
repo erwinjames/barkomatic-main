@@ -92,9 +92,9 @@ if (strcmp($res, "VERIFIED") == 0 || strcasecmp($res, "VERIFIED") == 0) {
         if ($insert) {
             $mail = new PHPMailer();
             try {
-                // $mail->SMTPDebug = SMTP::DEBUG_SERVER; 
-                // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-                // $mail->SMTPDebug = 4;
+                $mail->SMTPDebug = SMTP::DEBUG_SERVER; 
+                $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+                $mail->SMTPDebug = 4;
                 $mail->isSMTP();
                 $mail->Mailer = "smtp";
                 $mail->SMTPAuth = true;

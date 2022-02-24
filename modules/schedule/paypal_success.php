@@ -1,3 +1,61 @@
+<?php
+require "../../resources/config.php";
+require "../library/PHPMailer/src/Exception.php";
+require "../library/PHPMailer/src/PHPMailer.php";
+require "../library/PHPMailer/src/SMTP.php";
+session_start();
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+if ($_GET['token']!=NULL) {
+$mail = new PHPMailer();
+try {
+    // $mail->SMTPDebug = SMTP::DEBUG_SERVER; 
+    // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+    // $mail->SMTPDebug = 4;
+    $mail->isSMTP();
+    $mail->Mailer = "smtp";
+    $mail->SMTPAuth = true;
+    $mail->Host = 'smtp.gmail.com';
+    $mail->Username = 'manugasewinjames@gmail.com';
+    $mail->Password = 'ejmanugas30';
+    $mail->SMTPSecure = 'tls';
+    $mail->Port = 587;
+    $mail->setFrom('manugasewinjames@gmail.com', 'Reservation');
+    $mail->addAddress($_SESSION['email']);
+    $mail->isHTML(true);
+    $mail->Subject = 'Reservation Confirmation';
+    $mail->Body = "
+    <!DOCTYPE html>
+    <head>
+    <style>
+        body {
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            }
+    </style>
+    </head>
+    <body>
+        <div class='container m-auto'>
+            <div class='row'>
+                <div class='col-sm-12'>
+                  <h1>sample</h1>
+                </div>
+            </div>
+        </div>
+    </body>
+    </html>";
+    $mail->send();
+    echo "Emailed Successfully";
+}catch(Exception $e){
+    echo "Could not sent the reservation confirmation. Mailer Error: {$mail->ErrorInfo}";
+    // echo 'Could not sent the reservation confirmation.{$mail->ErrorInfo}';
+}
+}
+?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">

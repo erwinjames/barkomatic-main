@@ -1,3 +1,59 @@
+<?php
+require_once"modules/config.php";
+session_start();
+if (isset($_GET['item_number'])) {
+
+  error_reporting(E_ALL);
+  ini_set('display_errors', 1);
+  $sql_rsrvtn = "SELECT * FROM tbl_passenger_reservation";
+  $stmt = $con->prepare($sql_rsrvtn);
+  $stmt->execute();
+  $stmt->store_result();
+  $stmt->fetch();
+  $num = $stmt->num_rows();
+  if($num > 0) {
+      $stmt->close();
+      error_reporting(E_ALL);
+      ini_set('display_errors', 1);
+      $sql_em = "SELECT 
+                  tbl_pp.gross_income,
+                  tbl_pr.ship_name,
+                  tbl_pr.expiration,
+                  tbl_pr.reservation_number,
+                  tbl_pr.passenger_name,
+                  tbl_pr.location_from,
+                  tbl_pr.location_to,
+                  tbl_pr.depart_date,
+                  tbl_pr.depart_time,
+                  tbl_pr.accomodation,
+                  tbl_pr.reservation_date,
+                  tbl_pr.status,
+                  tbl_acctyp.accomodation_name,
+                  tbl_acctyp.seat_type,
+                  tbl_acctyp.aircon,
+                  tbl_acctyp.price,
+                  tbl_sched.location_from,
+                  tbl_sched.location_to,
+                  tbl_sched.depart_date,
+                  tbl_sched.depart_time,
+                  tbl_sched.port_from,
+                  tbl_sched.port_to
+                  FROM tbl_passenger_reservation tbl_pr
+                  JOIN tbl_psnger_pymnt tbl_pp 
+                  JOIN tbl_ship_schedule tbl_sched
+                  JOIN  tbl_ship_has_accomodation_type tbl_acctyp ON tbl_sched.id = tbl_acctyp.id
+                  WHERE tbl_pr.reservation_number=? AND tbl_pr.status = NULL";
+      $s = $con->prepare($sql_em);
+      $s->bind_param('s',$_GET['item_number']);
+      $s->execute();
+      $result = $s->get_result();
+      $row = $result->fetch_array();
+     
+
+
+     
+?>
+
 <!DOCTYPE html>
 <head>
 <style>
@@ -122,7 +178,7 @@
 <article class='ticket>
 <header class='ticket__wrapper'>
   <div class='ticket__header'>
-    2 🎟
+    <?php echo $_GET['item_number'] ;?> 🎟
   </div>
 </header>
 <div class='ticket__divider'>
@@ -132,7 +188,7 @@
 <div class='ticket__body'>
   <section class='ticket__section'>
     <h3>Your Tickets</h3>
-    <p>Level 1 VIP Club Seats and Bar</p>
+    <p><?php $row['accomodation_name']; ?></p>
     <p>Block 406   Row Q   Seats 34-35</p>
     <p>Your seats are together</p>
   </section>
@@ -154,3 +210,10 @@
 </div>
 </body>
 </html>
+
+<?php  
+}else{
+  echo "2";
+}
+
+} ?>

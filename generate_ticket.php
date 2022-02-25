@@ -32,12 +32,14 @@ if (isset($_GET['item_number'])) {
                         tbl_tcket.tckt_stats,
                         tbl_tcket.tckt_dscnt,
                         tbl_tcket.tckt_owner,
-                        tbl_tcket.tckt_price
+                        tbl_tcket.tckt_price,
+                        tbl_pymnt.gross_income
      from tbl_passenger_reservation tbl_pass_reserv
      JOIN tbl_ship_detail tbl_sd ON tbl_pass_reserv.ship_name = tbl_sd.ship_name
      JOIN tbl_ship_schedule tbl_sched ON tbl_sd.id = tbl_sched.id
      JOIN tbl_ship_has_accomodation_type tbl_acctyp ON tbl_sched.id = tbl_acctyp.id
      JOIN tbl_tckt tbl_tcket ON tbl_sd.ship_name = tbl_tcket.tckt_owner
+     JOIN tbl_psnger_pymnt tbl_pymnt ON tbl_pass_reserv.reservation_number = tbl_pymnt.reservation_number
      WHERE tbl_pass_reserv.reservation_number=? LIMIT 1";
      
       $s = $con->prepare($sql_em);
@@ -185,18 +187,19 @@ if (isset($_GET['item_number'])) {
     <p><?php echo $row['seat_type'] ?? 'No seats'?></p>
   </section>
   <section class='ticket__section'>
-    <h3>Delivery Address</h3>
-    <p>Addis ababa, 2321 px.box</p>
-    <p>Ethiopia</p>
+    <h3>Departure Schedule</h3>
+    <p>Depart Date : <b><?php echo $row['depart_date'] ?? 'No depart'?></b></p>
+    <p>Depart Time : <b><?php echo $row['depart_time'] ?? 'No Time'?></b></p>
+
   </section>
   <section class='ticket__section'>
     <h3>Payment Method</h3>
-    <p>Mastercard **** 3232</p>
+    <p>PAYPAL</p>
   </section>
 </div>
 <footer class='ticket__footer'>
   <span>Total Paid</span>
-  <span>£173.20</span>
+  <span> &nbsp [ PHP <?php echo $row['gross_income'] ?? 'No Income'?> ]</span>
 </footer>
 </article>
 </div>

@@ -315,7 +315,7 @@ function fetch_data_paypal($c){
     <input type="hidden" name="custom" value="'.$_SESSION['id'].'">
     <input type="hidden" name="ship_name" value="'.$row['ship_name'].'">
     <input type="hidden" name="cancel_return" value="'.PAYPAL_CANCEL_URL.'">
-    <input type="hidden" name="return" value="'.PAYPAL_RETURN_URL.'&&rsrvtn_id='.$row[reservation_number].'">
+    <input type="hidden" name="return" value="'.PAYPAL_RETURN_URL.'?payer_email='.$_SESSION['email'].'&rsrvtn_id='.$row['reservation_number'].'">
     <input type="hidden" name="notify_url" value="'.PAYPAL_NOTIFY_URL.'">
     <input class="buy-btn" type="submit" value="Proceed to Payment">
     </form>

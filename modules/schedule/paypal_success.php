@@ -3,54 +3,39 @@ require "../../resources/config.php";
 require "../library/PHPMailer/src/Exception.php";
 require "../library/PHPMailer/src/PHPMailer.php";
 require "../library/PHPMailer/src/SMTP.php";
-session_start();
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-if ($_GET['token']!=NULL) {
-$mail = new PHPMailer();
-try {
-    // $mail->SMTPDebug = SMTP::DEBUG_SERVER; 
-    // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-    // $mail->SMTPDebug = 4;
-    $mail->isSMTP();
-    $mail->Mailer = "smtp";
-    $mail->SMTPAuth = true;
-    $mail->Host = 'smtp.gmail.com';
-    $mail->Username = 'manugasewinjames@gmail.com';
-    $mail->Password = 'ejmanugas30';
-    $mail->SMTPSecure = 'tls';
-    $mail->Port = 587;
-    $mail->setFrom('manugasewinjames@gmail.com', 'Reservation');
-    $mail->addAddress($_SESSION['email']);
-    $mail->isHTML(true);
-    $mail->Subject = 'Reservation Confirmation';
-    $mail->Body = "
-    <!DOCTYPE html>
-    <head>
-    <style>
-        body {
-            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-            }
-    </style>
-    </head>
-    <body>
-        <div class='container m-auto'>
-            <div class='row'>
-                <div class='col-sm-12'>
-                  <h1>sample</h1>
-                </div>
-            </div>
-        </div>
-    </body>
-    </html>";
-    $mail->send();
-    echo "Emailed Successfully";
-}catch(Exception $e){
-    echo "Could not sent the reservation confirmation. Mailer Error: {$mail->ErrorInfo}";
-    // echo 'Could not sent the reservation confirmation.{$mail->ErrorInfo}';
+if ($_GET['token']!=NULL && $_GET['rsrvtn_id']) {
+
+
+$item_number = $_GET['item_number'];  
+$txn_id = $_GET['tx']; 
+$payment_gross = $_GET['amt']; 
+$currency_code = $_GET['cc']; 
+$payment_status = $_GET['st']; 
+ 
+// Get product info from the database 
+$productResult = $con->query("SELECT * FROM tbl_passenger_reservation WHERE reservation_number = '.$item_number'"); 
+$productRow = $productResult->fetch_assoc(); 
+
+// Check if transaction data exists with the same TXN ID. 
+$prevPaymentResult = $con->query("SELECT * FROM tbl_psnger_pymnt WHERE txn_id = '".$txn_id."' AND reservation_number='.$item_number.'"); 
+
+if($prevPaymentResult->num_rows > 0){ 
+    $paymentRow = $prevPaymentResult->fetch_assoc(); 
+    $payment_id = $paymentRow['id']; 
+    $payment_gross = $paymentRow['gross_income']; 
+    $payment_status = $paymentRow['payment_status']; 
+   
+}else{ 
+    // Insert tansaction data into the database 
+    $insert = $con->query("INSERT INTO tbl_psnger_pymnt(reservation_number,txn_id,payer_email,currency_code,gross_income,payment_status,dates) VALUES('".$item_number."','".$txn_id."','test@2go','".$currency_code."','".$payment_gross."','".$payment_status."')"); 
+    $payment_id = $con->insert_id; 
+
+
 }
 }
 ?>

@@ -1,9 +1,9 @@
 <?php
+session_start();
 require "../../resources/config.php";
 require "../library/PHPMailer/src/Exception.php";
 require "../library/PHPMailer/src/PHPMailer.php";
 require "../library/PHPMailer/src/SMTP.php";
-
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
@@ -16,13 +16,59 @@ $txn_id = $_GET['tx'];
 $payment_gross = $_GET['amt']; 
 $currency_code = $_GET['cc']; 
 $payment_status = $_GET['st']; 
- 
+if(isset($_GET['item_number'])){
+    $mail = new PHPMailer();
+    try {
+        // $mail->SMTPDebug = SMTP::DEBUG_SERVER; 
+        // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+        // $mail->SMTPDebug = 4;
+        $mail->isSMTP();
+        $mail->Mailer = "smtp";
+        $mail->SMTPAuth = true;
+        $mail->Host = 'smtp.gmail.com';
+        $mail->Username = 'manugasewinjames@gmail.com';
+        $mail->Password = 'ejmanugas30';
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
+        $mail->setFrom('manugasewinjames@gmail.com', 'Reservation');
+        $mail->addAddress($_GET['payer_email']);
+        $mail->isHTML(true);
+        $mail->Subject = 'Booking Ticket';
+        $mail->Body = "
+        <!DOCTYPE html>
+        <head>
+        <style>
+            body {
+                font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+                }
+        </style>
+        </head>
+        <body>
+            <div class='container m-auto'>
+                <div class='row'>
+                    <div class='col-sm-12'>
+                      <a href='http://071c-202-175-242-179.ngrok.io/barkomatic-main/generate_ticket.php?item_number=".$item_number."'>click me to print ticket</a>
+                    </div>
+                </div>
+            </div>
+        </body>
+        </html>";
+        $mail->send();
+        echo "<script>
+        alert('Please check your email for your ticket');
+        </script>";
+    }catch(Exception $e){
+        echo "Could not sent the reservation confirmation. Mailer Error: {$mail->ErrorInfo}";
+        // echo 'Could not sent the reservation confirmation.{$mail->ErrorInfo}';
+    } 
+
+}
 // Get product info from the database 
 $productResult = $con->query("SELECT * FROM tbl_passenger_reservation WHERE reservation_number = '.$item_number'"); 
 $productRow = $productResult->fetch_assoc(); 
 
 // Check if transaction data exists with the same TXN ID. 
-$prevPaymentResult = $con->query("SELECT * FROM tbl_psnger_pymnt WHERE txn_id = '.$txn_id.'"); 
+$prevPaymentResult = $con->query("SELECT * FROM tbl_psnger_pymnt WHERE txn_id = '".$txn_id."' AND reservation_number='.$item_number.'"); 
 
 if($prevPaymentResult->num_rows > 0){ 
     $paymentRow = $prevPaymentResult->fetch_assoc(); 
@@ -34,60 +80,9 @@ if($prevPaymentResult->num_rows > 0){
     // Insert tansaction data into the database 
     $insert = $con->query("INSERT INTO tbl_psnger_pymnt(reservation_number,txn_id,payer_email,currency_code,gross_income,payment_status,dates) VALUES('".$item_number."','".$txn_id."','test@2go','".$currency_code."','".$payment_gross."','".$payment_status."')"); 
     $payment_id = $con->insert_id; 
-    if ($insert) {
-        $productResult1 = $con->query("SELECT * FROM tbl_psnger_pymnt WHERE reservation_number = '.$item_number' AND txn_id = '.$txn_id.'"); 
-        $productRow1 = $productResult1->fetch_assoc(); 
-        if ($productRow1) {
-            $mail = new PHPMailer();
-            try {
-                // $mail->SMTPDebug = SMTP::DEBUG_SERVER; 
-                // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-                // $mail->SMTPDebug = 4;
-                $mail->isSMTP();
-                $mail->Mailer = "smtp";
-                $mail->SMTPAuth = true;
-                $mail->Host = 'smtp.gmail.com';
-                $mail->Username = 'manugasewinjames@gmail.com';
-                $mail->Password = 'ejmanugas30';
-                $mail->SMTPSecure = 'tls';
-                $mail->Port = 587;
-                $mail->setFrom('manugasewinjames@gmail.com', 'Reservation');
-                $mail->addAddress($_GET['payer_email']);
-                $mail->isHTML(true);
-                $mail->Subject = 'Booking Ticket';
-                $mail->Body = "
-                <!DOCTYPE html>
-                <head>
-                <style>
-                    body {
-                        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-                        }
-                </style>
-                </head>
-                <body>
-                    <div class='container m-auto'>
-                        <div class='row'>
-                            <div class='col-sm-12'>
-                              <a href='localhost/barkomatic-main/test.php?item_number='.$item_number.'&txn_id='.$txn_id .''>click me to print ticket</a>
-                            </div>
-                        </div>
-                    </div>
-                </body>
-                </html>";
-                $mail->send();
-                echo "<script>
-                alert('Please check your email for your ticket');
-                </script>";
-            }catch(Exception $e){
-                echo "Could not sent the reservation confirmation. Mailer Error: {$mail->ErrorInfo}";
-                // echo 'Could not sent the reservation confirmation.{$mail->ErrorInfo}';
-            } 
-        }
-    }
+
 
 }
-
-
 }
 ?>
 

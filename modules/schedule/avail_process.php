@@ -415,7 +415,7 @@ function reservation_confirmation($c,$sdsn,$rsrvtn_num) {
 
         if(!empty($row)) {
             $pssngr_id = $_SESSION['id'];
-            echo "payment.php?reservetionId=$rsrvtn_num&&userId=$pssngr_id";
+            echo "payment.php?reservetionId=$rsrvtn_num&&userId=$pssngr_id&&typOfpymnt='avail'";
         } else {
             echo "row is empty! - 2";
         }

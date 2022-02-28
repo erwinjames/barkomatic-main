@@ -65,7 +65,7 @@ $res = curl_exec($ch);
 $tokens = explode("\r\n\r\n", trim($res)); 
 $res = trim(end($tokens)); 
 if (strcmp($res, "VERIFIED") == 0 || strcasecmp($res, "VERIFIED") == 0) { 
-    if ($_POST['item_name']== "Payment_reservation") {
+    if ($_POST['item_name']== "avail") {
     // Retrieve transaction info from PayPal
     $item_name = $_POST['item_name']; 
     $item_number    = $_POST['item_number']; 
@@ -81,7 +81,26 @@ if (strcmp($res, "VERIFIED") == 0 || strcasecmp($res, "VERIFIED") == 0) {
         exit(); 
     }else{ 
         // Insert transaction data into the database 
-        $insert = $con->query("INSERT INTO tbl_psnger_pymnt(id,reservation_number,txn_id,payer_email,currency,gross_income,payment_status,dates) VALUES('".$custom."','".$item_number."','".$txn_id."','".$payer_email."','".$currency_code."','".$payment_gross."','".$payment_status."',NOW())"); 
+        $insert = $con->query("INSERT INTO tbl_psnger_pymnt(id,reservation_number,txn_id,payer_email,currency,gross_income,payment_status,dates,payer_type) VALUES('".$custom."','".$item_number."','".$txn_id."','".$payer_email."','".$currency_code."','".$payment_gross."','".$payment_status."',NOW(),'".$item_name."')"); 
+    } 
+}
+else if ($_POST['item_name']== "reserve") {
+    // Retrieve transaction info from PayPal
+    $item_name = $_POST['item_name']; 
+    $item_number    = $_POST['item_number']; 
+    $txn_id         = $_POST['txn_id']; 
+    $custom = $_POST['custom'];
+    $payment_gross     = $_POST['mc_gross']; 
+    $currency_code     = $_POST['mc_currency']; 
+    $payment_status = $_POST['payment_status']; 
+    $payer_email = $_POST['payer_email'];
+    // Check if transaction data exists with the same TXN ID 
+    $prevPayment = $con->query("SELECT id FROM tbl_psnger_pymnt WHERE txn_id = '".$txn_id."'"); 
+    if($prevPayment->num_rows > 0){ 
+        exit(); 
+    }else{ 
+        // Insert transaction data into the database 
+        $insert = $con->query("INSERT INTO tbl_psnger_pymnt(id,reservation_number,txn_id,payer_email,currency,gross_income,payment_status,dates,payer_type) VALUES('".$custom."','".$item_number."','".$txn_id."','".$payer_email."','".$currency_code."','".$payment_gross."','".$payment_status."',NOW()'".$item_name."')"); 
     } 
 }
 else if($_POST['item_name']=="Membership_subscription"){

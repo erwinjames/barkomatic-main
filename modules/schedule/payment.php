@@ -301,7 +301,7 @@ function fetch_data_paypal($c){
 
                 <!-- Specify details about the subscription that buyers will purchase -->
 
-    <input type="hidden" name="item_name" value="Payment_reservation">
+    <input type="hidden" name="item_name" value="'.$_GET['typOfpymnt'].'">
     <input type="hidden" name="item_accomodation" value="'.$No.'">
 
     <input type="hidden" name="item_number" value="'.$row['reservation_number'].'">

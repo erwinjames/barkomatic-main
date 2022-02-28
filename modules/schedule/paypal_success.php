@@ -16,7 +16,55 @@ $txn_id = $_GET['tx'];
 $payment_gross = $_GET['amt']; 
 $currency_code = $_GET['cc']; 
 $payment_status = $_GET['st']; 
-if(isset($_GET['item_number'])){
+if(isset($_GET['item_number']) && isset($_GET['pyrtype'])=='avail'){
+    $mail = new PHPMailer();
+    try {
+        // $mail->SMTPDebug = SMTP::DEBUG_SERVER; 
+        // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+        // $mail->SMTPDebug = 4;
+        $mail->isSMTP();
+        $mail->Mailer = "smtp";
+        $mail->SMTPAuth = true;
+        $mail->Host = 'smtp.gmail.com';
+        $mail->Username = 'manugasewinjames@gmail.com';
+        $mail->Password = 'ejmanugas30';
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
+        $mail->setFrom('manugasewinjames@gmail.com', 'Reservation');
+        $mail->addAddress($_GET['payer_email']);
+        $mail->isHTML(true);
+        $mail->Subject = 'Avail Ticket';
+        $mail->Body = "
+        <!DOCTYPE html>
+        <head>
+        <style>
+            body {
+                font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+                }
+        </style>
+        </head>
+        <body>
+            <div class='container m-auto'>
+                <div class='row'>
+                    <div class='col-sm-12'>
+                      <a href='http://071c-202-175-242-179.ngrok.io/barkomatic-main/generate_ticket.php?item_number=".$item_number."'>click me to print ticket</a>
+                    </div>
+                </div>
+            </div>
+        </body>
+        </html>";
+        $mail->send();
+        echo "<script>
+        alert('Please check your email for your ticket');
+        </script>";
+    }catch(Exception $e){
+        echo "Could not sent the reservation confirmation. Mailer Error: {$mail->ErrorInfo}";
+        // echo 'Could not sent the reservation confirmation.{$mail->ErrorInfo}';
+    } 
+
+}
+
+if(isset($_GET['item_number']) && isset($_GET['pyrtype'])=='reserve'){
     $mail = new PHPMailer();
     try {
         // $mail->SMTPDebug = SMTP::DEBUG_SERVER; 
@@ -47,7 +95,23 @@ if(isset($_GET['item_number'])){
             <div class='container m-auto'>
                 <div class='row'>
                     <div class='col-sm-12'>
-                      <a href='http://071c-202-175-242-179.ngrok.io/barkomatic-main/generate_ticket.php?item_number=".$item_number."'>click me to print ticket</a>
+                    <h4>VG Shipping Inc.</h4><br>
+                    <p>Hello Kim, Thank you for making your reservation in our shipping line.</p>
+                    <p>Your ticket reservation details:</p>
+                    <table>
+                        <th>
+                            <tr>Reservation No.</tr>
+                            <tr>Route</tr>
+                            <tr>Depart Date/Time</tr>
+                            <tr></tr>
+                            <tr></tr>
+                            <tr></tr>
+                        </th>
+                    </table>
+                    <p>If you find it necessary to cancel or change plans, please inform us by email <span style='color:#007bff;font-weight:700;'>vgshippinglines@gmail.com<span></p>
+                    <br><br>
+                    <p>Again, thank you for choosing us. We look forward to having you as our guest.</p>
+                    <p>Best regards,<br><span>Reservation Office</span></p>
                     </div>
                 </div>
             </div>
@@ -168,7 +232,13 @@ if($prevPaymentResult->num_rows > 0){
         <div class="banner-content">
             <div class="intro text-center container">
                 <h1 class="text-white display-3">THANK YOU FOR CHOOSING US!</h1>
+                <?php 
+                if (isset($_GET['pyrtype'])=='reserve') {
+                ?>
                 <p class="text-white">PLEASE CHECK YOUR EMAIL TO PRINT YOUR TICKET</p>
+                <?php   } else {?>
+                    <p class="text-white">PLEASE CHECK YOUR EMAIL FOR YOUR </p>
+                <?php } ?>
             </div>
         </div>
     </section>

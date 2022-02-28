@@ -7,9 +7,9 @@
    define('PAYPAL_ID', 'williamdoe@shiplines.com'); 
    define('PAYPAL_SANDBOX', TRUE); //TRUE or FALSE 
     
-   define('PAYPAL_RETURN_URL', 'http://071c-202-175-242-179.ngrok.io/barkomatic-main/modules/schedule/paypal_success.php'); 
-   define('PAYPAL_CANCEL_URL', 'http://071c-202-175-242-179.ngrok.io/barkomatic-main/modules/schedule/paypal_cancel.php'); 
-   define('PAYPAL_NOTIFY_URL', 'http://071c-202-175-242-179.ngrok.io/barkomatic-main/modules/schedule/paypal_ipn.php'); 
+   define('PAYPAL_RETURN_URL', 'https://f34e-202-175-242-179.ngrok.io/barkomatic-main/modules/schedule/paypal_success.php'); 
+   define('PAYPAL_CANCEL_URL', 'https://f34e-202-175-242-179.ngrok.io/barkomatic-main/modules/schedule/paypal_cancel.php'); 
+   define('PAYPAL_NOTIFY_URL', 'https://f34e-202-175-242-179.ngrok.io/barkomatic-main/modules/schedule/paypal_ipn.php'); 
    define('PAYPAL_CURRENCY', 'PHP'); 
     
       

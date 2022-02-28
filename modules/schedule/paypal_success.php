@@ -16,7 +16,7 @@ $txn_id = $_GET['tx'];
 $payment_gross = $_GET['amt']; 
 $currency_code = $_GET['cc']; 
 $payment_status = $_GET['st']; 
-if(isset($_GET['item_number']) && isset($_GET['pyrtype'])=='avail'){
+if(isset($_GET['item_number'])){
     $mail = new PHPMailer();
     try {
         // $mail->SMTPDebug = SMTP::DEBUG_SERVER; 
@@ -33,6 +33,9 @@ if(isset($_GET['item_number']) && isset($_GET['pyrtype'])=='avail'){
         $mail->setFrom('manugasewinjames@gmail.com', 'Reservation');
         $mail->addAddress($_GET['payer_email']);
         $mail->isHTML(true);
+
+        if($_GET['pyrtype']=="avail")  {
+
         $mail->Subject = 'Avail Ticket';
         $mail->Body = "
         <!DOCTYPE html>
@@ -47,7 +50,7 @@ if(isset($_GET['item_number']) && isset($_GET['pyrtype'])=='avail'){
             <div class='container m-auto'>
                 <div class='row'>
                     <div class='col-sm-12'>
-                      <a href='http://071c-202-175-242-179.ngrok.io/barkomatic-main/generate_ticket.php?item_number=".$item_number."'>click me to print ticket</a>
+                      <a href='https://localhost/barkomatic-main/generate_ticket.php?item_number=".$item_number."'>click me to print ticket</a>
                     </div>
                 </div>
             </div>
@@ -57,30 +60,10 @@ if(isset($_GET['item_number']) && isset($_GET['pyrtype'])=='avail'){
         echo "<script>
         alert('Please check your email for your ticket');
         </script>";
-    }catch(Exception $e){
-        echo "Could not sent the reservation confirmation. Mailer Error: {$mail->ErrorInfo}";
-        // echo 'Could not sent the reservation confirmation.{$mail->ErrorInfo}';
-    } 
+    }
+    
+   else if($_GET['pyrtype']=="reserve")  {
 
-}
-
-if(isset($_GET['item_number']) && isset($_GET['pyrtype'])=='reserve'){
-    $mail = new PHPMailer();
-    try {
-        // $mail->SMTPDebug = SMTP::DEBUG_SERVER; 
-        // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
-        // $mail->SMTPDebug = 4;
-        $mail->isSMTP();
-        $mail->Mailer = "smtp";
-        $mail->SMTPAuth = true;
-        $mail->Host = 'smtp.gmail.com';
-        $mail->Username = 'manugasewinjames@gmail.com';
-        $mail->Password = 'ejmanugas30';
-        $mail->SMTPSecure = 'tls';
-        $mail->Port = 587;
-        $mail->setFrom('manugasewinjames@gmail.com', 'Reservation');
-        $mail->addAddress($_GET['payer_email']);
-        $mail->isHTML(true);
         $mail->Subject = 'Booking Ticket';
         $mail->Body = "
         <!DOCTYPE html>
@@ -96,7 +79,7 @@ if(isset($_GET['item_number']) && isset($_GET['pyrtype'])=='reserve'){
                 <div class='row'>
                     <div class='col-sm-12'>
                     <h4>VG Shipping Inc.</h4><br>
-                    <p>Hello Kim, Thank you for making your reservation in our shipping line.</p>
+                    <p>Hello Kim, Thank you for making your reservation in our shipping line. <br>Your <b>Payment</b> will be handled in the ticket office.</p>
                     <p>Your ticket reservation details:</p>
                     <table>
                         <th>
@@ -121,12 +104,14 @@ if(isset($_GET['item_number']) && isset($_GET['pyrtype'])=='reserve'){
         echo "<script>
         alert('Please check your email for your ticket');
         </script>";
-    }catch(Exception $e){
+    }
+}catch(Exception $e){
         echo "Could not sent the reservation confirmation. Mailer Error: {$mail->ErrorInfo}";
         // echo 'Could not sent the reservation confirmation.{$mail->ErrorInfo}';
     } 
-
 }
+
+
 // Get product info from the database 
 $productResult = $con->query("SELECT * FROM tbl_passenger_reservation WHERE reservation_number = '.$item_number'"); 
 $productRow = $productResult->fetch_assoc(); 
@@ -233,11 +218,11 @@ if($prevPaymentResult->num_rows > 0){
             <div class="intro text-center container">
                 <h1 class="text-white display-3">THANK YOU FOR CHOOSING US!</h1>
                 <?php 
-                if (isset($_GET['pyrtype'])=='reserve') {
+                if ($_GET['pyrtype']=='avail') {
                 ?>
                 <p class="text-white">PLEASE CHECK YOUR EMAIL TO PRINT YOUR TICKET</p>
                 <?php   } else {?>
-                    <p class="text-white">PLEASE CHECK YOUR EMAIL FOR YOUR </p>
+                    <p class="text-white">PLEASE CHECK YOUR EMAIL FOR YOUR RESERVATION INFORMATION</p>
                 <?php } ?>
             </div>
         </div>

@@ -311,9 +311,7 @@ function fetch_data_paypal($c){
     <input type="hidden" name="a3" id="paypalAmt" value="'.$total_price.'">
     <input type="hidden" name="p3" id="paypalValid" value="1">
     <input type="hidden" name="t3" value="M">
-
                  <!-- Custom variable user ID -->
-
     <input type="hidden" name="custom" value="'.$_SESSION['id'].'">
     <input type="hidden" name="ship_name" value="'.$row['ship_name'].'">
     <input type="hidden" name="cancel_return" value="'.PAYPAL_CANCEL_URL.'">

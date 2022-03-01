@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 13, 2022 at 02:35 PM
--- Server version: 10.4.14-MariaDB
--- PHP Version: 7.4.10
+-- Generation Time: Mar 01, 2022 at 02:03 AM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -141,7 +141,35 @@ INSERT INTO `tbl_passenger_reservation` (`id`, `reservation_number`, `ship_name`
 (58, '7644710', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'sample', '2022-02-05', '2022-02-07', 'Expired'),
 (59, '2438192', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'No Aircon', '2022-02-06', '2022-02-08', 'Expired'),
 (60, '5863491', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'sample', '2022-02-07', '2022-02-09', 'Expired'),
-(61, '1421288', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'sample', '2022-02-09', '2022-02-11', 'Expired');
+(61, '1421288', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'sample', '2022-02-09', '2022-02-11', 'Expired'),
+(62, '9057281', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'No Aircon', '2022-02-25', '2022-02-27', 'Expired'),
+(63, '7181409', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'No Aircon', '2022-02-25', '2022-02-27', 'Expired'),
+(64, '9174785', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'No Aircon', '2022-02-25', '2022-02-27', 'Expired'),
+(65, '1846388', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'No Aircon', '2022-02-25', '2022-02-27', 'Expired'),
+(66, '1676736', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'No Aircon', '2022-02-25', '2022-02-27', 'Expired'),
+(67, '9527128', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'No Aircon', '2022-02-25', '2022-02-27', 'Expired'),
+(68, '5932472', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'No Aircon', '2022-02-28', '2022-03-02', 'Expired'),
+(69, '5386540', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'No Aircon', '2022-02-28', '2022-03-02', 'Expired'),
+(70, '5381289', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'No Aircon', '2022-02-28', '2022-03-02', 'Expired'),
+(71, '7285796', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'No Aircon', '2022-02-28', '2022-03-02', 'Expired'),
+(72, '5184937', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'No Aircon', '2022-02-28', '2022-03-02', 'Expired'),
+(73, '6486826', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'No Aircon', '2022-02-28', '2022-03-02', 'Expired'),
+(74, '5774985', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'No Aircon', '2022-02-28', '2022-03-02', 'Expired'),
+(75, '5568149', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'No Aircon', '2022-02-28', '2022-03-02', 'Expired'),
+(76, '7562471', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'No Aircon', '2022-02-28', '2022-03-02', 'Expired'),
+(77, '2729257', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'No Aircon', '2022-02-28', '2022-03-02', 'Expired'),
+(78, '1033192', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'No Aircon', '2022-02-28', '2022-03-02', 'Expired'),
+(79, '5954494', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'No Aircon', '2022-02-28', '2022-03-02', 'Expired'),
+(80, '4863221', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'No Aircon', '2022-02-28', '2022-03-02', 'Expired'),
+(81, '8023207', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'No Aircon', '2022-02-28', '2022-03-02', 'Expired'),
+(82, '6362798', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'No Aircon', '2022-02-28', '2022-03-02', 'Expired'),
+(83, '5661168', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'No Aircon', '2022-02-28', '2022-03-02', 'Expired'),
+(84, '9318845', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'No Aircon', '2022-02-28', '2022-03-02', 'Expired'),
+(85, '8140692', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'No Aircon', '2022-02-28', '2022-03-02', 'Expired'),
+(86, '6116494', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'No Aircon', '2022-02-28', '2022-03-02', 'Expired'),
+(87, '5336970', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'No Aircon', '2022-02-28', '2022-03-02', 'Expired'),
+(88, '8012376', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'No Aircon', '2022-02-28', '2022-03-02', 'Expired'),
+(89, '5574084', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'No Aircon', '2022-03-01', '2022-03-03', NULL);
 
 -- --------------------------------------------------------
 
@@ -176,17 +204,26 @@ CREATE TABLE `tbl_psnger_pymnt` (
   `currency` varchar(30) NOT NULL,
   `gross_income` varchar(30) NOT NULL,
   `payment_status` varchar(30) NOT NULL,
-  `dates` datetime NOT NULL
+  `dates` datetime NOT NULL,
+  `payer_type` varchar(30) NOT NULL,
+  `ship_name` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_psnger_pymnt`
 --
 
-INSERT INTO `tbl_psnger_pymnt` (`id`, `reservation_number`, `txn_id`, `payer_email`, `currency`, `gross_income`, `payment_status`, `dates`) VALUES
-(1, 1421288, '', 'sb-f9srf9117280@personal.example.com', 'PHP', '', '', '2022-02-09 12:27:24'),
-(1, 1421288, '9EF20470AX2517517', 'sb-f9srf9117280@personal.example.com', 'PHP', '5300.00', 'Completed', '2022-02-09 12:28:16'),
-(1, 1421288, '8LG493828F316381T', 'sb-f9srf9117280@personal.example.com', 'PHP', '5300.00', 'Completed', '2022-02-09 12:48:16');
+INSERT INTO `tbl_psnger_pymnt` (`id`, `reservation_number`, `txn_id`, `payer_email`, `currency`, `gross_income`, `payment_status`, `dates`, `payer_type`, `ship_name`) VALUES
+(1, 1421288, '', 'sb-f9srf9117280@personal.example.com', 'PHP', '', '', '2022-02-09 12:27:24', '', ''),
+(1, 1421288, '9EF20470AX2517517', 'sb-f9srf9117280@personal.example.com', 'PHP', '5300.00', 'Completed', '2022-02-09 12:28:16', '', ''),
+(1, 1421288, '8LG493828F316381T', 'sb-f9srf9117280@personal.example.com', 'PHP', '5300.00', 'Completed', '2022-02-09 12:48:16', '', ''),
+(1, 7181409, '87Y821002U221852U', 'Johndoe@personalemail.com', 'PHP', '300.00', 'Completed', '2022-02-25 11:39:48', '', 'test'),
+(1, 9174785, '7825472119760052C', 'Johndoe@personalemail.com', 'PHP', '300.00', 'Completed', '2022-02-25 12:00:18', '', 'test'),
+(1, 1846388, '32L38894DJ065591P', 'Johndoe@personalemail.com', 'PHP', '300.00', 'Completed', '2022-02-25 13:49:30', '', 'test'),
+(1, 1676736, '35W74869RY584312U', 'Johndoe@personalemail.com', 'PHP', '300.00', 'Completed', '2022-02-25 14:09:18', '', 'test'),
+(1, 9527128, '4P16845411298345R', 'Johndoe@personalemail.com', 'PHP', '300.00', 'Completed', '2022-02-25 15:48:48', '', 'test'),
+(1, 5954494, '9YT09683EV596783B', 'Johndoe@personalemail.com', 'PHP', '300.00', 'Completed', '2022-02-28 14:59:34', 'avail', 'test'),
+(1, 4863221, '1H326320UD4053729', 'Johndoe@personalemail.com', 'PHP', '300.00', 'Completed', '2022-02-28 15:07:09', 'avail', 'test');
 
 -- --------------------------------------------------------
 
@@ -620,7 +657,7 @@ ALTER TABLE `tbl_passenger_detail`
 -- AUTO_INCREMENT for table `tbl_passenger_reservation`
 --
 ALTER TABLE `tbl_passenger_reservation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
 
 --
 -- AUTO_INCREMENT for table `tbl_passenger_reset_password`

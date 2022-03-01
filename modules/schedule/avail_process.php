@@ -416,7 +416,8 @@ function reservation_confirmation($c,$sdsn,$rsrvtn_num) {
         if(!empty($row)) {
             $pssngr_id = $_SESSION['id'];
             $avail = 'avail';
-            echo "http://localhost:8080/barkomatic-main/payment.php?reservetionId=$rsrvtn_num&&userId=$pssngr_id&&typOfpymnt=$avail";
+            $shipname = $row['ship_name'];
+            echo "http://localhost:8080/barkomatic-main/payment.php?reservetionId=$rsrvtn_num&&userId=$pssngr_id&&typOfpymnt=$avail&&shipName=$shipname";
         } else {
             echo "row is empty! - 2";
         }

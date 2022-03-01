@@ -240,12 +240,13 @@
         var getReservetionId= <?php echo $_GET['reservetionId'] ?>;
         var passengerId= <?php echo $_GET['userId'] ?>;
         let typOfpymnts= "<?php echo $_GET['typOfpymnt'] ?>";
+        let shipname= "<?php echo $_GET['shipName'] ?>";
        $(document).ready(function() {
          // fetch payment
         ajax_call = function() {
             $.ajax({
             type: "POST",
-            url:'modules/schedule/payment.php?reservation='+getReservetionId+'&&passengersId='+passengerId+'&&typOfpymnt='+typOfpymnts,
+            url:'modules/schedule/payment.php?reservation='+getReservetionId+'&&passengersId='+passengerId+'&&typOfpymnt='+typOfpymnts+'&&shipName='+shipname,
             data: $('#responsecontainer').serialize() + '&action=responsecontainer',
             success: function(response){
                             $("#responsecontainer").html(response);
@@ -263,7 +264,7 @@
                ajax_call = function() {
             $.ajax({
             type: "POST",
-            url:'modules/schedule/payment.php?reservation='+getReservetionId+'&&typOfpymnt='+typOfpymnts,
+            url:'modules/schedule/payment.php?reservation='+getReservetionId+'&&typOfpymnt='+typOfpymnts+'&&shipName='+shipname,
             data: $('#tripsummary').serialize() + '&action=tripsummary',
             success: function(response){
            
@@ -279,7 +280,7 @@
         $(document).ready(function(){  
             $('input[type="radio"]').click(function(){   
                 $.ajax({  
-                    url:'modules/schedule/payment.php?reservation='+getReservetionId+'&&passengersId='+passengerId+'&&typOfpymnt='+typOfpymnts, 
+                    url:'modules/schedule/payment.php?reservation='+getReservetionId+'&&passengersId='+passengerId+'&&typOfpymnt='+typOfpymnts+'&&shipName='+shipname, 
                         method:"POST",  
                         data: $('#paypal').serialize() + '&action=paypal', 
                         success:function(data){  

@@ -237,6 +237,7 @@ function fetch_data_paypal($c){
     ini_set('display_errors', 1);
     $reservationNum = $_GET['reservation'];
     $typofpayment = $_GET['typOfpymnt'];
+    $shipName = $_GET['shipName'];
     $sql_srch_slcts = "SELECT 
                         tbl_pass_reserv.reservation_number,
                         tbl_pass_reserv.ship_name,
@@ -301,7 +302,7 @@ function fetch_data_paypal($c){
     <input type="hidden" name="cmd" value="_xclick-subscriptions">
 
                 <!-- Specify details about the subscription that buyers will purchase -->
-
+    <input type="hidden" name="ship_name" value="'.$shipName.'">
     <input type="hidden" name="item_name" value="'.$typofpayment.'">
     <input type="hidden" name="item_accomodation" value="'.$No.'">
 

@@ -4,6 +4,7 @@
 
     <?php if (isset($_GET['reservetionId'])) {?>
           <?php if (isset($_SESSION['id'])== $_GET['userId'] && isset($_GET['typOfpymnt']))  { ?>
+            <div class="container">
     <div class="progressbar" style="font-size: 12px;margin-top: 50px; font-weight: bolder;">
         <div class="container">
             <div class="row">
@@ -229,6 +230,7 @@
   <?php }else{?>
   <h1>PLEASE CHECK YOUR EMAIL FIRST</h1>
     <?php }?>
+  </div>
     <!-- **** All JS Files ***** -->
     <script src="js/jquery/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>

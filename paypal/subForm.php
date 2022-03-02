@@ -1,9 +1,7 @@
 <?php
 // Include configuration file 
 include_once 'config.php'; 
-include_once '../modules/config.php';
 // Start session
-session_start();
 
 if(isset($_SESSION['ship_id']) && $_SESSION['ship_id'] != NULL){
 ?>
@@ -52,7 +50,8 @@ function getSubsPrice(obj){
 			<!-- Specify a subscriptions button. -->
 			<input type="hidden" name="cmd" value="_xclick-subscriptions">
 			<!-- Specify details about the subscription that buyers will purchase -->
-			<input type="hidden" name="item_name" value="<?php echo $itemName; ?>">
+			<input type="hidden" name="item_name" value="Membership_subscription">
+			<input type="hidden" name="ship_ids" value="<?php echo $ship_id; ?>">
 			<input type="hidden" name="item_number" value="<?php echo $itemNumber; ?>">
 			<input type="hidden" name="currency_code" value="<?php echo PAYPAL_CURRENCY; ?>">
 			<input type="hidden" name="a3" id="paypalAmt" value="<?php echo $itemPrice; ?>">

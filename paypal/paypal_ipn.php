@@ -1,6 +1,6 @@
 <?php
 require_once "../modules/config.php";
-require_once 
+session_start();
 /*
  * Read POST data
  * reading posted data directly from $_POST causes serialization
@@ -91,7 +91,8 @@ if (strcmp($res, "VERIFIED") == 0 || strcasecmp($res, "VERIFIED") == 0) {
             //Update subscription id in users table
             if($insert){
                 $subscription_id = $con->insert_id;
-                $update = $con->query("UPDATE tbl_ship_detail SET subscription_id = 1 AND subs_stats = '$payment_status'  WHERE id = 1");
+                $session_id = $_SESSION['id'];
+                $update = $con->query("UPDATE tbl_ship_detail SET subscription_id = 1 WHERE id = '".$session_id."'");
 
             }
         }

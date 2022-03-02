@@ -1,6 +1,5 @@
 <?php
 require "../../resources/config.php";
-
 //* insert records
 if(isset($_POST['action']) && $_POST['action'] == 'add_port_loc_form') {
     session_start();
@@ -304,6 +303,7 @@ function fetch_depart_detail($c) {
                     <th>Port</th>
                     <th>Location To</th>
                     <th>Port</th>
+                    <th>Ship Reside</th>
                     <th></th>
                 </tr>
             </thead>
@@ -317,11 +317,12 @@ function fetch_depart_detail($c) {
                 <td>'.$row["port_from"].'</td>
                 <td>'.$row["location_to"].'</td>
                 <td>'.$row["port_to"].'</td>
+                <td>'.$row["ship_reside"].'</td>
                 <td class="text-center">
                     <button type="button" name="update" id="'.$row["id"].'" class="button small green update_ship_sched_btn" data-toggle="modal" data-target="#exampleModal">
                         <span class="icon"><i class="mdi mdi-pencil"></i></span>
                     </button>
-                    <button type="button" name="delete" id="'.$row["id"].'" class="button small red delete_ship_sched_btn">
+                    <button type="button" name="delete_sched" id="'.$row["id"].'" class="button small red delete_ship_sched_btn">
                         <span class="icon"><i class="mdi mdi-trash-can"></i></span>
                     </button>
                 </td>
@@ -354,6 +355,7 @@ function add_schedule($c) {
 
     echo 'Schedule added successfully!';
 }
+
 
 //* fetch accommodation type
 function fetch_accomm_detail($c) {
@@ -516,12 +518,12 @@ function ship_sched_edit_id_form($con) {
         echo "session for edit id was not set!";
     }
 }
+
 function delete_sched_ship($con) {
     $delete_id = $_POST['delete_ship_sched_id'];
     $ship_name = $_SESSION['stff_ship_reside'];
-    
     $sql_dlt = "DELETE tbl_ship_schedule,tbl_ship_belong FROM tbl_ship_belong 
-                INNER JOIN tbl_ship_schedule ON tbl_ship_belong.id = tbl_ship_schedule.id
+                INNER JOIN tbl_ship_schedule ON tbl_ship_belong.id = tbl_ship_schedule.id AND tbl_ship_belong.ship = tbl_ship_schedule.ship_reside
                 WHERE tbl_ship_schedule.id=? AND tbl_ship_belong.ship=?";
 
     $stmt = $con->prepare($sql_dlt);

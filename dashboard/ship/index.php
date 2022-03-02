@@ -1,16 +1,15 @@
-<?php require "./resources/config.php";
+<?php
+
+require_once "./resources/config.php";
     session_start(); 
-    if(isset($_SESSION['ship_id']) && $_SESSION['ship_id'] != NULL && $_SESSION['subscription_id'] == 1) { 
+    if(isset($_SESSION['ship_id']) && $_SESSION['subscription_id'] = 1) { 
        
         $ship_name = $_SESSION['ship_name'];
-        
-      
         $query = "SELECT dates,year(dates) as dateYear,SUM(gross_income) as totalProfit FROM tbl_psnger_pymnt WHERE ship_name = '$ship_name'";
         //execute query
         $result = $con->query($query);
         //loop through the returned data
         // $data = array();
-
         if (is_array($result) || is_object($result))
         {
             foreach ($result as $row)
@@ -52,7 +51,6 @@
                 if ($date=="12") {
                         $month = "December";
                     } 
-            
                 $productname[] = $month;
                 $sale[]= $row['totalProfit'];
             }

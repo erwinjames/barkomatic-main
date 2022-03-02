@@ -5,7 +5,7 @@
    $itemNumber = 'MS123456';
    session_start();
 
-   $ship_id = isset($_SESSION['ship_id']);
+   $ship_id = $_SESSION['ship_id'];
    // Subscription price for one month
    $itemPrice = 1500.00;
      
@@ -15,7 +15,7 @@
     
    define('PAYPAL_RETURN_URL', 'https://0489-202-175-242-179.ngrok.io/barkomatic-main/paypal/success.php'); 
    define('PAYPAL_CANCEL_URL', 'https://0489-202-175-242-179.ngrok.io/barkomatic-main/paypal/cancel.php'); 
-   define('PAYPAL_NOTIFY_URL', 'https://0489-202-175-242-179.ngrok.io/barkomatic-main/modules/schedule/paypal_ipn.php?shp_id="'.$ship_id.'"'); 
+   define('PAYPAL_NOTIFY_URL', 'https://0489-202-175-242-179.ngrok.io/barkomatic-main/modules/schedule/paypal_ipn.php'); 
    define('PAYPAL_CURRENCY', 'PHP'); 
     
     

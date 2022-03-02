@@ -105,7 +105,7 @@ else if ($_POST['item_name']== "reserve") {
         $insert = $con->query("INSERT INTO tbl_psnger_pymnt(id,reservation_number,txn_id,payer_email,currency,gross_income,payment_status,dates,payer_type,ship_name) VALUES('".$custom."','".$item_number."','".$txn_id."','".$payer_email."','".$currency_code."','".$payment_gross."','".$payment_status."',NOW()'".$item_name."','".$ship_name."')"); 
     } 
 }
-else if($_POST['item_name']=="Membership_subscription"){
+else if(isset($_POST['item_name'])=="Membership_subscription"){
     $unitPrice = 25;
     
     //Payment data
@@ -116,23 +116,21 @@ else if($_POST['item_name']=="Membership_subscription"){
     $payment_gross = $_POST['mc_gross'];
     $currency_code = $_POST['mc_currency'];
     $payment_status = $_POST['payment_status'];
- 
+    $custom = $_POST['custom'];
     $subscr_month = ($payment_gross/$unitPrice);
     $subscr_days = ($subscr_month*30);
     $subscr_date_from = date("Y-m-d H:i:s");
     $subscr_date_to = date("Y-m-d H:i:s", strtotime($subscr_date_from. ' + '.$subscr_days.' days'));
-   
+
     if(!empty($txn_id)){
         //Check if subscription data exists with the same TXN ID.
         $prevPayment = $con->query("SELECT id FROM user_subscriptions WHERE txn_id = '".$txn_id."'");
         if($prevPayment->num_rows > 0){
             exit();
         }else{
-           
             //Insert tansaction data into the database
             $insert = $con->query("INSERT INTO user_subscriptions(id,payment_method,validity,valid_from,valid_to,item_number,txn_id,payment_gross,currency_code,subscr_id,payment_status,payer_email) VALUES('".$custom."','paypal','".$subscr_month."','".$subscr_date_from."','".$subscr_date_to."','".$item_number."','".$txn_id."','".$payment_gross."','".$currency_code."','". $subscr_id."','".$payment_status."','".$payer_email."')");
               //Update subscription id in users table
-              $custom = $_GET['shp_id'];
             $update = $con->query("UPDATE tbl_ship_detail SET subscription_id = 1 WHERE id = '".$custom."'");
         }
      }

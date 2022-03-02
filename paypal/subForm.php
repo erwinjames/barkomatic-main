@@ -26,7 +26,6 @@ function getSubsPrice(obj){
 </head>
 <body>
 <div class="container">
-	<h1>Barkomatic Pay</h1>
 	
 	<div class="subs-box">
 		<div class="form-group">
@@ -51,14 +50,13 @@ function getSubsPrice(obj){
 			<input type="hidden" name="cmd" value="_xclick-subscriptions">
 			<!-- Specify details about the subscription that buyers will purchase -->
 			<input type="hidden" name="item_name" value="Membership_subscription">
-			<input type="hidden" name="ship_ids" value="<?php echo $ship_id; ?>">
 			<input type="hidden" name="item_number" value="<?php echo $itemNumber; ?>">
 			<input type="hidden" name="currency_code" value="<?php echo PAYPAL_CURRENCY; ?>">
 			<input type="hidden" name="a3" id="paypalAmt" value="<?php echo $itemPrice; ?>">
 			<input type="hidden" name="p3" id="paypalValid" value="1">
 			<input type="hidden" name="t3" value="M">
 			<!-- Custom variable user ID -->
-			<input type="hidden" name="custom" value="<?php echo $loggedInUserID; ?>">
+			<input type="hidden" name="custom" value="<?php echo $ship_id; ?>">
 			<!-- Specify urls -->
 			<input type="hidden" name="cancel_return" value="<?php echo PAYPAL_CANCEL_URL; ?>">
 			<input type="hidden" name="return" value="<?php echo PAYPAL_RETURN_URL; ?>">

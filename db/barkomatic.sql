@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 01, 2022 at 02:03 AM
+-- Generation Time: Mar 02, 2022 at 04:34 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -169,7 +169,8 @@ INSERT INTO `tbl_passenger_reservation` (`id`, `reservation_number`, `ship_name`
 (86, '6116494', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'No Aircon', '2022-02-28', '2022-03-02', 'Expired'),
 (87, '5336970', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'No Aircon', '2022-02-28', '2022-03-02', 'Expired'),
 (88, '8012376', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'No Aircon', '2022-02-28', '2022-03-02', 'Expired'),
-(89, '5574084', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'No Aircon', '2022-03-01', '2022-03-03', NULL);
+(89, '5574084', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'No Aircon', '2022-03-01', '2022-03-03', NULL),
+(90, '7757246', 'test', 'test test', 'lapu-lapu', 'olango', '2022-02-23', '04:52 PM', 'No Aircon', '2022-03-01', '2022-03-03', NULL);
 
 -- --------------------------------------------------------
 
@@ -257,7 +258,7 @@ CREATE TABLE `tbl_ship_account` (
 
 INSERT INTO `tbl_ship_account` (`id`, `username`, `password`) VALUES
 (1, 'test', 'a94a8fe5ccb19ba61c4c0873d391e987982fbbd3'),
-(4, 'airline', 'a94a8fe5ccb19ba61c4c0873d391e987982fbbd3');
+(5, 'shipline', 'fc942c63a5f7773e5d99808f650b3cf20404456f');
 
 -- --------------------------------------------------------
 
@@ -275,9 +276,6 @@ CREATE TABLE `tbl_ship_belong` (
 --
 
 INSERT INTO `tbl_ship_belong` (`id`, `ship`) VALUES
-(1, 'test'),
-(2, 'test'),
-(3, 'test'),
 (4, 'test');
 
 -- --------------------------------------------------------
@@ -300,8 +298,7 @@ CREATE TABLE `tbl_ship_detail` (
 
 INSERT INTO `tbl_ship_detail` (`id`, `subscription_id`, `ship_name`, `email`, `ship_logo`) VALUES
 (1, 1, 'test', 'manugasewinjames@gmail.com', NULL),
-(3, 0, 'sample2', 'erwinjamesmanugas@gmail.com', NULL),
-(4, 0, 'airline', 'erwinjamesmanugas@gmail.com', NULL);
+(5, 1, 'shipping line sample', 'erwinjamesmanugas@gmail.com', NULL);
 
 -- --------------------------------------------------------
 
@@ -366,7 +363,8 @@ INSERT INTO `tbl_ship_reset_password` (`id`, `token`, `token_expire`) VALUES
 (1, NULL, '2021-12-04 19:10:53'),
 (2, NULL, '2021-12-04 19:12:32'),
 (3, NULL, '2022-01-29 04:28:36'),
-(4, NULL, '2022-02-12 04:58:29');
+(4, NULL, '2022-02-12 04:58:29'),
+(5, NULL, '2022-03-01 16:57:11');
 
 -- --------------------------------------------------------
 
@@ -376,6 +374,7 @@ INSERT INTO `tbl_ship_reset_password` (`id`, `token`, `token_expire`) VALUES
 
 CREATE TABLE `tbl_ship_schedule` (
   `id` int(11) NOT NULL,
+  `ship_reside` varchar(30) NOT NULL,
   `depart_date` date NOT NULL,
   `depart_time` varchar(15) NOT NULL,
   `location_from` varchar(75) NOT NULL,
@@ -383,13 +382,6 @@ CREATE TABLE `tbl_ship_schedule` (
   `location_to` varchar(75) NOT NULL,
   `port_to` varchar(75) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `tbl_ship_schedule`
---
-
-INSERT INTO `tbl_ship_schedule` (`id`, `depart_date`, `depart_time`, `location_from`, `port_from`, `location_to`, `port_to`) VALUES
-(1, '2022-02-23', '04:52 PM', 'lapu-lapu', 'lapu-lapu', 'olango', 'olango port');
 
 -- --------------------------------------------------------
 
@@ -408,7 +400,8 @@ CREATE TABLE `tbl_staff_account` (
 --
 
 INSERT INTO `tbl_staff_account` (`id`, `username`, `password`) VALUES
-(1, 'test', 'a94a8fe5ccb19ba61c4c0873d391e987982fbbd3');
+(1, 'test', 'a94a8fe5ccb19ba61c4c0873d391e987982fbbd3'),
+(2, 'ej', 'e090ad826a0332e86ab7082c8d2c27063c3a0055');
 
 -- --------------------------------------------------------
 
@@ -428,7 +421,8 @@ CREATE TABLE `tbl_staff_detail` (
 --
 
 INSERT INTO `tbl_staff_detail` (`id`, `name`, `email`, `ship_reside`) VALUES
-(1, 'test', 'test2@testing.com', 'test');
+(1, 'test', 'test2@testing.com', 'test'),
+(2, 'shipline_staff', 'manugasewinjames@gmail.com', 'shipping line sample');
 
 -- --------------------------------------------------------
 
@@ -447,7 +441,8 @@ CREATE TABLE `tbl_staff_reset_password` (
 --
 
 INSERT INTO `tbl_staff_reset_password` (`id`, `token`, `token_expire`) VALUES
-(1, NULL, '2021-12-10 06:12:22');
+(1, NULL, '2021-12-10 06:12:22'),
+(2, NULL, '2022-03-01 19:28:00');
 
 -- --------------------------------------------------------
 
@@ -484,7 +479,6 @@ INSERT INTO `tbl_tckt` (`id`, `tckt_qty`, `tckt_stats`, `tckt_promo`, `tckt_dscn
 
 CREATE TABLE `user_subscriptions` (
   `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL DEFAULT 0,
   `payment_method` enum('paypal') COLLATE utf8_unicode_ci NOT NULL DEFAULT 'paypal',
   `validity` int(5) NOT NULL COMMENT 'in month(s)',
   `valid_from` datetime NOT NULL,
@@ -503,9 +497,8 @@ CREATE TABLE `user_subscriptions` (
 -- Dumping data for table `user_subscriptions`
 --
 
-INSERT INTO `user_subscriptions` (`id`, `user_id`, `payment_method`, `validity`, `valid_from`, `valid_to`, `item_number`, `txn_id`, `payment_gross`, `currency_code`, `subscr_id`, `payer_email`, `payment_status`, `dates`) VALUES
-(1, 0, 'paypal', 1, '2021-12-15 15:53:50', '2022-01-14 15:53:50', 'MS123456', '3BM06405GD8690126', 25.00, 'USD', 'I-44JBV7VDT0S1', 'sb-f9srf9117280@personal.example.com', 'Completed', '2022-02-13 20:16:54'),
-(4, 0, 'paypal', 360, '2022-02-13 12:33:06', '2051-09-09 12:33:06', 'MS123456', '5G751735193990033', 9000.00, 'PHP', '', 'sb-f9srf9117280@personal.example.com', 'Completed', '2022-02-13 20:16:54');
+INSERT INTO `user_subscriptions` (`id`, `payment_method`, `validity`, `valid_from`, `valid_to`, `item_number`, `txn_id`, `payment_gross`, `currency_code`, `subscr_id`, `payer_email`, `payment_status`, `dates`) VALUES
+(5, 'paypal', 360, '2022-03-02 03:14:02', '2051-09-26 03:14:02', 'MS123456', '2R785010YN977083E', 9000.00, 'PHP', 'I-9WSKV2BJCPLS', 'Johndoe@personalemail.com', 'Completed', '2022-03-02 10:14:02');
 
 --
 -- Indexes for dumped tables
@@ -657,7 +650,7 @@ ALTER TABLE `tbl_passenger_detail`
 -- AUTO_INCREMENT for table `tbl_passenger_reservation`
 --
 ALTER TABLE `tbl_passenger_reservation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- AUTO_INCREMENT for table `tbl_passenger_reset_password`
@@ -669,19 +662,19 @@ ALTER TABLE `tbl_passenger_reset_password`
 -- AUTO_INCREMENT for table `tbl_ship_account`
 --
 ALTER TABLE `tbl_ship_account`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_ship_belong`
 --
 ALTER TABLE `tbl_ship_belong`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tbl_ship_detail`
 --
 ALTER TABLE `tbl_ship_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_ship_has_accomodation_type`
@@ -699,43 +692,37 @@ ALTER TABLE `tbl_ship_port`
 -- AUTO_INCREMENT for table `tbl_ship_reset_password`
 --
 ALTER TABLE `tbl_ship_reset_password`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_ship_schedule`
 --
 ALTER TABLE `tbl_ship_schedule`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tbl_staff_account`
 --
 ALTER TABLE `tbl_staff_account`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_staff_detail`
 --
 ALTER TABLE `tbl_staff_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_staff_reset_password`
 --
 ALTER TABLE `tbl_staff_reset_password`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `tbl_tckt`
 --
 ALTER TABLE `tbl_tckt`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT for table `user_subscriptions`
---
-ALTER TABLE `user_subscriptions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

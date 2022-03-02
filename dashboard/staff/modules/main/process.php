@@ -355,8 +355,6 @@ function add_schedule($c) {
 
     echo 'Schedule added successfully!';
 }
-
-
 //* fetch accommodation type
 function fetch_accomm_detail($c) {
     $stmt = $c->prepare("SELECT * FROM tbl_ship_has_accomodation_type"); 

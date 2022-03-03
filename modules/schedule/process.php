@@ -32,7 +32,7 @@ function search_available_schedule($c) {
     $srch_ss = $_POST['srch_ship_sched'];
     $sslf = $_POST['srch_sched_loc_from'];
     $sslt = $_POST['srch_sched_loc_to'];
-    $ssld = date('Y-m-d', strtotime($_POST['srch_sched_loc_depart']));
+    $ssld = date('Y-m-d', strtotime("2022-03-14"));
     $sql_slct = "SELECT 
                 tbl_ship_sd.ship_name,
                 tbl_ship_sd.ship_logo,
@@ -42,6 +42,7 @@ function search_available_schedule($c) {
                 tbl_ship_sched.port_from,
                 tbl_ship_sched.location_to,
                 tbl_ship_sched.port_to,
+                tbl_ship_sched.ship_reside,
                 tbl_ship_acctyp.accomodation_name,
                 tbl_ship_acctyp.price,
                 tbl_ship_acctyp.id,
@@ -52,7 +53,7 @@ function search_available_schedule($c) {
                 tbl_tcket.tckt_price
                 FROM tbl_ship_detail tbl_ship_sd
                 JOIN tbl_ship_schedule tbl_ship_sched
-                JOIN tbl_ship_has_accomodation_type tbl_ship_acctyp ON tbl_ship_sched.id = tbl_ship_acctyp.id
+                JOIN tbl_ship_has_accomodation_type tbl_ship_acctyp
                 JOIN tbl_tckt tbl_tcket ON tbl_ship_sd.ship_name = tbl_tcket.tckt_owner
                 WHERE tbl_ship_sd.ship_name=? AND tbl_ship_sched.depart_date=? AND tbl_ship_sched.location_from=? AND tbl_ship_sched.location_to=?";
     $stmt = $c->prepare($sql_slct);
@@ -149,7 +150,7 @@ function go_schedule($c) {
         tbl_tcket.tckt_price
         FROM tbl_ship_detail tbl_sd
         JOIN tbl_ship_schedule tbl_sched
-        JOIN tbl_ship_has_accomodation_type tbl_acctyp ON tbl_sched.id = tbl_acctyp.id
+        JOIN tbl_ship_has_accomodation_type tbl_acctyp
         JOIN tbl_tckt tbl_tcket ON tbl_sd.ship_name = tbl_tcket.tckt_owner
         WHERE tbl_sched.depart_time=? AND tbl_sd.ship_name=?";
 $stmt = $c->prepare($sql_srch_slct);
@@ -390,7 +391,7 @@ function reservation($c) {
     }
 }
 //* send email reservation confirmation
-function reservation_confirmation($c,$sdsn,$rsrvtn_num) {
+function reservation_confirmation($c,$sdsn) {
     $sql_rsrvtn = "SELECT * FROM tbl_passenger_reservation";
     $stmt = $c->prepare($sql_rsrvtn);
     $stmt->execute();
@@ -402,8 +403,7 @@ function reservation_confirmation($c,$sdsn,$rsrvtn_num) {
         $sql_em = "SELECT 
                     tbl_sd.email,
                     tbl_pr.ship_name,
-                    tbl_pr.expiration,
-                    tbl_pr.reservation_number
+                    tbl_pr.expiration
                     FROM tbl_ship_detail tbl_sd
                     JOIN tbl_passenger_reservation tbl_pr ON tbl_sd.id = tbl_pr.id
                     WHERE tbl_sd.ship_name=?";
@@ -414,17 +414,64 @@ function reservation_confirmation($c,$sdsn,$rsrvtn_num) {
         $row = $result->fetch_array();
 
         if(!empty($row)) {
-            $pssngr_id = $_SESSION['id'];
-            $reserve = 'reserve';
-            $shipname = $row['ship_name'];
-            echo "http://localhost/barkomatic-main/payment.php?reservetionId=$rsrvtn_num&&userId=$pssngr_id&&typOfpymnt=$reserve&&shipName=$shipname";
+            $ship_name = $row['ship_name'];
+            $ship_email = $row['email'];
+            $exp = $row['expiration'];
+            $pssngr_fname = $_SESSION['first_name'];
+            $mail = new PHPMailer();
+            try {
+                // $mail->SMTPDebug = SMTP::DEBUG_SERVER; 
+                // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+                // $mail->SMTPDebug = 4;
+                $mail->isSMTP();
+                $mail->Mailer = "smtp";
+                $mail->SMTPAuth = true;
+                $mail->Host = 'smtp.gmail.com';
+                $mail->Username = 'manugasewinjames@gmail.com';
+                $mail->Password = 'ejmanugas30';
+                $mail->SMTPSecure = 'tls';
+                $mail->Port = 587;
+                $mail->setFrom('manugasewinjames@gmail.com', 'Reservation');
+                $mail->addAddress($_SESSION['email']);
+                $mail->isHTML(true);
+                $mail->Subject = 'Reservation Confirmation';
+                $mail->Body = "
+                <!DOCTYPE html>
+                <head>
+                <style>
+                    body {
+                        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+                        }
+                </style>
+                </head>
+                <body>
+                    <div class='container m-auto'>
+                        <div class='row'>
+                            <div class='col-sm-12'>
+                                <h4>$ship_name</h4><br>
+                                <p>Hello $pssngr_fname, Thank you for making your reservation in our shipping line. <br>Your <b>Payment</b> will be handled in the ticket office.</p>
+                                <p>Your ticket reservation is valid until: <b>$exp</b></p>
+                                <p>If you find it necessary to cancel or change plans, please inform us by email <span style='color:#007bff;font-weight:700;'>$ship_email<span></p>
+                                <br><br>
+                                <p>Again, thank you for choosing us. We look forward to having you as our guest.</p>
+                                <p>Best regards,<br><span>Reservation Office</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </body>
+                </html>";
+                $mail->send();
+                echo "Your reservation is submitted, In a while you will recieve an email confirmation for your reservation.";
+            }catch(Exception $e){
+                echo "Could not sent the reservation confirmation. Mailer Error: {$mail->ErrorInfo}";
+                // echo 'Could not sent the reservation confirmation.{$mail->ErrorInfo}';
+            }
         } else {
             echo "row is empty! - 2";
         }
     } else {
         echo "row is empty! - 1";
     }
-
 }
 
 

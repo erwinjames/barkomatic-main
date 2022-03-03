@@ -70,10 +70,13 @@ $(document).ready(function() {
             data: $('#smmry_dptr_slctd_sched_form').serialize() + '&action=smmry_dptr_slctd_sched_form',
             success: function(response) {
                 setTimeout(function() {
+                    alert(response);
+                }, 100);
+                setTimeout(function() {
                     $(':input[type="submit"]').prop('disabled', false);
                 }, 100);
                 setTimeout(function() {
-                    window.location.href = response ;
+                    window.location.reload();
                 }, 100);
             }
         });

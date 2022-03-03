@@ -32,7 +32,8 @@ function search_available_schedule($c) {
     $srch_ss = $_POST['srch_ship_sched'];
     $sslf = $_POST['srch_sched_loc_from'];
     $sslt = $_POST['srch_sched_loc_to'];
-    $ssld = date('Y-m-d', strtotime("2022-03-14"));
+    $ssld = date('Y-m-d', strtotime($_POST['srch_sched_loc_depart']));
+    // $ssld = date('Y-m-d', strtotime("2022-03-14"));
     $sql_slct = "SELECT 
                 tbl_ship_sd.ship_name,
                 tbl_ship_sd.ship_logo,

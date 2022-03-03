@@ -27,12 +27,13 @@ if(isset($_POST['action']) && $_POST['action'] == 'smmry_dptr_slctd_sched_form')
 
 //* search available schedule
 function search_available_schedule($c) {
-    error_reporting(E_ALL);
-    ini_set('display_errors', 1);
+    // error_reporting(E_ALL);
+    // ini_set('display_errors', 1);
     $srch_ss = $_POST['srch_ship_sched'];
     $sslf = $_POST['srch_sched_loc_from'];
     $sslt = $_POST['srch_sched_loc_to'];
     $ssld = date('Y-m-d', strtotime($_POST['srch_sched_loc_depart']));
+
     $sql_slct = "SELECT 
                 tbl_ship_sd.ship_name,
                 tbl_ship_sd.ship_logo,
@@ -52,7 +53,7 @@ function search_available_schedule($c) {
                 tbl_tcket.tckt_price
                 FROM tbl_ship_detail tbl_ship_sd
                 JOIN tbl_ship_schedule tbl_ship_sched
-                JOIN tbl_ship_has_accomodation_type tbl_ship_acctyp ON tbl_ship_sched.id = tbl_ship_acctyp.id
+                JOIN tbl_ship_has_accomodation_type tbl_ship_acctyp
                 JOIN tbl_tckt tbl_tcket ON tbl_ship_sd.ship_name = tbl_tcket.tckt_owner
                 WHERE tbl_ship_sd.ship_name=? AND tbl_ship_sched.depart_date=? AND tbl_ship_sched.location_from=? AND tbl_ship_sched.location_to=?";
     $stmt = $c->prepare($sql_slct);
@@ -149,7 +150,7 @@ function go_schedule($c) {
         tbl_tcket.tckt_price
         FROM tbl_ship_detail tbl_sd
         JOIN tbl_ship_schedule tbl_sched
-        JOIN tbl_ship_has_accomodation_type tbl_acctyp ON tbl_sched.id = tbl_acctyp.id
+        JOIN tbl_ship_has_accomodation_type tbl_acctyp
         JOIN tbl_tckt tbl_tcket ON tbl_sd.ship_name = tbl_tcket.tckt_owner
         WHERE tbl_sched.depart_time=? AND tbl_sd.ship_name=?";
 $stmt = $c->prepare($sql_srch_slct);
@@ -264,7 +265,7 @@ $stmt->close();
                     tbl_tcket.tckt_price
                     FROM tbl_ship_detail tbl_sd
                     JOIN tbl_ship_schedule tbl_sched
-                    JOIN tbl_ship_has_accomodation_type tbl_acctyp ON tbl_sched.id = tbl_acctyp.id
+                    JOIN tbl_ship_has_accomodation_type tbl_acctyp
                     JOIN tbl_tckt tbl_tcket ON tbl_sd.ship_name = tbl_tcket.tckt_owner
                     WHERE tbl_sched.depart_time=? AND tbl_acctyp.id=? AND tbl_sd.ship_name=?";
     $stmt = $c->prepare($sql_srch_slct);

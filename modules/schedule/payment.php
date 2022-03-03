@@ -158,8 +158,8 @@ function fetch_resrvation_data($c){
                         tbl_tcket.tckt_price
      from tbl_passenger_reservation tbl_pass_reserv
      JOIN tbl_ship_detail tbl_sd ON tbl_pass_reserv.ship_name = tbl_sd.ship_name
-     JOIN tbl_ship_schedule tbl_sched ON tbl_sd.id = tbl_sched.id
-     JOIN tbl_ship_has_accomodation_type tbl_acctyp ON tbl_sched.id = tbl_acctyp.id
+     JOIN tbl_ship_schedule tbl_sched 
+     JOIN tbl_ship_has_accomodation_type tbl_acctyp
      JOIN tbl_tckt tbl_tcket ON tbl_sd.ship_name = tbl_tcket.tckt_owner
      WHERE tbl_pass_reserv.reservation_number=?";
     $stmt = $c->prepare($sql_srch_slcts);
@@ -269,8 +269,8 @@ function fetch_data_paypal($c){
                         tbl_tcket.tckt_price
      from tbl_passenger_reservation tbl_pass_reserv
      JOIN tbl_ship_detail tbl_sd ON tbl_pass_reserv.ship_name = tbl_sd.ship_name
-     JOIN tbl_ship_schedule tbl_sched ON tbl_sd.id = tbl_sched.id
-     JOIN tbl_ship_has_accomodation_type tbl_acctyp ON tbl_sched.id = tbl_acctyp.id
+     JOIN tbl_ship_schedule tbl_sched 
+     JOIN tbl_ship_has_accomodation_type tbl_acctyp
      JOIN tbl_tckt tbl_tcket ON tbl_sd.ship_name = tbl_tcket.tckt_owner
      WHERE tbl_pass_reserv.reservation_number=?";
     $stmt = $c->prepare($sql_srch_slcts);

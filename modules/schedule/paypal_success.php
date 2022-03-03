@@ -8,9 +8,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
-if ($_GET['token']!=NULL && $_GET['rsrvtn_id']) {
+if ($_GET['token']!=NULL) {
 
-
+if($_GET['rsrvtn_id']!=NULL){
 $item_number = $_GET['item_number'];  
 $txn_id = $_GET['tx']; 
 $payment_gross = $_GET['amt']; 
@@ -132,6 +132,8 @@ if($prevPaymentResult->num_rows > 0){
 
 
 }
+}
+echo ("<script>windows.location.href('localhost/barkomatic-main/')</script>");
 }
 ?>
 

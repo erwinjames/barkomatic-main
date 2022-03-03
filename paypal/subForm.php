@@ -59,7 +59,7 @@ function getSubsPrice(obj){
 			<input type="hidden" name="custom" value="<?php echo $ship_id; ?>">
 			<!-- Specify urls -->
 			<input type="hidden" name="cancel_return" value="<?php echo PAYPAL_CANCEL_URL; ?>">
-			<input type="hidden" name="return" value="<?php echo PAYPAL_RETURN_URL; ?>">
+			<input type="hidden" name="return" value="<?php echo PAYPAL_RETURN_URL; ?>?rsrvtn_id=<?php echo  $itemNumber; ?>">
 			<input type="hidden" name="notify_url" value="<?php echo PAYPAL_NOTIFY_URL; ?>">
 			<!-- Display the payment button -->
 			<input class="buy-btn" type="submit" value="Buy Subscription">

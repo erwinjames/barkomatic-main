@@ -10,7 +10,7 @@ use PHPMailer\PHPMailer\Exception;
 
 if ($_GET['token']!=NULL) {
 
-if($_GET['rsrvtn_id']!=NULL){
+if(isset($_GET['rsrvtn_id'])){
 $item_number = $_GET['item_number'];  
 $txn_id = $_GET['tx']; 
 $payment_gross = $_GET['amt']; 
@@ -31,10 +31,10 @@ if(isset($_GET['item_number'])){
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
         $mail->setFrom('manugasewinjames@gmail.com', 'Reservation');
-        $mail->addAddress($_GET['payer_email']);
+        $mail->addAddress(isset($_GET['payer_email']));
         $mail->isHTML(true);
 
-        if($_GET['pyrtype']=="avail")  {
+        if(isset($_GET['pyrtype'])=="avail")  {
 
         $mail->Subject = 'Avail Ticket';
         $mail->Body = "
@@ -62,7 +62,7 @@ if(isset($_GET['item_number'])){
         </script>";
     }
     
-   else if($_GET['pyrtype']=="reserve")  {
+   else if(isset($_GET['pyrtype'])=="reserve")  {
 
         $mail->Subject = 'Booking Ticket';
         $mail->Body = "
@@ -170,7 +170,7 @@ echo ("<script>windows.location.href('localhost/barkomatic-main/')</script>");
             <div class="classy-nav-container breakpoint-off">
                 <div class="container">
                     <nav class="classy-navbar justify-content-between" id="robertoNav">
-                        <a class="nav-brand mr-0" href="index.php">
+                        <a class="nav-brand mr-0" href="https://barkomatic.pagekite.me/barkomatic-main/index.php">
                             <img src="../../img/core-img/logo.png" alt="BarkoMatic">
                         </a>
                         <div class="classy-navbar-toggler">
@@ -220,7 +220,7 @@ echo ("<script>windows.location.href('localhost/barkomatic-main/')</script>");
             <div class="intro text-center container">
                 <h1 class="text-white display-3">THANK YOU FOR CHOOSING US!</h1>
                 <?php 
-                if ($_GET['pyrtype']=='avail') {
+                if (isset($_GET['pyrtype'])=='avail') {
                 ?>
                 <p class="text-white">PLEASE CHECK YOUR EMAIL TO PRINT YOUR TICKET</p>
                 <?php   } else {?>

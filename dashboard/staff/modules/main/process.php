@@ -15,7 +15,6 @@ if(isset($_POST['action']) && $_POST['action'] == 'add_accomm_form') {
     session_start();
     add_accomodation_type($con);
 }
-
 //* fetch records
 if(isset($_POST['action']) && $_POST['action'] == 'fetch_added_loc') {
     fetch_port_location($con);

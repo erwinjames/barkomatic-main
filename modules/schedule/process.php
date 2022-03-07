@@ -414,7 +414,7 @@ function reservation_confirmation($c,$sdsn) {
                     tbl_pr.ship_name,
                     tbl_pr.expiration
                     FROM tbl_ship_detail tbl_sd
-                    JOIN tbl_passenger_reservation tbl_pr ON tbl_sd.id = tbl_pr.id
+                    JOIN tbl_passenger_reservation tbl_pr ON tbl_sd.ship_name = tbl_pr.ship_name
                     WHERE tbl_sd.ship_name=?";
         $s = $c->prepare($sql_em);
         $s->bind_param('s', $sdsn);

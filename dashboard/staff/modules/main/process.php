@@ -403,7 +403,7 @@ function add_accomodation_type($c) {
     $ship_belong = $_POST['ship'];
 
     $stmt = $c->prepare("INSERT INTO tbl_ship_has_accomodation_type (accomodation_name,seat_type,aircon,price,ship_reside) VALUES (?,?,?,?,?)");
-    $stmt->bind_param('ssss', $accomm_name,$seat_typ,$aircon,$price,$ship_belong);
+    $stmt->bind_param('sssss', $accomm_name,$seat_typ,$aircon,$price,$ship_belong);
     $stmt->execute();
     $stmt->close();
 

@@ -74,7 +74,7 @@ $(document).ready(function() {
                     alert(res);
                     if (res == "Login Successfully!") {
                         setTimeout(function() {
-                            window.location = "https://barkomatic2022.pagekite.me/barkomatic-main/dashboard/staff/";
+                            window.location = "/dashboard/staff/";
                         }, 100);
                     }
                     $(':input[type="submit"]').prop('disabled', false);

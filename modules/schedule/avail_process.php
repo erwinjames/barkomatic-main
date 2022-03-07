@@ -64,7 +64,7 @@ function search_available_schedule($c) {
     $row = $result->fetch_array();
     if(!empty($row)) {
         echo '
-        <div class = "container bg-light border rounded-fill">
+        <div>
         <div class="form-group accomm_type" name="sample_list" >
                 <select onchange="selectOnChange(this)" name="srch_sched_accomm_type" id="slct_accomm_type" class="form-control select">
                 <option value="0" data-price="0" data-name="None" >Ordinary</option> 
@@ -83,7 +83,7 @@ function search_available_schedule($c) {
        ';
     $output = '
                 
-                <div class="pl-4 m-auto">
+                <div class="row pl-4 border rounded-fill m-auto">
                 <br>
                 <div class="col-sm-4">
                     <div class="form-group text-center">
@@ -120,7 +120,6 @@ function search_available_schedule($c) {
                         <input type="submit" id="srch_sched_filter_btn" value="GO" class="btn btn-success">
                     </div>
                 </div>
-            </div>
             </div>';
     echo $output;
 } else {

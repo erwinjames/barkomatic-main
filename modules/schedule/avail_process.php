@@ -63,62 +63,67 @@ function search_available_schedule($c) {
     $result = $stmt->get_result();
     $row = $result->fetch_array();
     if(!empty($row)) {
-        $output = '
+        echo '
+        <div class="form-group accomm_type" name="sample_list" >
+                <select onchange="selectOnChange(this)" name="srch_sched_accomm_type" id="slct_accomm_type" class="form-control select">
+                <option value="0" data-price="0" data-name="None" >Ordinary</option> 
+         ';
+         $stmt2 = $c->prepare("SELECT * FROM tbl_ship_has_accomodation_type WHERE ship_reside=?"); 
+         $stmt2->bind_param("s", $srch_ss);
+         $stmt2->execute();
+         $result2 = $stmt2->get_result();
+        while($row1 = $result2->fetch_assoc()){
+            echo '<option value="'.$row1["id"].'" data-price="'.$row1["price"].'" data-name="'.$row1["accomodation_name"].'">'.$row1["accomodation_name"].'</option>
+                ';
+        }
+                echo ' 
+                </select>
+                </div>
+       ';
+    $output = '
+                
                 <div class="row bg-light pl-4 border rounded-fill m-auto">
-                    <div class="col-sm-4">
-                        <div class="form-group text-center">
-                            <input type="text" name="srch_sched_time" value="'.$row["depart_time"].'" class="form-control border-top-0 rounded-0 text-center"  readonly>
-                        </div>
-
-
-                        <div class="form-group accomm_type" name="sample_list" >
-                            <select onchange="selectOnChange(this)" name="srch_sched_accomm_type" id="slct_accomm_type" class="form-control select">
-                            <option value="0" data-price="0" data-name="None" >No Aircon</option> 
-                            <option value="'.$row["id"].'" data-price="'.$row["price"].'" data-name="'.$row["accomodation_name"].'">'.$row["accomodation_name"].'</option>
-                            </select>
-                        </div>
-
-                        
+                <br>
+                <div class="col-sm-4">
+                    <div class="form-group text-center">
+                        <input type="text" name="srch_sched_time" value="'.$row["depart_time"].'" class="form-control border-top-0 rounded-0 text-center"  readonly>
                     </div>
-                    <div class="col-sm-4 text-center">
-                        <div class="form-group pt-2 text-center">
-                            <img src="data:image/jpeg;base64,'.base64_encode($row["ship_logo"]).'" alt="" width="70">
-                            <input type="text" name="srch_sched_ship_nm" value="'.$row["ship_name"].'" class="bg-light border-0" readonly>
-                        </div>
-                        <div class="form-group">
-                            <input type="text" id="cost"  name="srch_sched_price_display" value="'.$row["tckt_price"].'" class="form-control border-0 p-0 bg-light text-center" readonly>
-                            <input type="hidden" name="srch_sched_price" value="'.$row["tckt_price"].'" class="form-control border-0 p-0 bg-light text-center" readonly>
-                            <small>Ticket Price</small>
-                            <br>
-                            <br>
-                            <input type="text" id="AcommondationPrice"  name="srch_sched_Accom_price" value="" class="form-control border-0 p-0 bg-light text-center" readonly>
-                            <input type="hidden" id="AcommondationPrice" name="srch_sched_Accom_price" value="" class="form-control border-0 p-0 bg-light text-center" readonly>
-                            <small>Accomodation Price</small>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <input type="text" id="total"  name="srch_sched_price_display" value="P'.$row["tckt_price"].'" class="form-control border-0 p-0 bg-light text-center" readonly>
-                            <input type="hidden" id="total" name="srch_sched_total_price" value="'.$row["tckt_price"].'" class="form-control border-0 p-0 bg-light text-center" readonly>
-                            <small>Total Price</small>
-                           
-
-                        </div>
+                </div>
+                <div class="col-sm-4 text-center">
+                    <div class="form-group pt-2 text-center">
+                        <img src="data:image/jpeg;base64,'.base64_encode($row["ship_logo"]).'" alt="" width="70">
+                        <input type="text" name="srch_sched_ship_nm" value="'.$row["ship_name"].'" class="bg-light border-0" readonly>
                     </div>
-                   
-               
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                        </div>
-                        <div class="form-group text-center">
-                            <input type="submit" id="srch_sched_filter_btn" value="GO" class="btn btn-success">
-                        </div>
+                    <div class="form-group">
+                        <input type="text" id="cost"  name="srch_sched_price_display" value="'.$row["tckt_price"].'" class="form-control border-0 p-0 bg-light text-center" readonly>
+                        <input type="hidden" name="srch_sched_price" value="'.$row["tckt_price"].'" class="form-control border-0 p-0 bg-light text-center" readonly>
+                        <small>Ticket Price</small>
+                        <br>
+                        <br>
+                        <input type="text" id="AcommondationPrice"  name="srch_sched_Accom_price" value="" class="form-control border-0 p-0 bg-light text-center" readonly>
+                        <input type="hidden" id="AcommondationPrice" name="srch_sched_Accom_price" value="" class="form-control border-0 p-0 bg-light text-center" readonly>
+                        <small>Accomodation Price</small>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <input type="text" id="total"  name="srch_sched_price_display" value="P'.$row["tckt_price"].'" class="form-control border-0 p-0 bg-light text-center" readonly>
+                        <input type="hidden" id="total" name="srch_sched_total_price" value="'.$row["tckt_price"].'" class="form-control border-0 p-0 bg-light text-center" readonly>
+                        <small>Total Price</small>
                     </div>
-                </div>';
-        echo $output;
-    } else {
-        echo '<p class="text-danger text-center lead">No Available Schedules!</p>';
-    }
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                    </div>
+                    <div class="form-group text-center">
+                        <input type="submit" id="srch_sched_filter_btn" value="GO" class="btn btn-success">
+                    </div>
+                </div>
+            </div>';
+    echo $output;
+} else {
+    echo '<p class="text-danger text-center lead">No Available Schedules!</p>';
+}
     $stmt->close();
 }
 
@@ -406,7 +411,7 @@ function reservation_confirmation($c,$sdsn,$rsrvtn_num) {
                     tbl_pr.expiration,
                     tbl_pr.reservation_number
                     FROM tbl_ship_detail tbl_sd
-                    JOIN tbl_passenger_reservation tbl_pr ON tbl_sd.id = tbl_pr.id
+                    JOIN tbl_passenger_reservation tbl_pr ON tbl_sd.ship_name = tbl_pr.ship_name
                     WHERE tbl_sd.ship_name=?";
         $s = $c->prepare($sql_em);
         $s->bind_param('s', $sdsn);

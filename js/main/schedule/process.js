@@ -32,6 +32,7 @@ $(document).ready(function() {
                 method: 'POST',
                 data: $('#search_sched_form').serialize() + '&action=search_sched_form',
                 success: function(response) {
+                    console.log(response);
                     setTimeout(function() {
                         $("#srch_sched_ftr_form").html(response);
                     }, 100);

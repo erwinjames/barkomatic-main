@@ -34,7 +34,7 @@ function search_available_schedule($c) {
     $sslt = $_POST['srch_sched_loc_to'];
     $ssld = date('Y-m-d', strtotime($_POST['srch_sched_loc_depart']));
     // $ssld = date('Y-m-d', strtotime("2022-03-14"));
-    $sql_slct = "SELECT 
+  $sql_slct = "SELECT 
                 tbl_ship_sd.ship_name,
                 tbl_ship_sd.ship_logo,
                 tbl_ship_sched.depart_date,
@@ -46,15 +46,15 @@ function search_available_schedule($c) {
                 tbl_ship_sched.ship_reside,
                 tbl_ship_acctyp.accomodation_name,
                 tbl_ship_acctyp.price,
-                tbl_ship_acctyp.id,
+                tbl_ship_acctyp.id as acctyp_id,
                 tbl_tcket.tckt_promo,
                 tbl_tcket.tckt_stats,
                 tbl_tcket.tckt_dscnt,
                 tbl_tcket.tckt_owner,
                 tbl_tcket.tckt_price
                 FROM tbl_ship_detail tbl_ship_sd
-                JOIN tbl_ship_schedule tbl_ship_sched
-                JOIN tbl_ship_has_accomodation_type tbl_ship_acctyp
+                JOIN tbl_ship_schedule tbl_ship_sched ON tbl_ship_sd.ship_name = tbl_ship_sched.ship_reside
+                JOIN tbl_ship_has_accomodation_type tbl_ship_acctyp ON tbl_ship_sd.ship_name = tbl_ship_acctyp.ship_reside
                 JOIN tbl_tckt tbl_tcket ON tbl_ship_sd.ship_name = tbl_tcket.tckt_owner
                 WHERE tbl_ship_sd.ship_name=? AND tbl_ship_sched.depart_date=? AND tbl_ship_sched.location_from=? AND tbl_ship_sched.location_to=?";
     $stmt = $c->prepare($sql_slct);
@@ -64,22 +64,31 @@ function search_available_schedule($c) {
     $result = $stmt->get_result();
     $row = $result->fetch_array();
     if(!empty($row)) {
+            echo '
+            <div class="form-group accomm_type" name="sample_list" >
+                    <select onchange="selectOnChange(this)" name="srch_sched_accomm_type" id="slct_accomm_type" class="form-control select">
+                    <option value="0" data-price="0" data-name="None" >Ordinary</option> 
+             ';
+             $stmt2 = $c->prepare("SELECT * FROM tbl_ship_has_accomodation_type WHERE ship_reside=?"); 
+             $stmt2->bind_param("s", $srch_ss);
+             $stmt2->execute();
+             $result2 = $stmt2->get_result();
+            while($row1 = $result2->fetch_assoc()){
+                echo '<option value="'.$row1["id"].'" data-price="'.$row1["price"].'" data-name="'.$row1["accomodation_name"].'">'.$row1["accomodation_name"].'</option>
+                    ';
+            }
+                    echo ' 
+                    </select>
+                    </div>
+           ';
         $output = '
-                <div class="row bg-light pl-4 border rounded-fill m-auto">
+                    
+                    <div class="row bg-light pl-4 border rounded-fill m-auto">
+                    <br>
                     <div class="col-sm-4">
                         <div class="form-group text-center">
                             <input type="text" name="srch_sched_time" value="'.$row["depart_time"].'" class="form-control border-top-0 rounded-0 text-center"  readonly>
                         </div>
-
-
-                        <div class="form-group accomm_type" name="sample_list" >
-                            <select onchange="selectOnChange(this)" name="srch_sched_accomm_type" id="slct_accomm_type" class="form-control select">
-                            <option value="0" data-price="0" data-name="None" >No Aircon</option> 
-                            <option value="'.$row["id"].'" data-price="'.$row["price"].'" data-name="'.$row["accomodation_name"].'">'.$row["accomodation_name"].'</option>
-                            </select>
-                        </div>
-
-                        
                     </div>
                     <div class="col-sm-4 text-center">
                         <div class="form-group pt-2 text-center">
@@ -102,12 +111,8 @@ function search_available_schedule($c) {
                             <input type="text" id="total"  name="srch_sched_price_display" value="P'.$row["tckt_price"].'" class="form-control border-0 p-0 bg-light text-center" readonly>
                             <input type="hidden" id="total" name="srch_sched_total_price" value="'.$row["tckt_price"].'" class="form-control border-0 p-0 bg-light text-center" readonly>
                             <small>Total Price</small>
-                           
-
                         </div>
                     </div>
-                   
-               
                     <div class="col-sm-4">
                         <div class="form-group">
                         </div>
@@ -125,6 +130,8 @@ function search_available_schedule($c) {
 
 //* summary departure
 function go_schedule($c) {
+    error_reporting(E_ALL);
+ini_set('display_errors', 1);
     $srch_st = $_POST['srch_sched_time'];
     $srch_sat = $_POST['srch_sched_accomm_type'];
     $srch_ssnm = $_POST['srch_sched_ship_nm'];
@@ -266,7 +273,7 @@ $stmt->close();
                     tbl_tcket.tckt_price
                     FROM tbl_ship_detail tbl_sd
                     JOIN tbl_ship_schedule tbl_sched
-                    JOIN tbl_ship_has_accomodation_type tbl_acctyp ON tbl_sched.id = tbl_acctyp.id
+                    JOIN tbl_ship_has_accomodation_type tbl_acctyp
                     JOIN tbl_tckt tbl_tcket ON tbl_sd.ship_name = tbl_tcket.tckt_owner
                     WHERE tbl_sched.depart_time=? AND tbl_acctyp.id=? AND tbl_sd.ship_name=?";
     $stmt = $c->prepare($sql_srch_slct);
@@ -274,6 +281,7 @@ $stmt->close();
     $stmt->execute();
     $result = $stmt->get_result();
     $row = $result->fetch_array();
+    echo $c -> error;
     if ($srch_sat!=0) {
         $total =$row["tckt_price"] + $row["price"] ;
     }

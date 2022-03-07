@@ -74,7 +74,7 @@ $(document).ready(function() {
                     alert(res);
                     if (res == "Login Successfully!") {
                         setTimeout(function() {
-                            window.location = "/dashboard/staff/";
+                            window.location = "localhost/barkomatic-main/dashboard/staff/";
                         }, 100);
                     }
                     $(':input[type="submit"]').prop('disabled', false);

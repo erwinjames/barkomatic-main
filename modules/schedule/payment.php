@@ -13,6 +13,10 @@ if(isset($_POST['action']) && $_POST['action'] == 'paypal') {
     session_start();
     fetch_data_paypal($con);
 }
+if(isset($_POST['action']) && $_POST['action'] == 'infos') {
+    session_start();
+    Redeemcode($con);
+}
 
 //fetch passenger info
 function get_PssngerInfo($c){
@@ -47,7 +51,6 @@ function get_PssngerInfo($c){
                         <h5>Contact Information</h5>
                     </div>
                 </div>
-
             </div>
             <div class="row">
                 <div class="col-sm-3 text-center">
@@ -115,6 +118,7 @@ function get_PssngerInfo($c){
                 <p class="" style="margin: -15px 0px 0px 10px; font-size: 13px;">'.$row['dob'].'</p>
             </div>
         </div>
+       
         </div>
     </div>
 </div>
@@ -322,6 +326,98 @@ function fetch_data_paypal($c){
    ';
     echo $output;
     $stmt->close();
+}
+}
+
+function Redeemcode($c){
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+    $reservationNum = $_GET['reservation'];
+    $typofpayment = $_GET['typOfpymnt'];
+    $shipName = $_GET['shipName'];
+    $sql_srch_slcts = "SELECT 
+                        tbl_pass_reserv.reservation_number,
+                        tbl_pass_reserv.ship_name,
+                        tbl_pass_reserv.passenger_name,
+                        tbl_pass_reserv.location_from,
+                        tbl_pass_reserv.location_to,
+                        tbl_pass_reserv.depart_date,
+                        tbl_pass_reserv.depart_time,
+                        tbl_pass_reserv.accomodation,
+                        tbl_pass_reserv.reservation_date,
+                        tbl_pass_reserv.expiration,
+                        tbl_pass_reserv.status,
+                        tbl_sd.ship_logo,
+                        tbl_sd.ship_name,
+                        tbl_sched.location_from,
+                        tbl_sched.location_to,
+                        tbl_sched.depart_date,
+                        tbl_sched.depart_time,
+                        tbl_acctyp.accomodation_name,
+                        tbl_acctyp.seat_type,
+                        tbl_acctyp.aircon,
+                        tbl_sched.port_from,
+                        tbl_sched.port_to,
+                        tbl_acctyp.price,
+                        tbl_tcket.tckt_promo,
+                        tbl_tcket.tckt_stats,
+                        tbl_tcket.tckt_dscnt,
+                        tbl_tcket.tckt_owner,
+                        tbl_tcket.tckt_price
+     from tbl_passenger_reservation tbl_pass_reserv
+     JOIN tbl_ship_detail tbl_sd ON tbl_pass_reserv.ship_name = tbl_sd.ship_name
+     JOIN tbl_ship_schedule tbl_sched 
+     JOIN tbl_ship_has_accomodation_type tbl_acctyp
+     JOIN tbl_tckt tbl_tcket ON tbl_sd.ship_name = tbl_tcket.tckt_owner
+     WHERE tbl_pass_reserv.reservation_number=?";
+    $stmt = $c->prepare($sql_srch_slcts);
+    echo $c -> error;
+    $stmt->bind_param('s',$reservationNum);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_array();
+
+    $stmt_ship_sd = $c->prepare("SELECT * FROM tbl_tckt Where tckt_owner=?"); 
+    $stmt_ship_sd->bind_param('s',$row['ship_name']);
+    $stmt_ship_sd->execute();
+    $row_ship_sd = $stmt_ship_sd->get_result();
+      
+                        if($row['accomodation']=="No Aircon"){
+                        $total_price = $row['tckt_price'];
+                        $dscount = $total_price * $row['tckt_dscnt'] / 100;
+                        $No = "No Aircon";
+                        }
+                        else{
+                        $total_price = $row['price'] + $row['tckt_price'];
+                        $dscount =($total_price / 100 )* $row['tckt_dscnt'] ;
+                        $No = $row['accomodation'];
+                        }
+            if ($row == null) {
+            echo "Error";
+            }
+            else{
+  echo '<ul class="card_list">';
+                while ($row1 = $row_ship_sd->fetch_assoc()) {
+                        echo  '
+                        <li>
+                        <div class="coupon_box">
+                        <div class="body_card">
+                            <h4 class="title_card"> '.$row1['tckt_promo'].' </h4>
+                            
+                        <h2 class="how_much"> <b> '.$row1['tckt_dscnt'].'% </b> </h2>
+                            <h3> OFF </h3>
+                        </div>
+                            <form>
+                            <input type="hidden" name="promo" value="'.$row1['tckt_promo'].'">
+                            <input type="hidden" name="discount" value="'.$row1['tckt_dscnt'].'">
+                            <button class="btn_card"> Redeem </button>
+                            </form>
+                    </div>
+                    </li>
+                    ';
+                   
+}
+echo ' </ul>';
 }
 }
 ?>

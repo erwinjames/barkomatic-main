@@ -4,7 +4,11 @@
 
     <?php if (isset($_GET['reservetionId'])) {?>
           <?php if (isset($_SESSION['id'])== $_GET['userId'] && isset($_GET['typOfpymnt']))  { ?>
-            <div class="container">
+             <div class="coupon_container">
+<!-- 	<span class="icon"></span> -->
+<div id="infos"></div>
+   </div>
+<div class="container">
     <div class="progressbar" style="font-size: 12px;margin-top: 50px; font-weight: bolder;">
         <div class="container">
             <div class="row">
@@ -219,11 +223,10 @@
  
 			<!-- Display the payment button -->
 	<div id='paypal'>
-
-
     </div>	
 	
     </div>
+   
     <?php  }else{?>
      <H1>Please Login</H1>
     <?php } ?>
@@ -231,6 +234,7 @@
   <h1>PLEASE CHECK YOUR EMAIL FIRST</h1>
     <?php }?>
   </div>
+
     <!-- **** All JS Files ***** -->
     <script src="js/jquery/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>
@@ -271,6 +275,23 @@
             success: function(response){
            
                             $("#tripsummary").html(response); 
+                    }
+                });
+            };
+            var intervals= 100;
+            setInterval(ajax_call, intervals);
+        });
+    </script>
+        <script>
+         $(document).ready(function() {
+               ajax_call = function() {
+            $.ajax({
+            type: "POST",
+            url:'modules/schedule/payment.php?reservation='+getReservetionId+'&&typOfpymnt='+typOfpymnts+'&&shipName='+shipname,
+            data: $('#infos').serialize() + '&action=infos',
+            success: function(response){
+           
+                            $("#infos").html(response); 
                     }
                 });
             };
@@ -332,7 +353,16 @@
                 $(targetBox).show();
             });
         });
+        
     </script>
+ <script>
+     $(document).ready(function(){
+  $(".btns").click(function(){
+    $(".redeem").slideToggle(1000);
+  });
+
+});
+ </script>
 
 </body>
 </html>

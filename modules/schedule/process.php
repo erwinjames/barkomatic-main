@@ -24,7 +24,6 @@ if(isset($_POST['action']) && $_POST['action'] == 'smmry_dptr_slctd_sched_form')
     session_start();
     reservation($con);
 }
-
 //* search available schedule
 function search_available_schedule($c) {
     error_reporting(E_ALL);
@@ -33,7 +32,7 @@ function search_available_schedule($c) {
     $sslf = $_POST['srch_sched_loc_from'];
     $sslt = $_POST['srch_sched_loc_to'];
     $ssld = date('Y-m-d', strtotime($_POST['srch_sched_loc_depart']));
-    // $ssld = date('Y-m-d', strtotime("2022-03-14"));
+    // $ssld = date('Y-m-d', strtotime("2022-03-14"));  <input type="checkbox" id="chkbox_discount" /> 
   $sql_slct = "SELECT 
                 tbl_ship_sd.ship_name,
                 tbl_ship_sd.ship_logo,
@@ -79,10 +78,28 @@ function search_available_schedule($c) {
             }
                     echo ' 
                     </select>
-                    </div>
+             </div>
            ';
+
+        //    echo '
+        //    <div class="form-group accomm_type" name="sample_list" >
+        //     ';
+        //     $stmt3 = $c->prepare("SELECT * FROM tbl_tckt WHERE tckt_owner=?"); 
+        //     $stmt3->bind_param("s", $srch_ss);
+        //     $stmt3->execute();
+        //     $result3 = $stmt3->get_result();
+        //    while($row2 = $result3->fetch_assoc()){
+        //        echo '
+        //        <ul>
+        //        <li> <label> <input type="checkbox" class="radioCheck"  id="chkbox_discount" name="creditCheck[]"  value = "'.$row2['tckt_dscnt'].'" onclick= "check(this);" />&nbsp <b>'.$row2['tckt_promo'].'&nbsp&nbsp('.$row2['tckt_dscnt'].'%) </b> </label></li>
+        //        </ul>
+        //        ';
+        //    }
+        //        echo ' 
+                 
+        //     </div>
+        //   ';
         $output = '
-                    
                     <div class="row bg-light pl-4 border rounded-fill m-auto">
                     <br>
                     <div class="col-sm-4">
@@ -249,7 +266,6 @@ $output = '
 </div>';
 echo $output;
 $stmt->close();
-
     }
     else{
     //$srch_sp = $_POST['srch_sched_price'];
@@ -399,6 +415,7 @@ function reservation($c) {
         reservation_confirmation($c,$sdsn,$rsrvtn_num);
     }
 }
+
 //* send email reservation confirmation
 function reservation_confirmation($c,$sdsn) {
     $sql_rsrvtn = "SELECT * FROM tbl_passenger_reservation";

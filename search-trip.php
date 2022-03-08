@@ -135,16 +135,56 @@
 function selectOnChange(obj) {
          var price =  $(obj).find(':selected').data('price');
          var cost = document.getElementById("cost").value;
+         
          var priceInt = parseInt(price);
          var costInt= parseInt(cost);
+
          var total = parseInt(priceInt + costInt);
          document.getElementById("AcommondationPrice").value = priceInt;
          document.getElementById("total").value = total;
+
+         
          if (price == 0) {
             document.getElementById("AcommondationPrice").value = "";
          }
     
 	  }
+
+
+function check(input)
+    {
+    	
+    	var checkboxes = document.getElementsByClassName("radioCheck");
+    	
+    	for(var i = 0; i < checkboxes.length; i++)
+    	{
+    		//uncheck all
+    		if(checkboxes[i].checked == true)
+    		{
+                // checkboxes[i].disabled = 'false';
+    			checkboxes[i].checked = false;
+                checkboxes[i].disabled = 'false';
+    		}
+            else if(checkboxes[i].checked != true)
+    		{  
+    			checkboxes[i].disabled = 'true';
+    		}  
+    	}
+    	//set checked of clicked object
+    	if(input.checked == true)
+    	{
+    		input.checked = false;
+    	}
+    	else
+    	{   
+    		input.checked = true;
+    	}	
+    }
+
+// for (i=0; i<document.creditCheck.length; i++){
+// if (document.creditCheck[i].checked !=true)
+//   document.creditCheck[i].disabled='true';
+// }
     </script>
 
     </body>

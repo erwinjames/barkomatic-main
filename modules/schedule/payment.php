@@ -381,10 +381,9 @@ function Redeemcode($c){
     $stmt_ship_sd->bind_param('s',$row['ship_name']);
     $stmt_ship_sd->execute();
     $row_ship_sd = $stmt_ship_sd->get_result();
-      
                         if($row['accomodation']=="No Aircon"){
                         $total_price = $row['tckt_price'];
-                        $dscount = $total_price * $row['tckt_dscnt'] / 100;
+                        $dscount =($total_price / 100 )* $row['tckt_dscnt'] ;
                         $No = "No Aircon";
                         }
                         else{
@@ -403,11 +402,9 @@ function Redeemcode($c){
                         <div class="coupon_box">
                         <div class="body_card">
                             <h4 class="title_card"> '.$row1['tckt_promo'].' </h4>
-                            
                         <h2 class="how_much"> <b> '.$row1['tckt_dscnt'].'% </b> </h2>
                             <h3> OFF </h3>
                         </div>
-                            
                             <input type="hidden" name="promo" value="'.$row1['tckt_promo'].'">
                             <input type="hidden" name="discount" value="'.$row1['tckt_dscnt'].'">
                             <button class="btn_card"> Redeem </button>

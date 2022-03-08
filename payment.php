@@ -6,7 +6,7 @@
           <?php if (isset($_SESSION['id'])== $_GET['userId'] && isset($_GET['typOfpymnt']))  { ?>
              <div class="coupon_container">
 <!-- 	<span class="icon"></span> -->
-<div id="infos"></div>
+<form id="infos"></form>
    </div>
 <div class="container">
     <div class="progressbar" style="font-size: 12px;margin-top: 50px; font-weight: bolder;">

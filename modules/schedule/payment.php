@@ -407,11 +407,11 @@ function Redeemcode($c){
                         <h2 class="how_much"> <b> '.$row1['tckt_dscnt'].'% </b> </h2>
                             <h3> OFF </h3>
                         </div>
-                            <form>
+                            
                             <input type="hidden" name="promo" value="'.$row1['tckt_promo'].'">
                             <input type="hidden" name="discount" value="'.$row1['tckt_dscnt'].'">
                             <button class="btn_card"> Redeem </button>
-                            </form>
+                           
                     </div>
                     </li>
                     ';

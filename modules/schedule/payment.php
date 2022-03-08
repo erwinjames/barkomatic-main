@@ -377,7 +377,7 @@ function Redeemcode($c){
     $result = $stmt->get_result();
     $row = $result->fetch_array();
 
-    $stmt_ship_sd = $c->prepare("SELECT * FROM tbl_tckt Where tckt_owner=?"); 
+    $stmt_ship_sd = $c->prepare("SELECT * FROM tbl_tckt Where tckt_owner=? AND tckt_qty != 0 AND tckt_stats = 'Open For Avail'"); 
     $stmt_ship_sd->bind_param('s',$row['ship_name']);
     $stmt_ship_sd->execute();
     $row_ship_sd = $stmt_ship_sd->get_result();

@@ -4,7 +4,7 @@
 
     <?php if (isset($_GET['reservetionId'])) {?>
           <?php if (isset($_SESSION['id'])== $_GET['userId'] && isset($_GET['typOfpymnt']))  { ?>
-             <div class="coupon_container">
+<div class="coupon_container">
 <!-- 	<span class="icon"></span> -->
 <form id="infos"></form>
    </div>

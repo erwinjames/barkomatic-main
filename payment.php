@@ -327,14 +327,38 @@ $row2 = $row_ship_sd1->fetch_array();
             var intervals= 100;
             setInterval(ajax_call, intervals);
         });
-    </script>
+    </script> 
         <script>
          $(document).ready(function() {
-            $('.card_list button').on('click', function() {
-                       
-             })
+               ajax_call = function() {
+            $.ajax({
+            type: "POST",
+            url:'modules/schedule/payment.php?reservation='+getReservetionId+'&&typOfpymnt='+typOfpymnts+'&&shipName='+shipname,
+            data: $('#tripsummary').serialize() + '&action=tripsummary',
+            success: function(response){
+           
+                            $("#tripsummary").html(response); 
+                    }
+                });
+            };
+            var intervals= 100;
+            setInterval(ajax_call, intervals);
         });
-    </script> 
+    </script>
+            <script>  
+        $(document).ready(function(){  
+            $('input[type="radio"]').click(function(){   
+                $.ajax({  
+                    url:'modules/schedule/payment.php?reservation='+getReservetionId+'&&typOfpymnt='+typOfpymnts+'&&shipName='+shipname,
+                        method:"POST",  
+                        data: $('#paypal').serialize() + '&action=paypal', 
+                        success:function(data){  
+                            $('#paypal').html(data);  
+                        }  
+                });  
+            });  
+        });  
+ </script>
     <script>
  $('#redeemCode').validate();
     $('#btn_card').click(function(e) {

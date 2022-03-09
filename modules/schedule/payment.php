@@ -13,11 +13,11 @@ if(isset($_POST['action']) && $_POST['action'] == 'paypal') {
     session_start();
     fetch_data_paypal($con);
 }
-if(isset($_POST['action']) && $_POST['action'] == 'infos') {
-    session_start();
-    Redeemcode($con);
-}
 
+if(isset($_POST['action']) && $_POST['action'] == 'redeemCode') {
+    session_start();
+    redeemPromoInsert($con);
+}
 //fetch passenger info
 function get_PssngerInfo($c){
     error_reporting(E_ALL);
@@ -328,93 +328,27 @@ function fetch_data_paypal($c){
     $stmt->close();
 }
 }
-
-function Redeemcode($c){
+//* reservation
+function redeemPromoInsert($c) {
     error_reporting(E_ALL);
     ini_set('display_errors', 1);
-    $reservationNum = $_GET['reservation'];
-    $typofpayment = $_GET['typOfpymnt'];
-    $shipName = $_GET['shipName'];
-    $sql_srch_slcts = "SELECT 
-                        tbl_pass_reserv.reservation_number,
-                        tbl_pass_reserv.ship_name,
-                        tbl_pass_reserv.passenger_name,
-                        tbl_pass_reserv.location_from,
-                        tbl_pass_reserv.location_to,
-                        tbl_pass_reserv.depart_date,
-                        tbl_pass_reserv.depart_time,
-                        tbl_pass_reserv.accomodation,
-                        tbl_pass_reserv.reservation_date,
-                        tbl_pass_reserv.expiration,
-                        tbl_pass_reserv.status,
-                        tbl_sd.ship_logo,
-                        tbl_sd.ship_name,
-                        tbl_sched.location_from,
-                        tbl_sched.location_to,
-                        tbl_sched.depart_date,
-                        tbl_sched.depart_time,
-                        tbl_acctyp.accomodation_name,
-                        tbl_acctyp.seat_type,
-                        tbl_acctyp.aircon,
-                        tbl_sched.port_from,
-                        tbl_sched.port_to,
-                        tbl_acctyp.price,
-                        tbl_tcket.tckt_promo,
-                        tbl_tcket.tckt_stats,
-                        tbl_tcket.tckt_dscnt,
-                        tbl_tcket.tckt_owner,
-                        tbl_tcket.tckt_price
-     from tbl_passenger_reservation tbl_pass_reserv
-     JOIN tbl_ship_detail tbl_sd ON tbl_pass_reserv.ship_name = tbl_sd.ship_name
-     JOIN tbl_ship_schedule tbl_sched 
-     JOIN tbl_ship_has_accomodation_type tbl_acctyp
-     JOIN tbl_tckt tbl_tcket ON tbl_sd.ship_name = tbl_tcket.tckt_owner
-     WHERE tbl_pass_reserv.reservation_number=?";
-    $stmt = $c->prepare($sql_srch_slcts);
+    $promo = $_POST['promo'];
+    $id = $_POST['id'];
+    $sdlf = $_POST['discount'];
+    $pid = $_SESSION['id'];
+    $sn = $_SESSION['username'];
+  
+    $sql_rsrtn = "INSERT INTO tbl_rdeem_promo(rdeem_id,rdeem_promo,v_discount,psnger_id,passnger_name,dates)
+                 VALUES (?,?,?,?,?,now())";
+    $stmt = $c->prepare($sql_rsrtn);
     echo $c -> error;
-    $stmt->bind_param('s',$reservationNum);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $row = $result->fetch_array();
-
-    $stmt_ship_sd = $c->prepare("SELECT * FROM tbl_tckt Where tckt_owner=? AND tckt_qty != 0 AND tckt_stats = 'Open For Avail'"); 
-    $stmt_ship_sd->bind_param('s',$row['ship_name']);
-    $stmt_ship_sd->execute();
-    $row_ship_sd = $stmt_ship_sd->get_result();
-                        if($row['accomodation']=="No Aircon"){
-                        $total_price = $row['tckt_price'];
-                        $dscount =($total_price / 100 )* $row['tckt_dscnt'] ;
-                        $No = "No Aircon";
-                        }
-                        else{
-                        $total_price = $row['price'] + $row['tckt_price'];
-                        $dscount =($total_price / 100 )* $row['tckt_dscnt'] ;
-                        $No = $row['accomodation'];
-                        }
-            if ($row == null) {
-            echo "Error";
-            }
-            else{
-  echo '<ul class="card_list">';
-                while ($row1 = $row_ship_sd->fetch_assoc()) {
-                        echo  '
-                        <li>
-                        <div class="coupon_box">
-                        <div class="body_card">
-                            <h4 class="title_card"> '.$row1['tckt_promo'].' </h4>
-                        <h2 class="how_much"> <b> '.$row1['tckt_dscnt'].'% </b> </h2>
-                            <h3> OFF </h3>
-                        </div>
-                            <input type="hidden" name="promo" value="'.$row1['tckt_promo'].'">
-                            <input type="hidden" name="discount" value="'.$row1['tckt_dscnt'].'">
-                            <button class="btn_card"> Redeem </button>
-                           
-                    </div>
-                    </li>
-                    ';
-                   
-}
-echo ' </ul>';
-}
+    $stmt->bind_param('sssss',$id,$promo,$sdlf,$pid,$sn);
+    if($stmt->execute()) {
+        $stmt->close();
+        echo "success";
+    }
+    else{
+        echo "Not";
+    }
 }
 ?>

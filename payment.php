@@ -4,10 +4,56 @@
 
     <?php if (isset($_GET['reservetionId'])) {?>
           <?php if (isset($_SESSION['id'])== $_GET['userId'] && isset($_GET['typOfpymnt']))  { ?>
-<div class="coupon_container">
-<!-- 	<span class="icon"></span> -->
-<form id="infos"></form>
-   </div>
+
+ <div class="coupon_container">
+ <form id="redeemCode" method="POST">
+<span class="show_all_except_clicked"></span>
+<ul class="card_list">
+<?php
+$stmt_ship_sd = $con->prepare("SELECT * FROM tbl_tckt Where tckt_owner=? AND tckt_qty != 0 AND tckt_stats = 'Open For Avail'"); 
+$stmt_ship_sd->bind_param('s',$_GET['shipName']);
+$stmt_ship_sd->execute();
+$row_ship_sd = $stmt_ship_sd->get_result();
+while ($row1 = $row_ship_sd->fetch_assoc()) { 
+    
+$stmt_ship_sd1 = $con->prepare("SELECT * FROM tbl_rdeem_promo Where psnger_id=?"); 
+$stmt_ship_sd1->bind_param('s',$_SESSION['id']);
+$stmt_ship_sd1->execute();
+$row_ship_sd1 = $stmt_ship_sd1->get_result();
+$row2 = $row_ship_sd1->fetch_array(); 
+    if ($row2==null) {
+    ?>
+                <li>
+                                            <div class="coupon_box">
+                                            <div class="body_card">
+                                                <h4 class="title_card"> <?php echo $row1['tckt_promo'] ?></h4>
+                                            <h2 class="how_much"> <b> <?php echo $row1['tckt_dscnt'] ?></b> </h2>
+                                                <h3> OFF </h3>
+                                             </div>
+                                                        <input type="hidden" name="id" value=" <?php echo $row1['id'] ?>">
+                                                        <input type="hidden" name="promo" value=" <?php echo $row1['tckt_promo'] ?>">
+                                                        <input type="hidden" name="discount" value="<?php echo $row1['tckt_dscnt'] ?>'">
+                                                        <button class="btn_card" id="btn_card"> Redeem </button>
+                                                    
+                                                    </div>
+                </li>
+    <?php } else{ ?>
+  
+  <li>
+                                            <div class="coupon_box">
+                                            <div class="body_card">
+                                                <h4 class="title_card">ALREADY CLAIMED</h4>
+                                             </div>
+                                                    
+                                                    </div>
+                </li>
+
+
+<?php } }?>
+</ul>
+</form>
+
+</div>
 <div class="container">
     <div class="progressbar" style="font-size: 12px;margin-top: 50px; font-weight: bolder;">
         <div class="container">
@@ -284,34 +330,38 @@
     </script>
         <script>
          $(document).ready(function() {
-               ajax_call = function() {
-            $.ajax({
-            type: "POST",
-            url:'modules/schedule/payment.php?reservation='+getReservetionId+'&&typOfpymnt='+typOfpymnts+'&&shipName='+shipname,
-            data: $('#infos').serialize() + '&action=infos',
-            success: function(response){
-           
-                            $("#infos").html(response); 
-                    }
-                });
-            };
-            var intervals= 100;
-            setInterval(ajax_call, intervals);
+            $('.card_list button').on('click', function() {
+                       
+             })
         });
+    </script> 
+    <script>
+ $('#redeemCode').validate();
+    $('#btn_card').click(function(e) {
+        if (document.querySelector('#redeemCode').checkValidity()) {
+            e.preventDefault();
+            $(':input[type="submit"]').prop('disabled', true);
+            $.ajax({
+                url:'modules/schedule/payment.php',
+                method: 'POST',
+                data: $('#redeemCode').serialize() + '&action=redeemCode',
+                success: function(response) {
+                    alert(response);
+                 if (response == 'success') {
+                    // $(this).parent('li').hide();
+                      setTimeout(function() {
+                           window.location.reload();
+                            }, 100);
+                        }
+                        else if(response == 'not')
+                   {
+                         alert('error');
+                   }
+                }
+            });
+        }
+    });
     </script>
-            <script>  
-        $(document).ready(function(){  
-            $('input[type="radio"]').click(function(){   
-                $.ajax({  
-                    url:'modules/schedule/payment.php?reservation='+getReservetionId+'&&passengersId='+passengerId+'&&typOfpymnt='+typOfpymnts+'&&shipName='+shipname, 
-                        method:"POST",  
-                        data: $('#paypal').serialize() + '&action=paypal', 
-                        success:function(data){  
-                            $('#paypal').html(data);  
-                        }  
-                });  
-            });  
-        });  
  </script>
     <script>
         $(document).ready(function() {
@@ -338,31 +388,10 @@
                 });
 
             });
-
+                   
         });
     </script>
     </script>
     <!-- creditcard payment -->
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $('input[type="radio"]').click(function() {
-                var inputValue = $(this).attr("value");
-                var targetBox = $("." + inputValue);
-                $(".box").not(targetBox).hide();
-                $(targetBox).show();
-            });
-        });
-        
-    </script>
- <script>
-     $(document).ready(function(){
-  $(".btns").click(function(){
-    $(".redeem").slideToggle(1000);
-  });
-
-});
- </script>
-
 </body>
 </html>

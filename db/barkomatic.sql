@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 07, 2022 at 06:39 AM
+-- Generation Time: Mar 10, 2022 at 12:58 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -130,7 +130,11 @@ CREATE TABLE `tbl_passenger_reservation` (
 INSERT INTO `tbl_passenger_reservation` (`id`, `reservation_number`, `ship_name`, `passenger_name`, `location_from`, `location_to`, `depart_date`, `depart_time`, `accomodation`, `reservation_date`, `expiration`, `status`) VALUES
 (97, '7604144', 'test', 'test test', 'lapu-lapu', 'olango', '2022-03-14', '10:25 PM', 'With Aircone', '2022-03-07', '2022-03-09', NULL),
 (98, '4175985', 'test', 'test test', 'lapu-lapu', 'olango', '2022-03-14', '10:00 AM', 'With Aircone', '2022-03-07', '2022-03-09', NULL),
-(99, '2932130', 'test', 'test test', 'lapu-lapu', 'olango', '2022-03-14', '10:00 AM', 'With Aircone', '2022-03-07', '2022-03-09', NULL);
+(99, '2932130', 'test', 'test test', 'lapu-lapu', 'olango', '2022-03-14', '10:00 AM', 'With Aircone', '2022-03-07', '2022-03-09', NULL),
+(100, '9905697', 'test', 'test test', 'lapu-lapu', 'olango', '2022-03-14', '10:25 PM', 'No Aircon', '2022-03-07', '2022-03-09', NULL),
+(101, '7496143', 'test', 'test test', 'lapu-lapu', 'olango', '2022-03-14', '10:25 PM', 'No Aircon', '2022-03-07', '2022-03-09', NULL),
+(102, '5066428', 'test', 'test test', 'lapu-lapu', 'olango', '2022-03-14', '10:00 AM', 'With Aircone', '2022-03-08', '2022-03-10', NULL),
+(103, '9298772', 'test', 'test test', 'lapu-lapu', 'olango', '2022-03-14', '10:00 AM', 'No Aircon', '2022-03-10', '2022-03-12', NULL);
 
 -- --------------------------------------------------------
 
@@ -185,6 +189,28 @@ INSERT INTO `tbl_psnger_pymnt` (`id`, `reservation_number`, `txn_id`, `payer_ema
 (1, 9527128, '4P16845411298345R', 'Johndoe@personalemail.com', 'PHP', '300.00', 'Completed', '2022-02-25 15:48:48', '', 'test'),
 (1, 5954494, '9YT09683EV596783B', 'Johndoe@personalemail.com', 'PHP', '300.00', 'Completed', '2022-02-28 14:59:34', 'avail', 'test'),
 (1, 4863221, '1H326320UD4053729', 'Johndoe@personalemail.com', 'PHP', '300.00', 'Completed', '2022-02-28 15:07:09', 'avail', 'test');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_rdeem_promo`
+--
+
+CREATE TABLE `tbl_rdeem_promo` (
+  `rdeem_id` int(11) NOT NULL,
+  `rdeem_promo` text NOT NULL,
+  `v_discount` int(11) NOT NULL,
+  `psnger_id` int(30) NOT NULL,
+  `passnger_name` varchar(30) NOT NULL,
+  `dates` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_rdeem_promo`
+--
+
+INSERT INTO `tbl_rdeem_promo` (`rdeem_id`, `rdeem_promo`, `v_discount`, `psnger_id`, `passnger_name`, `dates`) VALUES
+(10, ' christmass', 40, 1, 'test', '2022-03-09 17:33:31');
 
 -- --------------------------------------------------------
 
@@ -427,11 +453,8 @@ CREATE TABLE `tbl_tckt` (
 --
 
 INSERT INTO `tbl_tckt` (`id`, `tckt_qty`, `tckt_stats`, `tckt_promo`, `tckt_dscnt`, `tckt_owner`, `tckt_price`) VALUES
-(4, '32', 'Open for Avail', '', '', 'test', 300),
-(6, '2', 'open_fr_avail', 'h', 'd', 'test', 300),
-(7, '2', 'open_fr_avail', '', '', 'test', 300),
-(8, '8', 'Open For Reservation', 'd', 'a', 'test', 300),
-(9, '6', 'Open For Reservation', 'l', 'h', 'test', 300);
+(9, '6', 'Open For Reservation', 'lD@D!', '30', 'test', 300),
+(10, '3', 'Open For Avail', 'christmass', '40', 'test', 300);
 
 -- --------------------------------------------------------
 
@@ -613,7 +636,7 @@ ALTER TABLE `tbl_passenger_detail`
 -- AUTO_INCREMENT for table `tbl_passenger_reservation`
 --
 ALTER TABLE `tbl_passenger_reservation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
 -- AUTO_INCREMENT for table `tbl_passenger_reset_password`
@@ -685,7 +708,7 @@ ALTER TABLE `tbl_staff_reset_password`
 -- AUTO_INCREMENT for table `tbl_tckt`
 --
 ALTER TABLE `tbl_tckt`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

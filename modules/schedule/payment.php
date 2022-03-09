@@ -270,12 +270,19 @@ function fetch_data_paypal($c){
                         tbl_tcket.tckt_stats,
                         tbl_tcket.tckt_dscnt,
                         tbl_tcket.tckt_owner,
-                        tbl_tcket.tckt_price
+                        tbl_tcket.tckt_price,
+                        tbl_promo.rdeem_id,
+                        tbl_promo.rdeem_promo,
+                        tbl_promo.v_discount,
+                        tbl_promo.psnger_id,
+                        tbl_promo.passnger_name,
+                        tbl_promo.dates
      from tbl_passenger_reservation tbl_pass_reserv
      JOIN tbl_ship_detail tbl_sd ON tbl_pass_reserv.ship_name = tbl_sd.ship_name
      JOIN tbl_ship_schedule tbl_sched 
      JOIN tbl_ship_has_accomodation_type tbl_acctyp
      JOIN tbl_tckt tbl_tcket ON tbl_sd.ship_name = tbl_tcket.tckt_owner
+     JOIN tbl_rdeem_promo tbl_promo
      WHERE tbl_pass_reserv.reservation_number=?";
     $stmt = $c->prepare($sql_srch_slcts);
     echo $c -> error;
@@ -283,14 +290,27 @@ function fetch_data_paypal($c){
     $stmt->execute();
     $result = $stmt->get_result();
     $row = $result->fetch_array();
-    if($row['accomodation']=="No Aircon"){
-    $total_price = $row['tckt_price'];
-    $No = "No Aircon";
-    }
-    else{
-    $total_price = $row['price'] + $row['tckt_price'];
-    $No = $row['accomodation'];
-    }
+                if($row['accomodation']=="No Aircon"){
+                        if ($row['v_discount']!=NULL) {
+                        $discount =($row['tckt_price'] / 100 ) * $row['v_discount'];
+                        $total_price = $row['tckt_price'] - $discount;
+                        $No = "No Aircon";
+                    }else{
+                        $total_price = $row['tckt_price'];
+                        $No = "No Aircon";
+                    }
+                }
+                else{
+                    if ($row['v_discount']!=NULL) {
+                        $total = $row['price'] + $row['tckt_price'];
+                        $discount =($total / 100 ) * $row['v_discount'];
+                        $total_price = $row['tckt_price'] - $discount;
+                        $No = "No Aircon";
+                    }else{
+                        $total_price = $row['price'] + $row['tckt_price'];
+                        $No = $row['accomodation'];
+                    }
+                }
     if ($row == null) {
        echo "Error";
     }

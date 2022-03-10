@@ -12,7 +12,7 @@
             </header>
             <div class="card-content p-0">
                 <div class="card has-table border-0">
-                    <div class="card-content" id="all_staff_data">
+                    <div class="card-content" id="summ_reservation_data">
                         <img class="text-center" src="./resources/img/loading.gif" alt="Loading" style="text-align:center;width:48px;height:48px;">
                     </div>
                 </div>

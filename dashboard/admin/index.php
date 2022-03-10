@@ -100,8 +100,6 @@
       var sales1 =  <?php echo json_encode($sale);?>;
 
       $(document).ready(function() {
-
-        
                 var myChart = new Chart(ctx, {
                     type: 'bar',
                     data: {
@@ -131,8 +129,6 @@
                             fontSize: 14,
                         }
                     },
- 
- 
                 }
                 
                 });

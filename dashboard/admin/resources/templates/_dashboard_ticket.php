@@ -10,7 +10,7 @@
                     <span class="icon"><i class="mdi mdi-account-multiple"></i></span> Details
                 </p>
             </header>
-            <div id="ticket_data" class="card-content">
+            <div id="summ_staff_data" class="card-content">
                 <img class="text-center" src="./resources/img/loading.gif" alt="Loading" style="text-align:center;width:48px;height:48px;">
             </div>
         </div>

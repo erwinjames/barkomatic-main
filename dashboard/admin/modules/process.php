@@ -406,15 +406,16 @@ function edit_assigned_role($c) {
 function summ_staff_data($c) {
     $sql_slct = "SELECT 
                 tbl_stfd.id,
-                tbl_stfd.name,
+                tbl_stfd.subscription_id,
+                tbl_stfd.ship_name,
                 tbl_stfd.email,
+                tbl_stfa.password,
                 tbl_stfa.username,
                 tbl_stfa.password
-                FROM tbl_staff_detail tbl_stfd
-                JOIN tbl_staff_account tbl_stfa 
-                ON tbl_stfd.id = tbl_stfa.id WHERE tbl_stfd.ship_reside=? LIMIT 3";
+                FROM tbl_ship_detail tbl_stfd
+                JOIN tbl_ship_account tbl_stfa 
+                ON tbl_stfd.id = tbl_stfa.id WHERE tbl_stfd.subscription_id=1";
      $stmt = $c->prepare($sql_slct);
-     $stmt->bind_param('s',$_SESSION['ship_name']);
      $stmt->execute();
      $result = $stmt->get_result();
     $output = '
@@ -431,7 +432,7 @@ function summ_staff_data($c) {
     while($row = $result->fetch_assoc()) {
         $output .= '
         <tr>
-            <td>'.$row['name'].'</td>
+            <td>'.$row['ship_name'].'</td>
             <td>'.$row['email'].'</td>
             <td>'.$row['username'].'</td>
             <td>'.$row['password'].'</td>
@@ -447,11 +448,10 @@ function summ_staff_data($c) {
 function total_number_of_staff($c) {
     $counter = 0;
     $sql_slct = "SELECT 
-                * FROM tbl_staff_account tbl_sa
-                INNER JOIN tbl_staff_detail tbl_sd ON tbl_sa.id = tbl_sd.id
-                WHERE tbl_sd.ship_reside=?";
+                * FROM tbl_ship_account tbl_sa
+                INNER JOIN tbl_ship_detail tbl_sd ON tbl_sa.id = tbl_sd.id
+                WHERE tbl_sd.subscription_id=1";
     $stmt = $c->prepare($sql_slct);
-    $stmt->bind_param('s', $_SESSION['ship_name']);
     $stmt->execute();
     $result = $stmt->get_result();
     while($row = $result->fetch_assoc()) {

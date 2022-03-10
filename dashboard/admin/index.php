@@ -103,7 +103,7 @@
                 var myChart = new Chart(ctx, {
                     type: 'bar',
                     data: {
-                        labels: <?php echo json_encode($productname);?>,
+                        labels: datesYear,
                         datasets: [{
                             label:" Total Profit",
                             backgroundColor: [

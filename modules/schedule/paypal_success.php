@@ -101,9 +101,14 @@ if(isset($_GET['item_number'])){
         </body>
         </html>";
         $mail->send();
-        echo "<script>
-        alert('Please check your email for your ticket');
-        </script>";
+        if ($mail) {
+            $s_id =$_SESSION['id'];
+            $update = $con->query("UPDATE tbl_rdeem_promo SET use_status = 1 WHERE psnger_id = $s_id ");
+            echo "<script>
+            alert('Please check your email for your ticket');
+            </script>";
+        }
+       
     }
 }catch(Exception $e){
         echo "Could not sent the reservation confirmation. Mailer Error: {$mail->ErrorInfo}";

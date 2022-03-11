@@ -16,13 +16,13 @@
     <header class="header-area">
         <div class="top-header-area">
             <div class="container">
-                <div class="row">
-                    <div class="col-6">
+                <div class="row col-md-12">
+                    <div class="col-8">
                         <div class="top-header-content">
                             <a href="#"><i class="icon_mail"></i> <span>barkomatic2021@gmail.com</span></a>
                         </div>
                     </div>
-                    <div class="col-6 pr-0">
+                    <div class="col-4">
                         <div class="top-header-content">
                             <a href="#" class="invisible"><i class="icon_mail"></i> <span>barkomatic2021@gmail.com</span></a>
                             <?php 
@@ -55,7 +55,9 @@
                 </div>
             </div>
         </div>
-        <div class="main-header-area">
+          </header>
+        <header class="header-area">
+        <div class="row main-header-area">
             <div class="classy-nav-container breakpoint-off">
                 <div class="container">
                     <nav class="classy-navbar justify-content-between" id="robertoNav">

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 10, 2022 at 12:58 AM
+-- Generation Time: Mar 11, 2022 at 06:40 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.0.13
 
@@ -76,7 +76,9 @@ CREATE TABLE `tbl_passenger_account` (
 --
 
 INSERT INTO `tbl_passenger_account` (`id`, `username`, `password`) VALUES
-(1, 'test', 'a94a8fe5ccb19ba61c4c0873d391e987982fbbd3');
+(1, 'test', 'a94a8fe5ccb19ba61c4c0873d391e987982fbbd3'),
+(2, 'deathpoyax', '1114531b2ee58172e1e71d61abce4572e6266d41'),
+(3, 'death', '0209c5aa8f5e5fb8dc3d683e840390694cbc4cb8');
 
 -- --------------------------------------------------------
 
@@ -100,7 +102,9 @@ CREATE TABLE `tbl_passenger_detail` (
 --
 
 INSERT INTO `tbl_passenger_detail` (`id`, `first_name`, `lastname`, `gender`, `dob`, `email`, `phone_number`, `Address`) VALUES
-(1, 'test', 'test', 'Male', '1996-02-29', 'manugasewinjames@gmail.com', '09062419916', 'Lapu Lapu City');
+(1, 'test', 'test', 'Male', '1996-02-29', 'manugasewinjames@gmail.com', '09062419916', 'Lapu Lapu City'),
+(2, 'jayar', 'Autentico', 'Male', '1996-03-21', 'deathpoyax28@gmail.com', '', ''),
+(3, 'jayar', 'Autentico', 'Male', '1999-02-15', 'dgx0days@gmail.com', '', '');
 
 -- --------------------------------------------------------
 
@@ -134,7 +138,20 @@ INSERT INTO `tbl_passenger_reservation` (`id`, `reservation_number`, `ship_name`
 (100, '9905697', 'test', 'test test', 'lapu-lapu', 'olango', '2022-03-14', '10:25 PM', 'No Aircon', '2022-03-07', '2022-03-09', NULL),
 (101, '7496143', 'test', 'test test', 'lapu-lapu', 'olango', '2022-03-14', '10:25 PM', 'No Aircon', '2022-03-07', '2022-03-09', NULL),
 (102, '5066428', 'test', 'test test', 'lapu-lapu', 'olango', '2022-03-14', '10:00 AM', 'With Aircone', '2022-03-08', '2022-03-10', NULL),
-(103, '9298772', 'test', 'test test', 'lapu-lapu', 'olango', '2022-03-14', '10:00 AM', 'No Aircon', '2022-03-10', '2022-03-12', NULL);
+(103, '9298772', 'test', 'test test', 'lapu-lapu', 'olango', '2022-03-14', '10:00 AM', 'No Aircon', '2022-03-10', '2022-03-12', NULL),
+(104, '5409928', 'test', 'test test', 'lapu-lapu', 'olango', '2022-03-14', '10:00 AM', 'No Aircon', '2022-03-10', '2022-03-12', NULL),
+(105, '3333582', 'test', 'test test', 'lapu-lapu', 'olango', '2022-03-14', '10:00 AM', 'No Aircon', '2022-03-11', '2022-03-13', NULL),
+(106, '5570781', 'test', 'test test', 'lapu-lapu', 'olango', '2022-03-14', '10:00 AM', 'No Aircon', '2022-03-11', '2022-03-13', NULL),
+(107, '7545225', 'test', 'jayar Autentico', 'lapu-lapu', 'olango', '2022-03-14', '10:00 AM', 'With Aircone', '2022-03-11', '2022-03-13', NULL),
+(108, '8509252', 'test', 'test test', 'lapu-lapu', 'olango', '2022-03-14', '10:00 AM', 'No Aircon', '2022-03-11', '2022-03-13', NULL),
+(109, '8782242', 'test', 'test test', 'lapu-lapu', 'olango', '2022-03-14', '10:00 AM', 'With Aircone', '2022-03-11', '2022-03-13', NULL),
+(110, '6740632', 'test', 'test test', 'lapu-lapu', 'olango', '2022-03-14', '10:00 AM', 'No Aircon', '2022-03-11', '2022-03-13', NULL),
+(111, '3220527', 'test', 'test test', 'lapu-lapu', 'olango', '2022-03-14', '10:00 AM', 'With Aircone', '2022-03-11', '2022-03-13', NULL),
+(112, '5733307', 'test', 'test test', 'lapu-lapu', 'olango', '2022-03-14', '10:00 AM', 'No Aircon', '2022-03-11', '2022-03-13', NULL),
+(113, '3540980', 'test', 'jayar Autentico', 'lapu-lapu', 'olango', '2022-03-14', '10:00 AM', 'With Aircone', '2022-03-11', '2022-03-13', NULL),
+(114, '8027314', 'test', 'test test', 'lapu-lapu', 'olango', '2022-03-14', '10:00 AM', 'With Aircone', '2022-03-11', '2022-03-13', NULL),
+(115, '4024370', 'test', 'test test', 'lapu-lapu', 'olango', '2022-03-14', '10:00 AM', 'With Aircone', '2022-03-11', '2022-03-13', NULL),
+(116, '1658631', 'test', 'test test', 'lapu-lapu', 'olango', '2022-03-14', '10:00 AM', 'No Aircon', '2022-03-11', '2022-03-13', NULL);
 
 -- --------------------------------------------------------
 
@@ -153,7 +170,9 @@ CREATE TABLE `tbl_passenger_reset_password` (
 --
 
 INSERT INTO `tbl_passenger_reset_password` (`id`, `token`, `token_expire`) VALUES
-(1, NULL, '2022-01-23 01:51:45');
+(1, NULL, '2022-01-23 01:51:45'),
+(2, NULL, '2022-03-10 19:26:34'),
+(3, NULL, '2022-03-10 19:28:45');
 
 -- --------------------------------------------------------
 
@@ -188,7 +207,10 @@ INSERT INTO `tbl_psnger_pymnt` (`id`, `reservation_number`, `txn_id`, `payer_ema
 (1, 1676736, '35W74869RY584312U', 'Johndoe@personalemail.com', 'PHP', '300.00', 'Completed', '2022-02-25 14:09:18', '', 'test'),
 (1, 9527128, '4P16845411298345R', 'Johndoe@personalemail.com', 'PHP', '300.00', 'Completed', '2022-02-25 15:48:48', '', 'test'),
 (1, 5954494, '9YT09683EV596783B', 'Johndoe@personalemail.com', 'PHP', '300.00', 'Completed', '2022-02-28 14:59:34', 'avail', 'test'),
-(1, 4863221, '1H326320UD4053729', 'Johndoe@personalemail.com', 'PHP', '300.00', 'Completed', '2022-02-28 15:07:09', 'avail', 'test');
+(1, 4863221, '1H326320UD4053729', 'Johndoe@personalemail.com', 'PHP', '300.00', 'Completed', '2022-02-28 15:07:09', 'avail', 'test'),
+(1, 5570781, '49A84091HP679711D', 'Johndoe@personalemail.com', 'PHP', '180.00', 'Completed', '2022-03-11 09:41:44', 'avail', ''),
+(3, 7545225, '1LR22426YG9059843', 'Johndoe@personalemail.com', 'PHP', '3180.00', 'Completed', '2022-03-11 11:40:03', 'avail', ''),
+(3, 3540980, '5UV96628998857402', 'Johndoe@personalemail.com', 'PHP', '3180.00', 'Completed', '2022-03-11 11:47:56', 'avail', '');
 
 -- --------------------------------------------------------
 
@@ -202,15 +224,16 @@ CREATE TABLE `tbl_rdeem_promo` (
   `v_discount` int(11) NOT NULL,
   `psnger_id` int(30) NOT NULL,
   `passnger_name` varchar(30) NOT NULL,
-  `dates` datetime NOT NULL
+  `dates` datetime NOT NULL,
+  `use_status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `tbl_rdeem_promo`
 --
 
-INSERT INTO `tbl_rdeem_promo` (`rdeem_id`, `rdeem_promo`, `v_discount`, `psnger_id`, `passnger_name`, `dates`) VALUES
-(10, ' christmass', 40, 1, 'test', '2022-03-09 17:33:31');
+INSERT INTO `tbl_rdeem_promo` (`rdeem_id`, `rdeem_promo`, `v_discount`, `psnger_id`, `passnger_name`, `dates`, `use_status`) VALUES
+(10, ' christmass', 40, 1, 'test', '2022-03-11 13:36:27', 1);
 
 -- --------------------------------------------------------
 
@@ -484,7 +507,7 @@ CREATE TABLE `user_subscriptions` (
 
 INSERT INTO `user_subscriptions` (`id`, `payment_method`, `validity`, `valid_from`, `valid_to`, `item_number`, `txn_id`, `payment_gross`, `currency_code`, `subscr_id`, `payer_email`, `payment_status`, `dates`) VALUES
 (9, 'paypal', 60, '2022-03-03 10:03:34', '2027-02-05 10:03:34', 'MS123456', '66M23657DN0630617', 1500.00, 'PHP', 'I-JWXGKGPFB9XT', 'Johndoe@personalemail.com', 'Completed', '2022-03-03 17:03:34'),
-(10, 'paypal', 60, '2022-03-03 10:11:21', '2027-02-05 10:11:21', 'MS123456', '96J66312XN644645F', 1500.00, 'PHP', 'I-77C5PNFULR2K', 'Johndoe@personalemail.com', 'Completed', '2022-03-03 17:11:21');
+(10, 'paypal', 60, '2022-03-03 10:11:21', '2027-02-05 10:11:21', 'MS123456', '96J66312XN644645F', 1600.00, 'PHP', 'I-77C5PNFULR2K', 'Johndoe@personalemail.com', 'Completed', '2022-02-22 17:11:21');
 
 --
 -- Indexes for dumped tables
@@ -624,25 +647,25 @@ ALTER TABLE `tbl_all_ship_port_location`
 -- AUTO_INCREMENT for table `tbl_passenger_account`
 --
 ALTER TABLE `tbl_passenger_account`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_passenger_detail`
 --
 ALTER TABLE `tbl_passenger_detail`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_passenger_reservation`
 --
 ALTER TABLE `tbl_passenger_reservation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=117;
 
 --
 -- AUTO_INCREMENT for table `tbl_passenger_reset_password`
 --
 ALTER TABLE `tbl_passenger_reset_password`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_ship_account`

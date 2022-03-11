@@ -238,7 +238,7 @@ $output = '
     </div>
     <div class="col-6 text-right">
         <div class="form-group">
-            <input type="submit" name="summry_dptr_btn" id="summry_dptr_btn" class="btn btn-success rounded-0" value="RESERVE">
+            <input type="submit" name="summry_dptr_btn" id="summry_dptr_btn" class="btn btn-success rounded-0" value="AVAIL">
         </div>
     </div>
 </div>
@@ -424,7 +424,7 @@ function reservation_confirmation($c,$sdsn,$rsrvtn_num) {
             $pssngr_id = $_SESSION['id'];
             $avail = 'avail';
             $shipname = $row['ship_name'];
-            echo "http://localhost:8080/barkomatic-main/payment.php?reservetionId=$rsrvtn_num&&userId=$pssngr_id&&typOfpymnt=$avail&&shipName=$shipname";
+            echo "https://barkomatic2021.pagekite.me/barkomatic-main/payment.php?reservetionId=$rsrvtn_num&&userId=$pssngr_id&&typOfpymnt=$avail&&shipName=$shipname";
         } else {
             echo "row is empty! - 2";
         }

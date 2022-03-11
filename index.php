@@ -113,11 +113,11 @@
                 </p>
                 <?php if(isset($_SESSION['ship_id'])) { ?>
                     <button type="button" class="btn btn-primary btn-lg pushable mt-3">
-                        <a href="http://localhost/barkomatic-main/dashboard/ship/"><span class="front">Go to Dashboard</span></a>
+                        <a href="https://barkomatic2021.pagekite.me/barkomatic-main/dashboard/ship/"><span class="front">Go to Dashboard</span></a>
                     </button>
                 <?php }else if(isset($_SESSION['stff_id'])) { ?>
                     <button type="button" class="btn btn-primary btn-lg pushable mt-3">
-                        <a href="http://localhost/barkomatic-main/dashboard/staff/"><span class="front">Go to Dashboard</span></a>
+                        <a href="https://barkomatic2021.pagekite.me/barkomatic-main/dashboard/staff/"><span class="front">Go to Dashboard</span></a>
                     </button>
                 <?php }else { ?>
                     <button type="button" class="btn btn-primary btn-lg pushable mt-3">

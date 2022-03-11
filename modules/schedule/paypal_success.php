@@ -50,7 +50,7 @@ if(isset($_GET['item_number'])){
             <div class='container m-auto'>
                 <div class='row'>
                     <div class='col-sm-12'>
-                      <a href='https://localhost/barkomatic-main/generate_ticket.php?item_number=".$item_number."'>click me to print ticket</a>
+                      <a href='https://barkomatic2021.pagekite.me/barkomatic-main/generate_ticket.php?item_number=".$item_number."'>click me to print ticket</a>
                     </div>
                 </div>
             </div>
@@ -138,7 +138,7 @@ if($prevPaymentResult->num_rows > 0){
 
 }
 }
-echo ("<script>windows.location.href('localhost/barkomatic-main/')</script>");
+echo ("<script>windows.location.href('https://barkomatic2021.pagekite.me/barkomatic-main/')</script>");
 }
 ?>
 
@@ -175,7 +175,7 @@ echo ("<script>windows.location.href('localhost/barkomatic-main/')</script>");
             <div class="classy-nav-container breakpoint-off">
                 <div class="container">
                     <nav class="classy-navbar justify-content-between" id="robertoNav">
-                        <a class="nav-brand mr-0" href="https://barkomatic.pagekite.me/barkomatic-main/index.php">
+                        <a class="nav-brand mr-0" href="https://barkomatic2021.pagekite.me/barkomatic-main/index.php">
                             <img src="../../img/core-img/logo.png" alt="BarkoMatic">
                         </a>
                         <div class="classy-navbar-toggler">

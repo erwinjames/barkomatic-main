@@ -50,7 +50,7 @@ $(document).ready(function() {
                             $('#confirm_password').val('');
                         }, 100);
                         setTimeout(function() {
-                            window.location = "http://localhost/barkomatic-main/login.php";
+                            window.location = "https://barkomatic2021.pagekite.me/barkomatic-main/login.php";
                         }, 100);
                     }
                     $('#passenger-submit').attr('disabled', false);
@@ -106,7 +106,7 @@ $(document).ready(function() {
                             $('#cpass').val('');
                         }, 100);
                         setTimeout(function() {
-                            window.location = "http://localhost/barkomatic-main/login.php";
+                            window.location = "https://barkomatic2021.pagekite.me/barkomatic-main/login.php";
                         }, 100);
                     }
                     $('#shipping-submit').attr('disabled', false);

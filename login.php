@@ -23,8 +23,8 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-12 register-right">
-                <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+            <div class="col-md-12 register-right">
+                <ul style="padding:1%;margin:1%;font-size:15px;" class="nav nav-tabs nav-justified" id="myTab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="false">Passenger</a>
                     </li>
@@ -43,11 +43,11 @@
                             <span id="res-icon"></span>
                             <span id="res-message"></span>
                         </div>
-                        <div style="padding-bottom:60px;" class="row register-form pt-0">
-                            <div class="col-9">
+                        <div style="padding-bottom:60px;" class="row register-form col-md-12">
+                            <div class="col-md-12">
                                 <h3 class="register-heading text-left mt-0 mb-0 display-6 pb-5"><i class="fa fa-lock"></i> Login as <sup class="font-weight-initial lead display-6">Passenger</sup></h3>
                                 <div class="row">
-                                    <div class="col-9">
+                                    <div class="col-md-12">
                                         <form id="passenger-form">
                                             <div class="form-group input-group">
                                                 <div class="input-group-prepend">
@@ -81,11 +81,11 @@
                             <span id="res-icon-showner"></span>
                             <span id="res-message-showner"></span>
                         </div>
-                        <div style="padding-bottom:60px;" class="row register-form pt-0">
-                            <div class="col-9">
+                        <div style="padding-bottom:60px;" class="row register-form col-md-12">
+                            <div class="col-md-12">
                             <h3 class="register-heading text-left mt-0 mb-0 display-6 pb-5"><i class="fa fa-lock"></i> Login as <sup class="font-weight-initial lead display-6">Shipping Line Owner</sup></h3>
                                 <div class="row">
-                                    <div class="col-9">
+                                    <div class="col-md-12">
                                         <form id="login_showner_form">
                                             <div class="form-group input-group">
                                                 <div class="input-group-prepend">
@@ -119,11 +119,11 @@
                             <span id="res-icon-staff"><i class='fa fa-check-circle'></i></span>
                             <span id="res-message-staff"></span>
                         </div>
-                        <div style="padding-bottom:60px;" class="row register-form pt-0">
-                            <div class="col-9">
+                        <div style="padding-bottom:60px;" class="row register-form col-md-12">
+                            <div class="col-md-12">
                                 <h3 class="register-heading text-left mt-0 mb-0 display-6 pb-5"><i class="fa fa-lock"></i> Login as <sup class="font-weight-initial lead display-6">Shipping Line Staff</sup></h3>
                                 <div class="row">
-                                    <div class="col-9">
+                                    <div class="col-md-12">
                                         <form id="staff_login_form">
                                             <div class="form-group input-group">
                                                 <div class="input-group-prepend">

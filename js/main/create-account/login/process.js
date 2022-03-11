@@ -39,12 +39,12 @@ $(document).ready(function() {
                     alert(res);
                     if (res == "Shipping Owner Login Successfully!") {
                         setTimeout(function() {
-                            window.location = "http://localhost/barkomatic-main/dashboard/ship/";
+                            window.location = "https://barkomatic2021.pagekite.me/barkomatic-main/dashboard/ship/";
                         }, 100);
                     }
                     else if(res == "Admin Login Successfully!"){
                         setTimeout(function() {
-                            window.location = "http://localhost/barkomatic-main/dashboard/admin/";
+                            window.location = "https://barkomatic2021.pagekite.me/barkomatic-main/dashboard/admin/";
                         }, 100);
                     }
                     else if(res =="Please subscribe first."){

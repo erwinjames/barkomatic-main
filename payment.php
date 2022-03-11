@@ -37,17 +37,28 @@ $row2 = $row_ship_sd1->fetch_array();
                                                     
                                                     </div>
                 </li>
-    <?php } else{ ?>
+    <?php } else if($row2['use_status']==0){ ?>
   
   <li>
                                             <div class="coupon_box">
                                             <div class="body_card">
                                                 <h4 class="title_card">ALREADY CLAIMED</h4>
                                              </div>
-                                                    
+                                                       <input type="hidden" name="id" value=" <?php echo $row1['id'] ?>">
+                                                        <input type="hidden" name="status" value="1">
+                                                   <button class="btn_card_status" id="btn_card_status"> USE </button>
                                                     </div>
                 </li>
 
+
+<?php }else{ ?>
+                  <li>
+                                            <div class="coupon_box">
+                                            <div class="body_card">
+                                                <h4 class="title_card">ALREADY CLAIMED</h4>
+                                             </div>
+                                                    </div>
+                </li>
 
 <?php } }?>
 </ul>
@@ -369,6 +380,30 @@ $row2 = $row_ship_sd1->fetch_array();
                 url:'modules/schedule/payment.php',
                 method: 'POST',
                 data: $('#redeemCode').serialize() + '&action=redeemCode',
+                success: function(response) {
+                    alert(response);
+                 if (response == 'success') {
+                    // $(this).parent('li').hide();
+                      setTimeout(function() {
+                           window.location.reload();
+                            }, 100);
+                        }
+                        else if(response == 'not')
+                   {
+                         alert('error');
+                   }
+                }
+            });
+        }
+    });
+    $('#btn_card_status').click(function(e) {
+        if (document.querySelector('#redeemCode').checkValidity()) {
+            e.preventDefault();
+            $(':input[type="submit"]').prop('disabled', true);
+            $.ajax({
+                url:'modules/schedule/payment.php',
+                method: 'POST',
+                data: $('#redeemCode').serialize() + '&action=redeemCode_status',
                 success: function(response) {
                     alert(response);
                  if (response == 'success') {

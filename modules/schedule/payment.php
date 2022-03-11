@@ -18,6 +18,10 @@ if(isset($_POST['action']) && $_POST['action'] == 'redeemCode') {
     session_start();
     redeemPromoInsert($con);
 }
+if(isset($_POST['action']) && $_POST['action'] == 'redeemCode_status') {
+    session_start();
+    redeemPromoInsert_claim($con);
+}
 //fetch passenger info
 function get_PssngerInfo($c){
     error_reporting(E_ALL);
@@ -276,7 +280,8 @@ function fetch_data_paypal($c){
                         tbl_promo.v_discount,
                         tbl_promo.psnger_id,
                         tbl_promo.passnger_name,
-                        tbl_promo.dates
+                        tbl_promo.dates,
+                        tbl_promo.use_status
      from tbl_passenger_reservation tbl_pass_reserv
      JOIN tbl_ship_detail tbl_sd ON tbl_pass_reserv.ship_name = tbl_sd.ship_name
      JOIN tbl_ship_schedule tbl_sched 
@@ -290,27 +295,17 @@ function fetch_data_paypal($c){
     $stmt->execute();
     $result = $stmt->get_result();
     $row = $result->fetch_array();
-                if($row['accomodation']=="No Aircon"){
-                        if ($row['v_discount']!=NULL) {
-                        $discount =($row['tckt_price'] / 100 ) * $row['v_discount'];
-                        $total_price = $row['tckt_price'] - $discount;
-                        $No = "No Aircon";
-                    }else{
-                        $total_price = $row['tckt_price'];
-                        $No = "No Aircon";
-                    }
-                }
-                else{
-                    if ($row['v_discount']!=NULL) {
-                        $total = $row['price'] + $row['tckt_price'];
-                        $discount =($total / 100 ) * $row['v_discount'];
-                        $total_price = $row['tckt_price'] - $discount;
-                        $No = "No Aircon";
-                    }else{
-                        $total_price = $row['price'] + $row['tckt_price'];
-                        $No = $row['accomodation'];
-                    }
-                }
+    if($row['accomodation']=="No Aircon"){
+    $discount =($row['tckt_price'] / 100 ) * $row['v_discount'];
+    $total_price = $row['tckt_price'] - $discount;
+    $No = "No Aircon";
+    }
+    else{
+    $total = $row['price'] + $row['tckt_price'];
+    $discount =($total / 100 ) * $row['v_discount'];
+    $total_price = $total - $discount;
+    $No = $row['accomodation'];
+    }
     if ($row == null) {
        echo "Error";
     }
@@ -341,6 +336,7 @@ function fetch_data_paypal($c){
     <input type="hidden" name="cancel_return" value="'.PAYPAL_CANCEL_URL.'">
     <input type="hidden" name="return" value="'.PAYPAL_RETURN_URL.'?payer_email='.$_SESSION['email'].'&rsrvtn_id='.$row['reservation_number'].'&pyrtype='.$typofpayment.'">
     <input type="hidden" name="notify_url" value="'.PAYPAL_NOTIFY_URL.'">
+    <input type="text" value="'.$total_price.'" class="form-control">
     <input style="position:right;" class="btn btn-success" type="submit" value="Proceed to Payment">
     </form>
    ';
@@ -363,6 +359,23 @@ function redeemPromoInsert($c) {
     $stmt = $c->prepare($sql_rsrtn);
     echo $c -> error;
     $stmt->bind_param('sssss',$id,$promo,$sdlf,$pid,$sn);
+    if($stmt->execute()) {
+        $stmt->close();
+        echo "success";
+    }
+    else{
+        echo "Not";
+    }
+}
+function redeemPromoInsert_claim($c) {
+    $id = $_POST['id'];
+    $pid = $_SESSION['id'];
+    $status = $_POST['status'];
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
+    $sql_rsrtn = "UPDATE tbl_rdeem_promo set use_status = $status WHERE rdeem_id = $id AND psnger_id = $pid";
+    $stmt = $c->prepare($sql_rsrtn);
+    echo $c -> error;
     if($stmt->execute()) {
         $stmt->close();
         echo "success";

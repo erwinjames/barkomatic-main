@@ -271,23 +271,16 @@ function fetch_data_paypal($c){
                         tbl_sched.port_to,
                         tbl_acctyp.price,
                         tbl_tcket.tckt_promo,
+                        tbl_tcket.id as ticket_id,
                         tbl_tcket.tckt_stats,
                         tbl_tcket.tckt_dscnt,
                         tbl_tcket.tckt_owner,
-                        tbl_tcket.tckt_price,
-                        tbl_promo.rdeem_id,
-                        tbl_promo.rdeem_promo,
-                        tbl_promo.v_discount,
-                        tbl_promo.psnger_id,
-                        tbl_promo.passnger_name,
-                        tbl_promo.dates,
-                        tbl_promo.use_status
+                        tbl_tcket.tckt_price
      from tbl_passenger_reservation tbl_pass_reserv
      JOIN tbl_ship_detail tbl_sd ON tbl_pass_reserv.ship_name = tbl_sd.ship_name
      JOIN tbl_ship_schedule tbl_sched 
      JOIN tbl_ship_has_accomodation_type tbl_acctyp
      JOIN tbl_tckt tbl_tcket ON tbl_sd.ship_name = tbl_tcket.tckt_owner
-     JOIN tbl_rdeem_promo tbl_promo
      WHERE tbl_pass_reserv.reservation_number=?";
     $stmt = $c->prepare($sql_srch_slcts);
     echo $c -> error;
@@ -295,21 +288,69 @@ function fetch_data_paypal($c){
     $stmt->execute();
     $result = $stmt->get_result();
     $row = $result->fetch_array();
-    if($row['accomodation']=="No Aircon"){
-    $discount =($row['tckt_price'] / 100 ) * $row['v_discount'];
-    $total_price = $row['tckt_price'] - $discount;
-    $No = "No Aircon";
+
+    $sql_srch_slcts1 = "SELECT * from tbl_rdeem_promo";
+    $stmt1 = $c->prepare($sql_srch_slcts1);
+    echo $c -> error;
+    $stmt1->execute();
+    $result1 = $stmt1->get_result();
+    $row1 = $result1->fetch_array();
+    if ($row1 == NULL) {
+        if($row['accomodation']=="No Aircon"){
+            $total_price = $row['tckt_price'];
+            $No = "No Aircon";
+            }
+            else{
+            $total_price = $row['price'] + $row['tckt_price'];
+            $No = $row['accomodation'];
+            }
+
+            $output = '
+            <form action="'.PAYPAL_URL.'" method="post" >
+                         <!-- Identify your business so that you can collect the payments -->
+        
+            <input type="hidden" name="business" value="'.PAYPAL_ID.'">
+        
+                         <!-- Specify a subscriptions button. -->
+        
+            <input type="hidden" name="cmd" value="_xclick-subscriptions">
+        
+                        <!-- Specify details about the subscription that buyers will purchase -->
+            <input type="hidden" name="ship_name" value="'.$shipName.'">
+            <input type="hidden" name="item_name" value="'.$typofpayment.'">
+            <input type="hidden" name="item_accomodation" value="'.$No.'">
+        
+            <input type="hidden" name="item_number" value="'.$row['reservation_number'].'">
+            <input type="hidden" name="currency_code" value="'.PAYPAL_CURRENCY.'">
+            <input type="hidden" name="a3" id="paypalAmt" value="'.$total_price.'">
+            <input type="hidden" name="p3" id="paypalValid" value="1">
+            <input type="hidden" name="t3" value="M">
+                         <!-- Custom variable user ID -->
+            <input type="hidden" name="custom" value="'.$_SESSION['id'].'">
+            <input type="hidden" name="ship_name" value="'.$row['ship_name'].'">
+            <input type="hidden" name="cancel_return" value="'.PAYPAL_CANCEL_URL.'">
+            <input type="hidden" name="return" value="'.PAYPAL_RETURN_URL.'?payer_email='.$_SESSION['email'].'&rsrvtn_id='.$row['reservation_number'].'&pyrtype='.$typofpayment.'">
+            <input type="hidden" name="notify_url" value="'.PAYPAL_NOTIFY_URL.'">
+            <input type="text" value="'.$total_price.'" class="form-control">
+            <input style="position:right;" class="btn btn-success" type="submit" value="Proceed to Payment">
+            </form>
+           ';
+            echo $output;
+            $stmt->close();
     }
-    else{
-    $total = $row['price'] + $row['tckt_price'];
-    $discount =($total / 100 ) * $row['v_discount'];
-    $total_price = $total - $discount;
-    $No = $row['accomodation'];
-    }
-    if ($row == null) {
-       echo "Error";
-    }
-    else{
+    else if($row1['use_status'] == 1){
+        if($row['accomodation']=="No Aircon"){
+            $discount =($row['tckt_price'] / 100 ) * $row1['v_discount'];
+            $total_price = $row['tckt_price'] - $discount;
+            $No = "No Aircon";
+            }
+            else{
+            $total = $row['price'] + $row['tckt_price'];
+            $discount =($total / 100 ) * $row1['v_discount'];
+            $total_price = $total - $discount;
+            $No = $row['accomodation'];
+            }
+  
     $output = '
     <form action="'.PAYPAL_URL.'" method="post" >
                  <!-- Identify your business so that you can collect the payments -->
@@ -342,6 +383,48 @@ function fetch_data_paypal($c){
    ';
     echo $output;
     $stmt->close();
+}
+else{
+    if($row['accomodation']=="No Aircon"){
+        $total_price = $row['tckt_price'];
+        $No = "No Aircon";
+        }
+        else{
+        $total_price = $row['price'] + $row['tckt_price'];
+        $No = $row['accomodation'];
+        }
+
+        $output = '
+        <form action="'.PAYPAL_URL.'" method="post" >
+                     <!-- Identify your business so that you can collect the payments -->
+    
+        <input type="hidden" name="business" value="'.PAYPAL_ID.'">
+    
+                     <!-- Specify a subscriptions button. -->
+    
+        <input type="hidden" name="cmd" value="_xclick-subscriptions">
+    
+                    <!-- Specify details about the subscription that buyers will purchase -->
+        <input type="hidden" name="ship_name" value="'.$shipName.'">
+        <input type="hidden" name="item_name" value="'.$typofpayment.'">
+        <input type="hidden" name="item_accomodation" value="'.$No.'">
+    
+        <input type="hidden" name="item_number" value="'.$row['reservation_number'].'">
+        <input type="hidden" name="currency_code" value="'.PAYPAL_CURRENCY.'">
+        <input type="hidden" name="a3" id="paypalAmt" value="'.$total_price.'">
+        <input type="hidden" name="p3" id="paypalValid" value="1">
+        <input type="hidden" name="t3" value="M">
+                     <!-- Custom variable user ID -->
+        <input type="hidden" name="custom" value="'.$_SESSION['id'].'">
+        <input type="hidden" name="ship_name" value="'.$row['ship_name'].'">
+        <input type="hidden" name="cancel_return" value="'.PAYPAL_CANCEL_URL.'">
+        <input type="hidden" name="return" value="'.PAYPAL_RETURN_URL.'?payer_email='.$_SESSION['email'].'&rsrvtn_id='.$row['reservation_number'].'&pyrtype='.$typofpayment.'">
+        <input type="hidden" name="notify_url" value="'.PAYPAL_NOTIFY_URL.'">
+        <input type="text" value="'.$total_price.'" class="form-control">
+        <input style="position:right;" class="btn btn-success" type="submit" value="Proceed to Payment">
+        </form>
+       ';
+        echo $output;
 }
 }
 //* reservation

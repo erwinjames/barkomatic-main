@@ -55,7 +55,7 @@ $row2 = $row_ship_sd1->fetch_array();
                   <li>
                                             <div class="coupon_box">
                                             <div class="body_card">
-                                                <h4 class="title_card">ALREADY CLAIMED</h4>
+                                                <h4 class="title_card">No Promo</h4>
                                              </div>
                                                     </div>
                 </li>

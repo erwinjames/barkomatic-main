@@ -14,7 +14,7 @@ $(document).ready(function() {
                     $('#passenger-btn').attr('disabled', false);
                     if (res == "Login Successfully!") {
                         setTimeout(function() {
-                            window.location = 'https://barkomatic2021.pagekite.me/barkomatic-main/index.php';
+                            window.location = 'http://barkomatic.xyz/index.php';
                         }, 100);
                     }
                     $(':input[type="submit"]').prop('disabled', false);
@@ -39,17 +39,17 @@ $(document).ready(function() {
                     alert(res);
                     if (res == "Shipping Owner Login Successfully!") {
                         setTimeout(function() {
-                            window.location = "https://barkomatic2021.pagekite.me/barkomatic-main/dashboard/ship/";
+                            window.location = "http://barkomatic.xyz/dashboard/ship/";
                         }, 100);
                     }
                     else if(res == "Admin Login Successfully!"){
                         setTimeout(function() {
-                            window.location = "https://barkomatic2021.pagekite.me/barkomatic-main/dashboard/admin/";
+                            window.location = "http://barkomatic.xyz/dashboard/admin/";
                         }, 100);
                     }
                     else if(res =="Please subscribe first."){
                         setTimeout(function() {
-                            window.location = "https://barkomatic2021.pagekite.me/barkomatic-main/paypal/subForm.php";
+                            window.location = "http://barkomatic.xyz/paypal/subForm.php";
                         }, 100);
                     }
                     $(':input[type="submit"]').prop('disabled', false);
@@ -74,7 +74,7 @@ $(document).ready(function() {
                     alert(res);
                     if (res == "Login Successfully!") {
                         setTimeout(function() {
-                            window.location = "https://barkomatic2021.pagekite.me/barkomatic-main/dashboard/staff/";
+                            window.location = "http://barkomatic.xyz/dashboard/staff/";
                         }, 100);
                     }
                     $(':input[type="submit"]').prop('disabled', false);

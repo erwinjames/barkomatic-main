@@ -26,11 +26,11 @@ if(isset($_GET['item_number'])){
         $mail->Mailer = "smtp";
         $mail->SMTPAuth = true;
         $mail->Host = 'smtp.gmail.com';
-        $mail->Username = 'manugasewinjames@gmail.com';
-        $mail->Password = 'ejmanugas30';
+        $mail->Username = 'admin@barkomatic.xyz';
+        $mail->Password = 'admin@barkomatic';
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
-        $mail->setFrom('manugasewinjames@gmail.com', 'Reservation');
+        $mail->setFrom('admin@barkomatic.xyz', 'Reservation');
         $mail->addAddress(isset($_GET['payer_email']));
         $mail->isHTML(true);
 

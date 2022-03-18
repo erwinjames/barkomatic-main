@@ -13,7 +13,7 @@
 	<div class="status">
 		<h1 class="error">Your PayPal Transaction has been Canceled</h1>
 	</div>
-	<a href="../login.php" class="btn-link">Back to Home</a>
+	<a href="http://barkomatic.xyz/" class="btn-link">Back to Home</a>
 </div>
 </body>
 </html>
